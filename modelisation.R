@@ -87,3 +87,68 @@ moran_plot_ppv<-moran.plot(as.vector(base_dept$scaled),
                            ylab="Lag Number of social housings per 10,000 inhabitants",
                            main="Matrice type PPV (6 nearest neighbours)",
                            labels=as.character(base_dept$NOM))
+
+
+######====models=====######
+
+# benchmark OLS model
+mco<-lm(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, data=base_dept)
+summary(mco)
+
+# Moran test
+moran.lm<-lm.morantest(mco, WQueen, alternative="two.sided")
+print(moran.lm)
+moran.lm.ppv<-lm.morantest(mco, PPV, alternative="two.sided")
+print(moran.lm.ppv)
+
+# Lagrange test between SAR and SEM
+LMQueen<-lm.LMtests(mco, WQueen, test=c("LMerr", "LMlag", "RLMerr", "RLMlag")) #robust versions included
+LM<-lm.LMtests(mco, PPV, test=c("LMerr", "LMlag", "RLMerr", "RLMlag")) #robust versions included
+print(LM)
+# choose?
+
+# SEM: Spatial Error Model
+sem_model<-errorsarlm(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, 
+                      data=base_dept, 
+                      listw=PPV, 
+                      method="eigen",
+                      zero.policy=TRUE)
+summary(sem_model)
+#stargazer(sem_model, type="text", title="Spatial Error Model Results", digits=3, out="sem_model.txt")
+
+# SAR: Spatial Lag Model
+lag_model<-lagsarlm(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, 
+                    data=base_dept, 
+                    listw=PPV, 
+                    method="eigen",
+                    zero.policy=TRUE)
+summary(lag_model)
+#stargazer(lag_model, type="text", title="Spatial Lag Model Results", digits=3, out="lag_model.txt")  
+# Compare models
+AIC(mco, sem_model, lag_model)
+BIC(mco, sem_model, lag_model) 
+
+hist(residuals(sem))
+hist(residuals(lag_model))
+
+#Plan Elhorst (2010)
+library(spatialreg)
+#SLX: Spatial Lag of X Model
+slx<-lmSLX(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, data=base_dept, listw=PPV, lag=TRUE)
+summary(slx)
+#stargazer(slx, type="text", title="Spatial Lag of X Model Results", digits=3, out="slx_model.txt")
+AIC(slx)
+impacts(slx, listw=PPV)
+
+#SDM: Spatial Durbin Model
+sdm<-lagsarlm(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, data=base_dept, listw=PPV, type="mixed")
+summary(sdm)
+#stargazer(sdm, type="text", title="Spatial Durbin Model Results", digits=3, out="sdm_model.txt")
+AIC(sdm)
+impacts(sdm, listw=PPV, R=1000)
+hist(residuals(sdm))
+
+# Comparison SDM vs SEM
+TestSDM_SEM<-LR.Sarlm(sdm,sem_model)
+print(TestSDM_SEM)
+
