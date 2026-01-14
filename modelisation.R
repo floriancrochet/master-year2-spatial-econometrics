@@ -9,13 +9,42 @@ library(spatialreg)
 library(car)
 library(broom)
 library(stargazer)
+library(readr)
 
 #data import
 df_social <- read_excel("Projet4.xlsx")
+df_extra <- read_delim("base_extra.csv", delim=";")
 carte_dept <- st_read("DEPARTEMENT.shp", quiet = TRUE)
 st_crs(carte_dept)
 
 base_dept <- merge(carte_dept, df_social, by.x = "INSEE_DEP", by.y = "Code_INSEE") #94 deps
+
+#new data import
+str(df_extra)
+df_extra_22 <- df_extra %>% 
+  dplyr::select(`année_publication`, 
+                `code_departement`, 
+                #`nom_departement`, 
+         #`code_region`, `nom_region`,
+         `Nombre de logements`,
+         `Variation de la population sur 10 ans (en %)`,
+         `Taux de chômage au T4 (en %)`,
+         `Taux de pauvreté* (en %)`,
+         `Taux de logements sociaux* (en %)`) %>% 
+  rename(publication_year = `année_publication`,
+         department_code = `code_departement`,
+         #department_name = `nom_departement`,
+         #region_code = `code_region`,
+         #region_name = `nom_region`,
+         #nb_logement = `Nombre de logements`,
+         population_change_10yrs_pct = `Variation de la population sur 10 ans (en %)`,
+         unemployment_rate_pct = `Taux de chômage au T4 (en %)`,
+         poverty_rate_pct = `Taux de pauvreté* (en %)`,
+         social_housing_rate_pct = `Taux de logements sociaux* (en %)`) %>%
+  filter(publication_year == 2022)
+#merge new data
+base_dept <- merge(base_dept, df_extra_22, by.x = "INSEE_DEP", by.y = "department_code") #94 deps
+
 
 ######====prepare the data/weights/matrix=====######
 
@@ -92,7 +121,8 @@ moran_plot_ppv<-moran.plot(as.vector(base_dept$scaled),
 ######====models=====######
 
 # benchmark OLS model
-mco<-lm(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, data=base_dept)
+equation <- Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres+population_change_10yrs_pct+unemployment_rate_pct+poverty_rate_pct
+mco<-lm(equation, data=base_dept)
 summary(mco)
 
 # Moran test
@@ -108,7 +138,8 @@ print(LM)
 # choose?
 
 # SEM: Spatial Error Model
-sem_model<-errorsarlm(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, 
+# Y = XB + u, u = lambda*Wu + e
+sem_model<-errorsarlm(equation, 
                       data=base_dept, 
                       listw=PPV, 
                       method="eigen",
@@ -117,7 +148,8 @@ summary(sem_model)
 #stargazer(sem_model, type="text", title="Spatial Error Model Results", digits=3, out="sem_model.txt")
 
 # SAR: Spatial Lag Model
-lag_model<-lagsarlm(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, 
+# Y = rho*WY + XB + e
+lag_model<-lagsarlm(equation, 
                     data=base_dept, 
                     listw=PPV, 
                     method="eigen",
@@ -128,20 +160,25 @@ summary(lag_model)
 AIC(mco, sem_model, lag_model)
 BIC(mco, sem_model, lag_model) 
 
-hist(residuals(sem))
+hist(residuals(sem_model))
 hist(residuals(lag_model))
 
 #Plan Elhorst (2010)
 library(spatialreg)
 #SLX: Spatial Lag of X Model
-slx<-lmSLX(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, data=base_dept, listw=PPV, lag=TRUE)
+slx<-lmSLX(equation, 
+           data=base_dept, 
+           PPV)
 summary(slx)
 #stargazer(slx, type="text", title="Spatial Lag of X Model Results", digits=3, out="slx_model.txt")
 AIC(slx)
 impacts(slx, listw=PPV)
 
 #SDM: Spatial Durbin Model
-sdm<-lagsarlm(Nb_log_sociaux_10000hab~Part_femmes_seuls_enfant+Nb_immigres, data=base_dept, listw=PPV, type="mixed")
+# Y = rho*WY + XB + WX*gamma + e
+# type="mixed" car équivalent à lagsarlm avec Durbin=TRUE
+
+sdm<-lagsarlm(equation, data=base_dept, listw=PPV, type="mixed")
 summary(sdm)
 #stargazer(sdm, type="text", title="Spatial Durbin Model Results", digits=3, out="sdm_model.txt")
 AIC(sdm)
