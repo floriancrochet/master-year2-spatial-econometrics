@@ -1,262 +1,606 @@
-# ==================================================================================================
-# PROJET D'ÉCONOMÉTRIE SPATIALE - M2 ECAP
-# ==================================================================================================
-# PROBLÉMATIQUE : Dans quelle mesure la densité de logements sociaux d'un département est-elle influencée 
-# par la structure sociale (familles monoparentales, immigration) de ce département et de ses voisins ?
-# AUTEUR : Sofia et Florian
-# DATE : 2026-01-06
+# ==============================================================================
+# SPATIAL ECONOMETRICS PROJECT - M2 ECAP
+# Authors: Sofia, Florian | Date: 2026-01-06
 #
-# VARIABLES :
-# - Y (Dépendante)  : Nb_log_sociaux_10000hab (Nombre de logements sociaux pour 10 000 hab)
-# - X (Explicatives): 
-#     1. Part_femmes_seuls_enfant (Part des familles monoparentales, %)
-#     2. Nb_immigres (Nombre d'immigrés - variable de niveau/stock)
-#
-# FICHIERS REQUIS :
-# - Projet4.xlsx (Données attributaires)
-# - DEPARTEMENT.shp (Données géographiques)
-# ==================================================================================================
+# Objective: Spatial modeling of social housing density (dept level)
+# Dependent (Y): Nb_log_sociaux_10000hab
+# Predictors (X): Part_femmes_seuls_enfant (%), Nb_immigres (stock)
+# Inputs: Projet4.xlsx, DEPARTEMENT.shp
+# ==============================================================================
 
-# ==================================================================================================
-# ### 1. PRÉPARATION DE L'ENVIRONNEMENT ET DES DONNÉES
-# ==================================================================================================
+# ==============================================================================
+# 1. DATA PREPARATION
+# ==============================================================================
+library(readxl)
+library(sf)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(RColorBrewer)
+library(mapview)
+library(cartography)
+library(spdep)
+library(spatialreg)
+library(tmap)
+library(car)
+library(EnvStats)
+library(broom)
+library(stargazer)
+library(readr)
+library(outliers)
+library(corrplot)
 
-# 1.1 Chargement des bibliothèques nécessaires
-# ---------------------------------------------------------
-# Si des paquets manquent, décommenter et exécuter : install.packages(c("readxl", "sf", "spdep", "spatialreg", "tmap", "car"))
-library(readxl)      # Pour lire Excel
-library(sf)          # Pour manipuler le shapefile (cartes)
-library(spdep)       # Pour la matrice de poids et tests de Moran
-library(spatialreg)  # Pour les modèles économétriques spatiaux (SAR, SEM, SDM...)
-library(tmap)        # (Optionnel) Pour de jolies cartes rapides
-library(car)         # Pour le test VIF (Multicollinéarité)
 
-# 1.2 Importation des données
-# ---------------------------------------------------------
-# Lecture du fichier Excel
-df_social <- read_excel("Projet4.xlsx")
-
-# Lecture du fond de carte (Shapefile)
+# ------------------------------------------------------------------------------
+# 1.1 Import
+# ------------------------------------------------------------------------------
 carte_dept <- st_read("DEPARTEMENT.shp", quiet = TRUE)
+df_social <- read_excel("Projet4.xlsx")
+df_extra <- read_delim("base_extra.csv", delim = ";")
 
-# Vérification du système de projection (CRS) - Doit être Lambert 93 (RGF93)
+# Validate input structures
+str(carte_dept)
+str(df_social)
+str(df_extra)
+
+# CRS check: EPSG:2154 (RGF93 / Lambert-93)
 st_crs(carte_dept)
 
-# 1.3 Nettoyage et Jointure
-# ---------------------------------------------------------
-# Vérification du nom et de la structure des colonnes pour la jointure
-# str(df_social)
-# str(carte_dept)
+# ------------------------------------------------------------------------------
+# 1.2 Data Cleaning & Feature Engineering
+# ------------------------------------------------------------------------------
+# Filter and standardize auxiliary data (2022)
+df_extra_22 <- df_extra |>
+    filter(`année_publication` == 2022) |>
+    select(
+        `année_publication`,
+        `code_departement`,
+        `Nombre de logements`,
+        `Variation de la population sur 10 ans (en %)`,
+        `Taux de chômage au T4 (en %)`,
+        `Taux de pauvreté* (en %)`,
+        `Taux de logements sociaux* (en %)`
+    ) |>
+    rename(
+        publication_year = `année_publication`,
+        department_code = code_departement,
+        population_change_10yrs_pct = `Variation de la population sur 10 ans (en %)`,
+        unemployment_rate_pct = `Taux de chômage au T4 (en %)`,
+        poverty_rate_pct = `Taux de pauvreté* (en %)`,
+        social_housing_rate_pct = `Taux de logements sociaux* (en %)`
+    )
 
-# Jointure : On conserve uniquement les départements présents dans les deux fichiers
-# by.x = colonne clé Excel, by.y = colonne clé Shapefile
+# Merge Datasets
+# Keys: INSEE_DEP (sf) <-> Code_INSEE (df_social)
 base_dept <- merge(carte_dept, df_social, by.x = "INSEE_DEP", by.y = "Code_INSEE")
 
-# Vérification qu'on a bien récupéré nos données (94 à 96 départements généralement)
-cat("Nombre de départements après jointure : ", nrow(base_dept), "\n")
+# Integrate auxiliary data (df_extra_22)
+base_dept <- merge(base_dept, df_extra_22, by.x = "INSEE_DEP", by.y = "department_code")
+cat("N =", nrow(base_dept), "departments (Final)\n") # Expected: 94
 
-# Transformation de variable (Optionnel mais recommandé pour les variables de stock comme Nb_immigres)
-# Distribution souvent asymétrique -> Logarithme
-base_dept$log_Nb_immigres <- log(base_dept$Nb_immigres + 1) # +1 pour éviter log(0)
+# Inspect final merged structure
+str(base_dept)
 
-# 1.4 Distribution des variables (Histogrammes & Boxplots)
-# ---------------------------------------------------------
-# Visualisation pour détecter les outliers et la normalité
-# On compare les distributions. Utilisation de par(mfrow) pour afficher plusieurs graphes.
-par(mfrow = c(3, 2)) # 3 lignes, 2 colonnes
+# Log-transform highly skewed immigrant stock (+1 to handle zeroes)
+base_dept$log_Nb_immigres <- log(base_dept$Nb_immigres + 1)
 
-# Y : Logements Sociaux
-hist(base_dept$Nb_log_sociaux_10000hab, main = "Hist: Logements Sociaux", xlab = "Nb/10k hab", col = "lightblue", border = "white")
-boxplot(base_dept$Nb_log_sociaux_10000hab, main = "Box: Logements Sociaux", col = "lightblue", horizontal = TRUE)
+# Select and rename variables
+base_dept <- base_dept |>
+    select(
+        "INSEE_DEP",
+        "INSEE_REG",
+        "Libellé",
+        "Nb_log_sociaux_10000hab",
+        "Part_femmes_seuls_enfant",
+        "Nb_immigres",
+        "log_Nb_immigres",
+        "Nombre de logements",
+        "population_change_10yrs_pct",
+        "unemployment_rate_pct",
+        "poverty_rate_pct",
+        "social_housing_rate_pct",
+        "geometry"
+    ) |>
+    rename(
+        department_code = INSEE_DEP,
+        region_code = INSEE_REG,
+        department_name = Libellé,
+        social_housing_density = Nb_log_sociaux_10000hab,
+        single_parent_ratio = Part_femmes_seuls_enfant,
+        immigrant_stock = Nb_immigres,
+        log_immigrant_stock = log_Nb_immigres,
+        housing_units = `Nombre de logements`
+    )
 
-# X1 : Familles Monoparentales
-hist(base_dept$Part_femmes_seuls_enfant, main = "Hist: Familles Monoparentales", xlab = "%", col = "lightgreen", border = "white")
-boxplot(base_dept$Part_femmes_seuls_enfant, main = "Box: Familles Monoparentales", col = "lightgreen", horizontal = TRUE)
+# ------------------------------------------------------------------------------
+# 1.3 Summary Statistics
+# ------------------------------------------------------------------------------
+vars_numeric <- c(
+    "social_housing_density",
+    "single_parent_ratio",
+    "immigrant_stock",
+    "log_immigrant_stock",
+    "housing_units",
+    "population_change_10yrs_pct",
+    "unemployment_rate_pct",
+    "poverty_rate_pct",
+    "social_housing_rate_pct"
+)
 
-# X2 : Immigrés (Logarithme recommandé)
-hist(base_dept$log_Nb_immigres, main = "Hist: Immigrés (Log)", xlab = "Log(Nb)", col = "salmon", border = "white")
-boxplot(base_dept$log_Nb_immigres, main = "Box: Immigrés (Log)", col = "salmon", horizontal = TRUE)
+stats_desc <- st_drop_geometry(base_dept)[, vars_numeric]
+summary(stats_desc)
 
-# Reset de l'affichage graphique
+# ------------------------------------------------------------------------------
+# 1.4 Distributions (Histograms & Boxplots)
+# ------------------------------------------------------------------------------
+par(mfrow = c(2, 2))
+
+# Social Housing Density
+hist(base_dept$social_housing_density, main = "Distribution: Housing Density", xlab = "Nb/10k hab", ylab = "Frequency", col = "lightblue", border = "white")
+grid()
+box()
+boxplot(base_dept$social_housing_density, main = "Dispersion: Housing Density", col = "lightblue", horizontal = TRUE)
+
+# Single Parent Ratio
+hist(base_dept$single_parent_ratio, main = "Distribution: Single-Parent Ratio", xlab = "%", ylab = "Frequency", col = "lightgreen", border = "white")
+grid()
+box()
+boxplot(base_dept$single_parent_ratio, main = "Dispersion: Single-Parent Ratio", col = "lightgreen", horizontal = TRUE)
+
+# Immigrant Stock
+hist(base_dept$immigrant_stock, main = "Distribution: Immigrant Stock", xlab = "Levels", ylab = "Frequency", col = "orange", border = "white")
+grid()
+box()
+boxplot(base_dept$immigrant_stock, main = "Dispersion: Immigrant Stock", col = "orange", horizontal = TRUE)
+
+# Log Immigrant Stock
+hist(base_dept$log_immigrant_stock, main = "Distribution: Log Immig. Stock", xlab = "Log", ylab = "Frequency", col = "salmon", border = "white")
+grid()
+box()
+boxplot(base_dept$log_immigrant_stock, main = "Dispersion: Log Immig. Stock", col = "salmon", horizontal = TRUE)
+
+# Housing Units
+hist(base_dept$housing_units, main = "Distribution: Housing Units", xlab = "Units", ylab = "Frequency", col = "steelblue", border = "white")
+grid()
+box()
+boxplot(base_dept$housing_units, main = "Dispersion: Housing Units", col = "steelblue", horizontal = TRUE)
+
+# Population Change 10Y
+hist(base_dept$population_change_10yrs_pct, main = "Distribution: Pop. Change 10Y (%)", xlab = "%", ylab = "Frequency", col = "mediumpurple", border = "white")
+grid()
+box()
+boxplot(base_dept$population_change_10yrs_pct, main = "Dispersion: Pop. Change 10Y (%)", col = "mediumpurple", horizontal = TRUE)
+
+# Unemployment Rate
+hist(base_dept$unemployment_rate_pct, main = "Distribution: Unemployment (%)", xlab = "%", ylab = "Frequency", col = "tomato", border = "white")
+grid()
+box()
+boxplot(base_dept$unemployment_rate_pct, main = "Dispersion: Unemployment (%)", col = "tomato", horizontal = TRUE)
+
+# Poverty Rate
+hist(base_dept$poverty_rate_pct, main = "Distribution: Poverty Rate (%)", xlab = "%", ylab = "Frequency", col = "goldenrod", border = "white")
+grid()
+box()
+boxplot(base_dept$poverty_rate_pct, main = "Dispersion: Poverty Rate (%)", col = "goldenrod", horizontal = TRUE)
+
+# Social Housing Rate
+hist(base_dept$social_housing_rate_pct, main = "Distribution: Social Housing Rate (%)", xlab = "%", ylab = "Frequency", col = "seagreen", border = "white")
+grid()
+box()
+boxplot(base_dept$social_housing_rate_pct, main = "Dispersion: Social Housing Rate (%)", col = "seagreen", horizontal = TRUE)
+
 par(mfrow = c(1, 1))
 
-# 1.5 Analyse des corrélations (Question 5 - TD3 Adaptation)
-# ---------------------------------------------------------
-# On regarde les liens linéaires simples entre variables avant la spatialisation.
-# Sélection des variables d'intérêt (sans la géométrie pour cor())
-vars_interet <- st_drop_geometry(base_dept)[, c("Nb_log_sociaux_10000hab", 
-                                                "Part_femmes_seuls_enfant", 
-                                                "Nb_immigres", 
-                                                "log_Nb_immigres")]
+# ------------------------------------------------------------------------------
+# 1.5 Outlier Assessment (Rosner's Test)
+# ------------------------------------------------------------------------------
+# Social Housing Density
+cat("\n--- Rosner Test: Social Housing Density ---\n")
+rosnerTest(base_dept$social_housing_density, k = 10, alpha = 0.05)$all.stats
 
-# Matrice de corrélation
-matrice_corr <- cor(vars_interet, use = "complete.obs")
-print("Matrice de corrélation :")
-matrice_corr
+# Single Parent Ratio
+cat("\n--- Rosner Test: Single Parent Ratio ---\n")
+rosnerTest(base_dept$single_parent_ratio, k = 10, alpha = 0.05)$all.stats
 
+# Immigrant Stock
+cat("\n--- ESD Test: Immigrant Stock (Levels) ---\n")
+x2 <- base_dept$immigrant_stock
+rval <- function(x2) {
+    ares <- abs(x2 - mean(x2)) / sd(x2)
+    df <- data.frame(x2, ares)
+    r <- max(df$ares)
+    list(r, df)
+}
+n <- length(x2)
+alpha <- 0.05
+lam <- c(1:20)
+R <- c(1:20)
+for (i in 1:20) {
+    if (i == 1) {
+        rt <- rval(x2)
+        R[i] <- unlist(rt[1])
+        df <- data.frame(rt[2])
+        newdf <- df[df$ares != max(df$ares), ]
+    } else if (i != 1) {
+        rt <- rval(newdf$x2)
+        R[i] <- unlist(rt[1])
+        df <- data.frame(rt[2])
+        newdf <- df[df$ares != max(df$ares), ]
+    }
+    p <- 1 - alpha / (2 * (n - i + 1))
+    t <- qt(p, (n - i - 1))
+    lam[i] <- t * (n - i) / sqrt((n - i - 1 + t**2) * (n - i + 1))
+}
+newdf <- data.frame(c(1:20), R, lam)
+names(newdf) <- c("No. Outliers", "Test Stat.", "Critical Val.")
+newdf
 
-# ==================================================================================================
-# ### 2. MATRICE DE PONDÉRATION SPATIALE (W)
-# ==================================================================================================
-# On utilise ici la contiguïté Reine (Queen) d'ordre 1, standard en analyse départementale.
+# Note: Log Immigrant Stock (ln(X2)) is excluded from outlier testing.
+# Its boxplot showed no observations beyond the whiskers, confirming absence of outliers.
 
-# 2.1 Création de la liste des voisins
-nb_queen <- poly2nb(base_dept, queen = TRUE)
+# Housing Units
+cat("\n--- Rosner Test: Housing Units ---\n")
+rosnerTest(base_dept$housing_units, k = 10, alpha = 0.05)$all.stats
 
-# Résumé de la connectivité (vérification d'îlots éventuels)
-print(summary(nb_queen))
+# Population Change 10Y
+cat("\n--- Grubbs Test: Population Change 10Y ---\n")
+grubbs.test(base_dept$population_change_10yrs_pct, type = 10, two.sided = TRUE)
 
-# Comparaison avec contiguïté Tour (Rook) d'ordre 1
-nb_rook <- poly2nb(base_dept, queen = FALSE)
-diff_nb <- diffnb(nb_queen, nb_rook)
+# Unemployment Rate
+cat("\n--- Rosner Test: Unemployment Rate ---\n")
+rosnerTest(base_dept$unemployment_rate_pct, k = 10, alpha = 0.05)$all.stats
 
-print("Différences entre Reine et Tour :")
-print(summary(diff_nb))
-if(length(diff_nb) == 0) cat("Aucune différence : les définitions de voisins sont identiques.\n")
+# Poverty Rate
+cat("\n--- Rosner Test: Poverty Rate ---\n")
+rosnerTest(base_dept$poverty_rate_pct, k = 10, alpha = 0.05)$all.stats
 
+# Social Housing Rate
+cat("\n--- Rosner Test: Social Housing Rate ---\n")
+rosnerTest(base_dept$social_housing_rate_pct, k = 10, alpha = 0.05)$all.stats
 
-# 2.2 Création de la matrice de poids row-standardized (W)
-listw_queen <- nb2listw(nb_queen, style = "W", zero.policy = TRUE)
+# ------------------------------------------------------------------------------
+# 1.6 Normality Assessment (Shapiro-Wilk)
+# ------------------------------------------------------------------------------
+# H0: Normal distribution (Reject if p-value < 0.05)
+p_vals <- sapply(st_drop_geometry(base_dept)[vars_numeric], function(x) shapiro.test(x)$p.value)
 
-# Visualisation rapide de la matrice
-# plot(st_geometry(base_dept), border="grey")
-# plot(nb_queen, st_coordinates(st_centroid(base_dept)), add=TRUE, col="red")
+cat("\n--- Shapiro-Wilk Tests (p-values) ---\n")
+print(round(p_vals, 5))
+# Conclusion: p < 0.05 for multiple variables.
+# Consequence: Non-normal distributions mandate non-parametric Spearman correlation.
 
-
-# ==================================================================================================
-# ### 3. ANALYSE EXPLORATOIRE SPATIALE (ESDA)
-# ==================================================================================================
-
-# 3.1 Test de Moran Global sur la variable dépendante (Y)
-moran_test <- moran.test(base_dept$Nb_log_sociaux_10000hab, listw_queen, zero.policy = TRUE)
-print(moran_test)
-# Interprétation : Si p-value < 0.05, il y a autocorrélation spatiale globale significative.
-
-# 3.2 Moran Scatterplot
-moran.plot(base_dept$Nb_log_sociaux_10000hab, listw_queen, 
-           labels = as.character(base_dept$Libellé), 
-           pch = 19, quiet = TRUE,
-           main = "Diagramme de Moran - Logements Sociaux")
-
-# NOTE GEODA :
-# Pour une exploration locale (LISA) interactive :
-# 1. Space > Univariate Local Moran's I.
-# 2. Sélectionnez 'Nb_log_sociaux_10000hab'.
-# 3. Visualisez la Cluster Map pour identifier les zones High-High (HH) ou Low-Low (LL).
-# C'est souvent plus visuel et pertinent pour le rapport écrit.
-
-
-# ==================================================================================================
-# ### 4. MODÉLISATION ÉCONOMÉTRIQUE
-# ==================================================================================================
-
-# Définition de l'équation de base
-# Y = Nb_log_sociaux
-# X = Part_femmes_seuls_enfant + Nb_immigres (ou log_Nb_immigres selon choix)
-
-# 4.1 Modèle OLS (MCO) Classique (Sans effet spatial)
-# ---------------------------------------------------------
-# Note: On utilise ici Nb_immigres brut comme demandé implicitement, mais le log est souvent mieux.
-model_ols <- lm(Nb_log_sociaux_10000hab ~ Part_femmes_seuls_enfant + Nb_immigres, data = base_dept)
-summary(model_ols)
-
-# --- Diagnostics OLS ---
-# A. Multicollinéarité (VIF)
-# VIF < 10 (idéalement < 5) indique absence de multicolinéarité grave.
-print(vif(model_ols))
-
-# B. Normalité des résidus (Jarque-Bera)
-# H0: Résidus normaux. Si p-value < 0.05, non-normalité.
-residus_ols <- residuals(model_ols)
-# jarque.bera.test(residus_ols) # Nécessite librarytseries, sinon regarder histogramme
-shapiro.test(residus_ols) # Alternative native R
-
-# C. Hétéroscédasticité (Breusch-Pagan)
-# H0: Homoscédasticité. Si p-value < 0.05, hétéroscédasticité (problème pour OLS).
-bptest(model_ols)
-
-# D. Autocorrélation spatiale des résidus OLS (Moran sur résidus)
-lm.morantest(model_ols, listw_queen)
-# Si significatif -> Le modèle OLS oublie la structure spatiale -> Modèle spatial requis.
+# ------------------------------------------------------------------------------
+# 1.7 Pairwise Correlations (Spearman)
+# ------------------------------------------------------------------------------
+vars_interet <- st_drop_geometry(base_dept)[, vars_numeric]
+corr_matrix <- cor(vars_interet, use = "complete.obs", method = "spearman")
+corrplot(corr_matrix,
+    method = "color",
+    type = "upper",
+    addCoef.col = "black",
+    tl.col = "black",
+    tl.cex = 0.7,
+    number.cex = 0.7,
+    col = colorRampPalette(c("blue", "white", "red"))(200),
+    title = "Spearman Correlation Matrix",
+    mar = c(0, 0, 2, 0)
+)
 
 
-# 4.2 Tests de Spécification (LM Tests) - CHOIX DU MODÈLE
-# ---------------------------------------------------------
-# Ces tests permettent de choisir entre SAR (Lag) et SEM (Error).
-lm_tests <- lm.LMtests(model_ols, listw_queen, test = "all")
-print(lm_tests)
 
-# --- RÈGLE DE DÉCISION (Approche Florax et al.) ---
-# 1. Regarder LMerr (Error) et LMlag (Lag).
-# 2. Si les deux sont non-significatifs -> Garder OLS.
-# 3. Si un seul est significatif -> Choisir ce modèle.
-# 4. Si les deux sont significatifs -> Regarder les versions ROBUSTES (RLMerr et RLMlag).
-#    -> Celui qui a la p-value la plus faible (le plus significatif) l'emporte.
+# ==============================================================================
+# 2. SPATIAL WEIGHTS MATRIX (W)
+# ==============================================================================
 
-# NOTE : Le modèle SDM (Durbin Spatial) est souvent préféré aujourd'hui car il englobe les deux.
-# Il inclut les X retardés spatialement (WX).
+# ------------------------------------------------------------------------------
+# 2.1 Queen Contiguity
+# ------------------------------------------------------------------------------
+# Neighbors share at least one vertex (edges + corners)
+nb_queen <- poly2nb(base_dept, row.names = base_dept$department_name, queen = TRUE)
+summary(nb_queen)
+
+# Connectivity visualization
+nb_linesQ <- nb2lines(nb_queen, coords = st_centroid(st_geometry(base_dept)))
+nb_sfQ <- st_as_sf(nb_linesQ)
+ggplot() +
+    geom_sf(data = base_dept, fill = "lightgreen", color = "black") +
+    geom_sf(data = nb_sfQ, color = "blue") +
+    theme_minimal() +
+    ggtitle("Contiguity Map: Queen")
+
+# Row-standardized W matrix
+WQueen <- nb2listw(nb_queen, style = "W", zero.policy = TRUE)
+
+# ------------------------------------------------------------------------------
+# 2.2 Rook Contiguity (Sensitivity Check)
+# ------------------------------------------------------------------------------
+# Neighbors share at least one edge (stricter than Queen)
+nb_rook <- poly2nb(base_dept, row.names = base_dept$department_name, queen = FALSE)
+summary(nb_rook)
+
+# ------------------------------------------------------------------------------
+# 2.3 K-Nearest Neighbors
+# ------------------------------------------------------------------------------
+# Distance-based alternative: each dept connected to its k closest centroids
+centroids <- st_centroid(st_geometry(base_dept))
+coords <- st_coordinates(centroids)
+crs <- st_crs(base_dept)
+coords_sf <- st_as_sf(as.data.frame(coords), coords = c("X", "Y"), crs = crs)
+coords_sp <- as(coords_sf, "Spatial")
+
+k <- 1
+knn_neighbours <- knearneigh(coords, k = k)
+neighbors <- knn2nb(knn_neighbours)
+summary(neighbors)
+
+# Connectivity visualization
+nb_linesKNN <- nb2lines(neighbors, coords = coords_sp)
+nb_sfKNN <- st_as_sf(nb_linesKNN)
+ggplot() +
+    geom_sf(data = base_dept, fill = "lightgreen", color = "black") +
+    geom_sf(data = nb_sfKNN, color = "blue") +
+    theme_minimal() +
+    ggtitle(paste("Contiguity Map:", k, "-Nearest Neighbors"))
+
+# Row-standardized W matrix
+KNN <- nb2listw(neighbors, style = "W", zero.policy = TRUE)
+
+# ==============================================================================
+# 3. EXPLORATORY SPATIAL DATA ANALYSIS (ESDA)
+# ==============================================================================
+
+set.seed(1234)
+
+# ------------------------------------------------------------------------------
+# 3.1 Spatial Autocorrelation under Queen W
+# ------------------------------------------------------------------------------
+
+# Global Moran's I (Asymptotic inference under randomisation)
+globalMoranQ <- moran.test(base_dept$social_housing_density, WQueen, zero.policy = TRUE, randomisation = TRUE)
+globalMoranQ
+
+# Monte Carlo permutation test (999 simulations under H0: no spatial autocorrelation)
+MoranpermQ <- moran.mc(base_dept$social_housing_density, WQueen, nsim = 999, zero.policy = TRUE)
+MoranpermQ
+
+# Moran Scatterplot (standardized Y vs spatially lagged Y)
+base_dept$social_housing_density_std <- scale(base_dept$social_housing_density)
+moran_plot_Q <- moran.plot(
+    as.vector(base_dept$social_housing_density_std),
+    WQueen,
+    xlab = "Social Housing Density (standardized)",
+    ylab = "Spatially Lagged Social Housing Density",
+    main = "Moran Scatterplot: Queen W",
+    labels = as.character(base_dept$department_name)
+)
+
+# ------------------------------------------------------------------------------
+# 3.2 Spatial Autocorrelation under KNN W
+# ------------------------------------------------------------------------------
+
+# Global Moran's I (Asymptotic inference under randomisation)
+globalMoranKNN <- moran.test(base_dept$social_housing_density, KNN, zero.policy = TRUE, randomisation = TRUE)
+globalMoranKNN
+
+# Monte Carlo permutation test (999 simulations under H0: no spatial autocorrelation)
+MoranpermKNN <- moran.mc(base_dept$social_housing_density, KNN, nsim = 999, zero.policy = TRUE)
+MoranpermKNN
+
+# Moran Scatterplot (standardized Y vs spatially lagged Y)
+moran_plot_KNN <- moran.plot(
+    as.vector(base_dept$social_housing_density_std),
+    KNN,
+    xlab = "Social Housing Density (standardized)",
+    ylab = "Spatially Lagged Social Housing Density",
+    main = "Moran Scatterplot: KNN W",
+    labels = as.character(base_dept$department_name)
+)
 
 
-# 4.3 Estimation des Modèles Spatiaux
-# ---------------------------------------------------------
-# Nous estimons les trois principaux pour comparaison complete (Conforme TD3).
+# ==============================================================================
+# 4. ECONOMETRIC MODELING
+# ==============================================================================
 
-# MODÈLE A : SEM (Spatial Error Model) - Erreur spatiale
-# Y = XB + u, u = lambda*Wu + e
-model_sem <- errorsarlm(Nb_log_sociaux_10000hab ~ Part_femmes_seuls_enfant + Nb_immigres, 
-                        data = base_dept, listw = listw_queen)
-summary(model_sem)
+# ------------------------------------------------------------------------------
+# 4.0 OLS Baseline
+# ------------------------------------------------------------------------------
+# Specification: Y ~ X1 + X2 + X3 + X4
+equation <- social_housing_density ~ single_parent_ratio + immigrant_stock + population_change_10yrs_pct + poverty_rate_pct
 
-# MODÈLE B : SAR (Spatial Autoregressive Model) - Lag spatial
-# Y = rho*WY + XB + e
-model_sar <- lagsarlm(Nb_log_sociaux_10000hab ~ Part_femmes_seuls_enfant + Nb_immigres, 
-                      data = base_dept, listw = listw_queen)
-summary(model_sar)
+ols <- lm(equation, data = base_dept)
+summary(ols)
 
-# MODÈLE C : SDM (Spatial Durbin Model) - Mixte
+# Multicollinearity check (VIF < 5)
+vif(ols)
+
+# Spatial distribution of OLS residuals
+base_dept$residuals_ols <- residuals(ols)
+
+ggplot(base_dept) +
+    geom_sf(aes(fill = residuals_ols)) +
+    scale_fill_gradient2(low = "blue", mid = "white", high = "red") +
+    theme_minimal() +
+    labs(title = "OLS residuals: spatial distribution")
+
+# ------------------------------------------------------------------------------
+# 4.1 Spatial Specification under Queen W
+# ------------------------------------------------------------------------------
+
+# Moran test on OLS residuals (H0: no spatial autocorrelation)
+moran_lmQ <- lm.morantest(ols, WQueen, alternative = "two.sided")
+print(moran_lmQ)
+
+# Lagrange Multiplier Tests ----------------------------------------------------
+LM_Q <- lm.LMtests(ols, WQueen, test = c("LMerr", "LMlag", "RLMerr", "RLMlag"))
+print(LM_Q)
+
+# Elhorst Procedure (LR Tests) -------------------------------------------------
+# Spatial Durbin Model (SDM) vs Spatial Error Model (SEM)
+# SEM: Y = XB + u, u = lambda*Wu + e
+sdmQ <- lagsarlm(equation, data = base_dept, listw = WQueen, type = "mixed")
+summary(sdmQ)
+
+semQ <- errorsarlm(equation, data = base_dept, listw = WQueen, method = "eigen")
+summary(semQ)
+
+TestSDM_SEM_Q <- LR.Sarlm(sdmQ, semQ)
+print(TestSDM_SEM_Q)
+
+# Spatial Durbin Model (SDM) vs Spatial Autoregressive Model (SAR)
+# SAR: Y = rho*WY + XB + e
+sarQ <- lagsarlm(equation, data = base_dept, listw = WQueen, method = "eigen")
+summary(sarQ)
+
+TestSDM_SAR_Q <- LR.Sarlm(sdmQ, sarQ)
+print(TestSDM_SAR_Q)
+
+# ------------------------------------------------------------------------------
+# 4.2 Spatial Specification under KNN W
+# ------------------------------------------------------------------------------
+
+# Moran test on OLS residuals (H0: no spatial autocorrelation)
+moran_lmKNN <- lm.morantest(ols, KNN, alternative = "two.sided")
+print(moran_lmKNN)
+
+# Lagrange Multiplier Tests ----------------------------------------------------
+LM_KNN <- lm.LMtests(ols, KNN, test = c("LMerr", "LMlag", "RLMerr", "RLMlag"))
+print(LM_KNN)
+
+# Elhorst Procedure (LR Tests) -------------------------------------------------
+# Spatial Durbin Model (SDM) vs Spatial Error Model (SEM)
+# SEM: Y = XB + u, u = lambda*Wu + e
+sdmKNN <- lagsarlm(equation, data = base_dept, listw = KNN, type = "mixed")
+summary(sdmKNN)
+
+semKNN <- errorsarlm(equation, data = base_dept, listw = KNN, method = "eigen")
+summary(semKNN)
+
+TestSDM_SEM_KNN <- LR.Sarlm(sdmKNN, semKNN)
+print(TestSDM_SEM_KNN)
+
+# Spatial Durbin Model (SDM) vs Spatial Autoregressive Model (SAR)
+# SAR: Y = rho*WY + XB + e
+sarKNN <- lagsarlm(equation, data = base_dept, listw = KNN, method = "eigen")
+summary(sarKNN)
+
+TestSDM_SAR_KNN <- LR.Sarlm(sdmKNN, sarKNN)
+print(TestSDM_SAR_KNN)
+
+##################################################################################
+# SOFIA
+##################################################################################
+# results formatin
+# --- helper: extract rho / lambda safely ---
+get_rho <- function(m) if (!is.null(m$rho)) round(m$rho, 3) else ""
+get_lambda <- function(m) if (!is.null(m$lambda)) round(m$lambda, 3) else ""
+
+# --- (optional) nice labels for regressors ---
+cov_labels <- c(
+    "Share single mothers",
+    "Number of immigrants",
+    "Pop. change 10y (%)",
+    "Unemployment rate (%)",
+    "Poverty rate (%)"
+)
+
+# Your SAR residual LM p-values (you already have these)
+lm_resid_sar_q <- 0.38173
+lm_resid_sar_ppv <- 0.10228
+
+
+stargazer(
+    lag_model_q, sem_model_q, lag_model, sem_model,
+    type = "text", # change to "latex" if needed
+    title = "Spatial regression models (SAR vs SEM) under alternative weight matrices",
+    digits = 3,
+    column.labels = c("SAR", "SEM", "SAR", "SEM"),
+    column.separate = c(1, 1, 1, 1),
+    dep.var.labels = "Social housing per 10,000 (2024)",
+    covariate.labels = cov_labels,
+    omit.stat = c("rsq", "adj.rsq", "f"),
+    add.lines = list(
+        c("Weights matrix", "Queen", "Queen", "k-NN (PPV)", "k-NN (PPV)"),
+        c(
+            "Spatial parameter",
+            paste0("rho=", get_rho(lag_model_q)),
+            paste0("lambda=", get_lambda(sem_model_q)),
+            paste0("rho=", get_rho(lag_model)),
+            paste0("lambda=", get_lambda(sem_model))
+        ),
+        c(
+            "LM residual test (p-value)",
+            round(lm_resid_sar_q, 3),
+            "— (absorbed by <U+03BB>)",
+            round(lm_resid_sar_ppv, 3),
+            "— (absorbed by <U+03BB>)"
+        )
+    ),
+    out = "sem_sar_model.txt"
+)
+
+
+# Compare models
+AIC(mco, sem_model, lag_model, sem_model_q, lag_model_q)
+BIC(mco, sem_model, lag_model, sem_model_q, lag_model_q)
+
+par(mfrow = c(1, 2))
+hist(residuals(sem_model))
+hist(residuals(lag_model))
+
+# Plan Elhorst (2010)
+library(spatialreg)
+
+# SDM: Spatial Durbin Model
 # Y = rho*WY + XB + WX*gamma + e
 # type="mixed" car équivalent à lagsarlm avec Durbin=TRUE
-model_sdm <- lagsarlm(Nb_log_sociaux_10000hab ~ Part_femmes_seuls_enfant + Nb_immigres, 
-                      data = base_dept, listw = listw_queen, type = "mixed")
-summary(model_sdm)
+
+sdm_ppv <- lagsarlm(
+    equation,
+    data = base_dept,
+    listw = PPV,
+    type = "mixed",
+    method = "eigen",
+    zero.policy = TRUE
+)
+
+sdm_q <- lagsarlm(
+    equation,
+    data = base_dept,
+    listw = WQueen,
+    type = "mixed",
+    method = "eigen",
+    zero.policy = TRUE
+)
+
+summary(sdm_ppv)
+coef_names <- names(coef(sdm_ppv))
+pretty_names <- coef_names
+pretty_names <- gsub("^lag\\.", "W × ", pretty_names)
+names(pretty_names) <- coef_names
+rho_val <- sdm_ppv$rho
+rho_se <- sqrt(diag(sdm_ppv$asyvar))["rho"]
+rho_val2 <- sdm_q$rho
+rho_se2 <- sqrt(diag(sdm_q$asyvar))["rho"]
 
 
-# 4.4 Comparaison et Choix Final
-# ---------------------------------------------------------
-# Comparaison par AIC (Le plus faible est le meilleur)
-AIC(model_ols, model_sar, model_sem, model_sdm)
+stargazer(
+    sdm_ppv, sdm_q,
+    type = "text",
+    title = "Spatial Durbin Model (SDM) – k-nearest neighbours",
+    digits = 3,
+    # covariate.labels = pretty_names,
+    omit.stat = c("rsq", "adj.rsq", "f"),
+    add.lines = list(c("Spatial lag parameter (rho)", round(rho_val, 3), round(rho_val2, 3))),
+    out = "sdm_model.txt"
+)
 
-# Test LR (Likelihood Ratio) pour voir si SDM simplifie en SAR ou SEM (Nested models)
-# H0 : Le modèle restreint (SAR ou SEM) est suffisant par rapport au SDM.
-# Si p-value < 0.05, on rejette H0 -> On garde SDM.
-lr_sdm_sar <- LR.sarlm(model_sdm, model_sar)
-lr_sdm_sem <- LR.sarlm(model_sdm, model_sem)
+AIC(sdm_ppv)
+impacts(sdm_ppv, listw = PPV, R = 1000)
+hist(residuals(sdm_ppv))
 
-print(lr_sdm_sar)
-print(lr_sdm_sem)
+# Comparison SDM vs SEM
+TestSDM_SEM <- LR.Sarlm(sdm_ppv, sem_model)
+TestSDMq_SEM <- LR.Sarlm(sdm_q, sem_model)
 
-
-# ==================================================================================================
-# ### 5. CALCUL DES IMPACTS (EFFETS DIRECTS, INDIRECTS, TOTAUX)
-# ==================================================================================================
-# Dans les modèles spatiaux (SAR/SDM), les coefficients béta ne s'interprètent pas directement.
-# Il faut calculer les impacts.
-# (Pour le SEM et l'OLS, impacts = coefficients).
-
-# Supposons que le modèle SDM ou SAR soit retenu (exemple avec SDM, le plus complet)
-# Si vous retenez le SAR, remplacez `model_sdm` par `model_sar`.
-
-W_mat <- as(listw_queen, "CsparseMatrix")
-tr_mat <- trW(W_mat, type="mult") # Calcul de la trace pour simulation Monte Carlo
-
-impacts_sdm <- impacts(model_sdm, tr = tr_mat, R = 1000) # R = nombre de simulations
-print(summary(impacts_sdm, zstats = TRUE, short = TRUE))
-
-# Interprétation :
-# - Direct : Effet d'une variation de X dans le département i sur Y dans le département i (incluant feedback).
-# - Indirect (Spillover) : Effet d'une variation de X dans les voisins j sur Y dans i.
-# - Total : Somme des deux.
-
-# ==================================================================================================
-# FIN DU SCRIPT
-# ==================================================================================================
+print(TestSDM_SEM)
+print(TestSDMq_SEM)
