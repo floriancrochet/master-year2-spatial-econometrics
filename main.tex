@@ -63,6 +63,45 @@
 % TITLE PAGE
 %--------------------------------------------------
 \begin{titlepage}
+	\thispagestyle{empty}
+	
+	% Logos at the top
+	\noindent
+	\begin{minipage}[t]{0.45\textwidth}
+		\includegraphics[height=1.5cm]{iae_logo.png}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.45\textwidth}
+		\raggedleft
+		\includegraphics[height=1.5cm]{nu_logo.png}
+	\end{minipage}
+	
+	\vspace{5cm}
+	
+	% Center of the page
+	\begin{center}
+		{\Large\scshape Master 2 -- Econometrics and Statistics}\\[0.2cm]
+		{\Large\scshape Applied Econometrics Track}\\[1cm]
+		
+		{\Large\bfseries Spatial Econometrics}\\[0.4cm]
+		
+		\rule{\textwidth}{1pt}
+		{\LARGE\bfseries Social Housing and Vulnerability Patterns in France (2024)\\[0.3cm]
+		Analysis by Spatial Econometrics}\\[0.1cm]
+		\rule{\textwidth}{1pt}
+		
+		\vfill
+		
+		% Bottom of the page
+		\large\textbf{Author: } Florian CROCHET, Sofia SEDLOVA \\[0.3cm]
+		
+		\large\textbf{Professor: } Muriel TRAVERS \\[0.3cm]
+		
+		\large\textbf{Academic Year: } 2025--2026
+	\end{center}
+\end{titlepage}
+
+\begin{titlepage}
   \centering
   \vspace*{2cm}
   {\LARGE\bfseries Social Housing and Vulnerability Patterns in France (2024)\\[0.4cm]
@@ -212,7 +251,14 @@ where $\mathrm{SHD}$ = social housing density (units per 10\,000 inhabitants), $
 \label{fig:choropleth_all}
 \end{figure}
 
+\newpage
 \subsection{Descriptive analysis}
+
+Table~\ref{tab:desc_stats} summarizes the cross-sectional distributions of the dependent variable and the principal socio-demographic covariates for the 94 French departements in our sample.
+
+\inputifexists{tables/descriptive_stats.tex}
+
+The dependent variable, social housing density, averages approximately 680 units per 10\,000 inhabitants, but exhibits substantial geographic dispersion ($\text{sd} = 247.22$), ranging from a minimum of 228 to a maximum of 1\,414 units, highlighting deep regional inequalities in affordable housing provision. Among the focal covariates, the share of single-parent households is relatively symmetric around its 12.46\% mean, whereas the immigrant stock is heavily right-skewed --- its mean (72\,802) is more than double its median (32\,985) due to high local concentrations in major urban areas. This extreme skewness justifies the logarithmic transformation applied to the immigrant stock in the subsequent econometric estimations. Additionally, the poverty rate averages 14.25\% with a notable upper bound of 27.60\%, underscoring the severe socio-economic disparities present across the territory.
 
 \begin{figure}[H]
 \centering
@@ -220,8 +266,6 @@ where $\mathrm{SHD}$ = social housing density (units per 10\,000 inhabitants), $
 \caption{Spearman correlation matrix between key variables. \textit{Source: INSEE, authors' calculations.}}
 \label{fig:corr_matrix}
 \end{figure}
-
-\inputifexists{tables/descriptive_stats.tex}
 
 \begin{figure}[H]
 \centering
