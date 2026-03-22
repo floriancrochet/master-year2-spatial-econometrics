@@ -1,0 +1,55 @@
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Fri, Mar 20, 2026 - 15:58:59
+\begin{table}[!htbp] \centering 
+  \caption{Spatial Durbin Model (SDM) under alternative weight matrices} 
+  \label{tab:sdm} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{social\_housing\_density} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ single\_parent\_ratio & 89.354$^{***}$ & 83.579$^{***}$ \\ 
+  & (16.999) & (15.835) \\ 
+  & & \\ 
+ immigrant\_stock & 0.0004 & 0.0003 \\ 
+  & (0.0003) & (0.0003) \\ 
+  & & \\ 
+ population\_change\_10yrs\_pct & $-$6.392 & $-$1.391 \\ 
+  & (3.919) & (3.998) \\ 
+  & & \\ 
+ poverty\_rate\_pct & $-$16.708$^{**}$ & $-$11.544 \\ 
+  & (7.950) & (7.396) \\ 
+  & & \\ 
+ lag.single\_parent\_ratio & $-$39.567 & $-$54.407$^{*}$ \\ 
+  & (24.358) & (28.394) \\ 
+  & & \\ 
+ lag.immigrant\_stock & 0.0001 & 0.001 \\ 
+  & (0.0004) & (0.001) \\ 
+  & & \\ 
+ lag.population\_change\_10yrs\_pct & $-$8.840$^{*}$ & $-$18.948$^{***}$ \\ 
+  & (5.324) & (6.320) \\ 
+  & & \\ 
+ lag.poverty\_rate\_pct & $-$20.131$^{*}$ & $-$15.210 \\ 
+  & (11.561) & (14.063) \\ 
+  & & \\ 
+ Constant & 250.754 & 318.262$^{**}$ \\ 
+  & (155.629) & (160.394) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Weights matrix & KNN-3 & Queen \\ 
+Spatial lag parameter ($\rho$) & 0.492 & 0.537 \\ 
+Observations & 94 & 94 \\ 
+Log Likelihood & $-$591.626 & $-$585.632 \\ 
+$\sigma^{2}$ & 15,982.270 & 14,054.010 \\ 
+Akaike Inf. Crit. & 1,205.251 & 1,193.264 \\ 
+Wald Test (df = 1) & 26.178$^{***}$ & 26.560$^{***}$ \\ 
+LR Test (df = 1) & 19.092$^{***}$ & 19.306$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 

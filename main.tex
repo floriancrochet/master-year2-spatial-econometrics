@@ -1,0 +1,500 @@
+\documentclass[a4paper,12pt]{article}
+
+%==================================================
+% PACKAGES
+%==================================================
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{siunitx}
+\sisetup{
+  round-mode=places,
+  round-precision=4,
+  table-number-alignment=center
+}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{setspace}
+\setstretch{1.2}
+\setlength{\parindent}{0in}
+\usepackage{fancyhdr}
+\usepackage[htt]{hyphenat}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{amsmath}
+\usepackage[authoryear,round]{natbib}
+
+% Safe \input: skip missing files so TeX compiles before R generates outputs
+\newcommand{\inputifexists}[1]{\IfFileExists{#1}{\input{#1}}{\textbf{[Table pending: \detokenize{#1}]}}}
+
+% Safe \includegraphics: show placeholder box if image not yet generated
+\newcommand{\includefig}[2][width=0.85\textwidth]{%
+  \IfFileExists{#2}{\includegraphics[#1]{#2}}{%
+    \fbox{\parbox{0.6\textwidth}{\centering\vspace{2cm}\textbf{[Figure pending]}\\\detokenize{#2}\vspace{2cm}}}%
+  }%
+}
+
+%==================================================
+% HEADER & FOOTER
+%==================================================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\footnotesize M2 ECAP 2025--2026: econometrie Spatiale}
+\rhead{}
+\cfoot{\footnotesize \thepage}
+\setlength{\headheight}{12.2pt}
+
+%==================================================
+% BEGIN DOCUMENT
+%==================================================
+\begin{document}
+
+\renewcommand{\contentsname}{Summary}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tables}
+
+\thispagestyle{empty}
+
+%--------------------------------------------------
+% TITLE PAGE
+%--------------------------------------------------
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\LARGE\bfseries Social Housing and Vulnerability Patterns in France (2024)\\[0.4cm]
+  Analysis by Spatial Econometrics\par}
+  \vspace{1cm}
+  {\large Dossier: Spatial Econometrics\par}
+  \vspace{2cm}
+  {\large\textbf{Author: } Florian CROCHET, Sofia SEDLOVA\par}
+  \vspace{0.5cm}
+  {\large\textbf{Professor: } Muriel TRAVERS \par}
+  \vspace{0.5cm}
+  {\large\textbf{Academic Year: } 2025--2026\par}
+  \vfill
+  {\small Nantes Universite -- IAE Nantes\par}
+\end{titlepage}
+
+\newpage
+\setcounter{page}{1}
+
+\tableofcontents
+\newpage
+\listoffigures
+\listoftables
+\newpage
+
+%==================================================
+% 1. INTRODUCTION
+%==================================================
+\section{Introduction}
+
+\medskip
+
+The remainder of the paper is structured as follows. Section~2 establishes the research question, hypotheses, and literature motivation. Section~3 presents the data and exploratory spatial analysis. Section~4 describes the econometric methodology and weight matrices. Section~5 reports estimation results and spatial impact measures. Section~6 concludes.
+
+
+%==================================================
+% 2. RESEARCH QUESTION, HYPOTHESES, AND LITERATURE
+%==================================================
+\section{Research question, hypotheses, and literature}
+
+\subsection{Significance and motivation}
+
+Social housing policy in France operates at the intersection of territorial planning, demographic need, and inter-governmental co-ordination. The \emph{Solidarite et Renouvellement Urbain} (SRU) law mandates a minimum social housing share in municipalities above a population threshold, but supply remains unevenly distributed. Understanding whether that distribution is driven solely by local demographic pressures or also by interactions with neighbouring territories is both a positive and a normative question: it determines whether policies designed independently department by department are sufficient, or whether a co-ordinated regional approach is needed.
+
+\medskip
+
+\citet{chapelle2022} and \citet{maaoui2023} show that the supply of social housing is systematically related to local social composition, particularly the presence of socio-economically vulnerable populations; social housing construction responds --- positively or negatively, depending on political constraints --- to indicators of housing need. \citet{wang2025} shows that affordable housing supply responds to neighbouring jurisdictions' characteristics and actions, not only to local conditions. \citet{beenstock2015} empirically confirms spatial dependence in housing supply decisions across jurisdictions. Taken together, this literature suggests that ignoring spatial interactions --- either in the regressors or in the outcome --- leads to biased estimates and potentially misleading policy conclusions.
+
+\subsection{Research question}
+
+\textbf{Research question.} \emph{To what extent is the density of social housing in a departement influenced by the social structure (single-parent families, immigration) of that departement and its neighbours?}
+
+\subsection{Hypotheses}
+
+This question motivates three testable hypotheses:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{clccc}
+\toprule
+\textbf{Hyp.} & \textbf{What it tests} & \textbf{Focal variable(s)} & \textbf{Spatial element} & \textbf{Parameter} \\
+\midrule
+H1 & Local social need $\rightarrow$ local supply & $\mathrm{SPR}$,\ $\mathrm{IMM}$ & No & $\beta_{\mathrm{SPR}},\,\beta_{\mathrm{IMM}} > 0$ \\
+H2 & Neighbour social need $\rightarrow$ local supply & $W\!\times\!\mathrm{SPR}$,\ $W\!\times\!\mathrm{IMM}$ & Yes ($WX$) & $\theta_{\mathrm{SPR}},\,\theta_{\mathrm{IMM}} \neq 0$ \\
+H3 & Neighbour supply $\rightarrow$ local supply & $W\!\times\!\mathrm{SHD}$ & Yes ($WY$) & $\rho > 0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\medskip
+
+More precisely: \textbf{H1} posits that departements with a higher share of single-parent families ($\mathrm{SPR}$) and a larger immigrant stock ($\mathrm{IMM}$) exhibit a higher density of social housing ($\beta_{\mathrm{SPR}} > 0$, $\beta_{\mathrm{IMM}} > 0$), capturing the direct local-need channel for the two focal variables. \textbf{H2} posits that the social need levels of \emph{neighbouring} departements also affect local supply via spatially lagged regressors ($\theta_{\mathrm{SPR}} \neq 0$ on $W \times \mathrm{SPR}$ and $\theta_{\mathrm{IMM}} \neq 0$ on $W \times \mathrm{IMM}$), motivated by \citet{wang2025}. \textbf{H3} posits that social housing density in a departement is positively influenced by density in neighbouring departements ($\rho > 0$ on $W \times \mathrm{SHD}$), reflecting policy imitation, administrative coordination, or housing-market spillovers, as found by \citet{beenstock2015}.
+
+\subsection{Methodological approach}
+
+The analysis proceeds in four steps.
+
+\medskip
+
+\textbf{Step 1 --- Benchmark OLS.} We first estimate the baseline equation by ordinary least squares (OLS). OLS assumes spatial independence of observations; its residuals are inspected for spatial autocorrelation via Moran's $I$ and Lagrange multiplier (LM) tests to determine whether a spatial extension is warranted.
+
+\medskip
+
+\textbf{Step 2 --- Spatial weight matrices.} Two neighbourhood structures are constructed: Queen contiguity (shared borders) and $k$-nearest neighbours ($k = 3$; $k = 6$ as robustness). All matrices are row-standardised. The choice of matrix is motivated by the institutional geography of French social housing and evaluated on connectivity and fit criteria.
+
+\medskip
+
+\textbf{Step 3 --- Candidate spatial models.} Three spatial specifications are estimated and compared:
+\begin{itemize}
+  \item \textbf{SAR} (Spatial Autoregressive / spatial lag model): captures endogenous spillovers in the dependent variable ($\rho \neq 0$, H3);
+  \item \textbf{SEM} (Spatial Error Model): captures spatially correlated unobservables in the error term ($\lambda \neq 0$), consistent with omitted spatial confounders;
+  \item \textbf{SDM} (Spatial Durbin Model): the most general specification, nesting both the SAR ($\theta = 0$) and the SLX ($\rho = 0$) as special cases; it simultaneously tests H2 ($\theta \neq 0$ on spatially lagged regressors) and H3.
+\end{itemize}
+
+\medskip
+
+\textbf{Step 4 --- Model selection (Elhorst procedure).} Following \citet{elhorst2010}, we start from the SDM and test downward restrictions toward the SAR ($H_0\colon\theta = 0$) and the SEM ($H_0\colon\theta + \rho\beta = 0$) via likelihood ratio tests. The simplest specification not rejected by the data is retained. AIC is used as a complementary fit criterion across all estimated models. For the preferred specification, direct, indirect, and total impact measures are computed following \citet{lesage2009} to decompose own-departement effects from cross-departement spillovers.
+
+
+%==================================================
+% 3. DATA
+%==================================================
+\section{Data}
+
+\subsection{Social housing across French departements}
+
+The variable of interest is \textbf{social housing density}, defined as the number of social housing units per 10\,000 inhabitants. It is observed at the \textbf{departement} level, an administrative division of metropolitan France. The sample covers $n = 94$ departements; Corsica (2A, 2B) and the overseas territories (DOM-TOM) are excluded because, as islands or geographically detached units, they would form isolated nodes in any contiguity weight matrix, introducing disconnected sub-graphs that bias the spatial structure.
+
+\medskip
+
+The departement boundaries are projected in \textbf{RGF93/Lambert-93} (EPSG:2154), the official metric projection for metropolitan France. It preserves shape locally and minimises area distortion, making it appropriate for centroid-based distance and contiguity computations.
+
+\medskip
+
+Social housing density exhibits wide cross-sectional variation: from 228 units per 10\,000 inhabitants (Ariège, departement~09) to 1\,414 (Seine-Saint-Denis, departement~93), with a mean of 679.5 ($\text{sd} = 247.2$). This variable is likely to exhibit \textbf{spatial dependence} for several reasons: (i)~national and regional social housing policies create spatial clusters of public investment; (ii)~urban labour markets and commuting zones spill across departement borders, linking housing demand in adjacent units; (iii)~immigration and internal migration patterns produce spatially correlated demographic pressures; and (iv)~poverty and unemployment, which drive eligibility for social housing, are themselves spatially clustered.
+
+\begin{figure}[H]
+\centering
+\IfFileExists{qgis/layout_v1.pdf}{%
+  \includegraphics[width=\textwidth]{qgis/layout_v1.pdf}%
+}{%
+  \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}\textbf{[Map pending: qgis/layout\_v1.pdf]}\vspace{2cm}}}%
+}
+\caption{Social housing density across French departements --- main cartographic layout. Choropleth in quantile classification; RGF93/Lambert-93 (EPSG:2154). \textit{Source: IGN (DEPARTEMENT boundaries), INSEE (Repertoire des logements locatifs des bailleurs sociaux). Authors' cartography.}}
+\label{fig:layout_main}
+\end{figure}
+
+\subsection{The factors behind social housing provision}
+
+The dataset combines departmental boundary polygons with two tabular sources: social housing and single-parent data from INSEE, and a set of socio-economic indicators published in 2022. After merging on the INSEE departement code, the cross-section contains $n = 94$ observations. The baseline OLS equation is:
+\begin{equation}
+\mathrm{SHD}_i = \beta_0 + \beta_1\,\mathrm{SPR}_i + \beta_2\,\mathrm{IMM}_i + \beta_3\,\Delta\mathrm{Pop}_i + \beta_4\,\mathrm{Pov}_i + \varepsilon_i
+\label{eq:ols}
+\end{equation}
+where $\mathrm{SHD}$ = social housing density (units per 10\,000 inhabitants), $\mathrm{SPR}$ = share of single-parent households, $\mathrm{IMM}$ = immigrant stock, $\Delta\mathrm{Pop}$ = 10-year population change, $\mathrm{Pov}$ = poverty rate.
+
+\subsubsection{Solo-mother households: the primary vulnerability indicator}
+
+\subsubsection{Immigration: the second focal variable}
+
+\subsubsection{Control variables: poverty and population dynamics}
+
+\begin{figure}[H]
+\centering
+\includefig[width=\textwidth]{figures/fig_choropleth_all_variables.png}
+\caption{Spatial distribution of model variables: social housing density (top-left), single-parent ratio (top-centre), immigrant stock --- log scale (top-right), 10-year population change (bottom-left), poverty rate (bottom-centre). All maps use quantile colour scales; RGF93/Lambert-93 projection. \textit{Source: INSEE, authors' calculations based on IGN departement boundaries.}}
+\label{fig:choropleth_all}
+\end{figure}
+
+\subsection{Descriptive analysis}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.75\textwidth]{figures/fig_correlation_matrix.png}
+\caption{Spearman correlation matrix between key variables. \textit{Source: INSEE, authors' calculations.}}
+\label{fig:corr_matrix}
+\end{figure}
+
+\inputifexists{tables/descriptive_stats.tex}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.95\textwidth]{figures/fig_hist_boxplot_housing_density.png}
+\caption{Distribution of the dependent variable: histogram (left) and box-plot (right). \textit{Source: INSEE, authors' calculations.}}
+\label{fig:hist_boxplot}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.95\textwidth]{figures/fig_hist_boxplot_focal_vars.png}
+\caption{Distribution of the two focal explanatory variables: single-parent household share (top row) and immigrant stock in log scale (bottom row). Histogram (left) and box-plot (right) in each case. \textit{Source: INSEE, authors' calculations.}}
+\label{fig:hist_boxplot_focal}
+\end{figure}
+
+
+%==================================================
+% 3. ECONOMETRIC METHODOLOGY
+%==================================================
+\section{Econometric methodology}
+
+% Present the spatial econometric framework.
+% The aim is to explain social_housing_rate_pct by departement,
+% considering potential spatial interactions between departements.
+
+\subsection{Spatial weight matrices}
+\label{sec:wmat}
+
+The spatial weight matrix $W$ encodes which units are considered neighbours and how strongly. Four specifications are constructed, covering both contiguity and distance-based definitions, and compared in Table~\ref{tab:wmat_stats} below.
+
+\subsubsection{Definitions}
+
+\paragraph{Queen contiguity.}
+Two departements are neighbours if their polygons share at least one boundary point (edge or corner). This produces a \emph{symmetric} matrix ($w_{ij} = w_{ji}$ always) and captures the geographic reality that French departements interact primarily through shared borders --- administrative coordination, local labour markets, commuting flows and housing supply decisions all operate through contiguous territory.
+
+\paragraph{$k$-nearest neighbours (KNN).}
+Each departement's centroid is connected to its $k$ geographically nearest centroids, regardless of whether they share a physical border. Three values are considered: $k \in \{1, 3, 6\}$. KNN-1 is included only as a structural reference (it produces 27 disconnected subgraphs and is excluded from estimation); the operational KNN specifications for model estimation are \textbf{KNN-3} (primary) and \textbf{KNN-6} (robustness check). KNN matrices are \emph{asymmetric} by construction --- if $j$ is among $i$'s $k$ nearest, $i$ need not be among $j$'s $k$ nearest.
+
+All matrices are \textbf{row-standardised}: each row sums to 1, so $Wy$ is simply a weighted average of neighbours' values.
+
+\subsubsection{Connectivity analysis}
+
+\inputifexists{tables/wmat_connectivity.tex}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.48\textwidth]{figures/fig_contiguity_queen.png}
+\includefig[width=0.48\textwidth]{figures/fig_contiguity_knn.png}\\[4pt]
+\includefig[width=0.48\textwidth]{figures/fig_contiguity_knn3.png}
+\includefig[width=0.48\textwidth]{figures/fig_contiguity_knn6.png}
+\caption{Neighbourhood graphs: Queen contiguity (top-left), KNN-1 reference (top-right), KNN-3 (bottom-left), KNN-6 (bottom-right). \textit{Source: authors' calculations based on IGN departement boundaries.}}
+\label{fig:neighbourhood}
+\end{figure}
+
+The connectivity statistics (Table~\ref{tab:wmat_stats}) and neighbourhood graphs (Figure~\ref{fig:neighbourhood}) confirm that \textbf{Queen contiguity} is the most appropriate primary weight matrix for analysing inter-departmental spillovers in social housing provision. Because social housing allocation in France is administered through departmental and regional institutions (prefectures, collectivit\'{e}s territoriales, Action Logement) whose jurisdictions follow administrative borders, a contiguity-based neighbourhood definition directly captures the institutional channels through which housing policies, labour-market pressures and demographic needs propagate across adjacent territories. The Queen matrix produces a single fully connected graph of 474 links ($\bar{k} = 5.04$, range 2--10), is symmetric by construction, and never generates geographically implausible links --- properties that are essential for consistent estimation of the spatial autoregressive parameter $\rho$ and for the impact decomposition (Section~\ref{sec:impacts}). The degree distribution, which reflects true geographic heterogeneity --- peripheral departements have fewer neighbours, interior crossroads departements more --- is shown in Figure~\ref{fig:nb_card_queen} (Appendix). By contrast, KNN matrices impose a uniform degree regardless of geographic position and may link centroid-distant departements that share no plausible economic relationship; moreover, KNN-1 produces 27 disconnected subgraphs and is excluded from estimation. Both KNN-3 (282 links) and KNN-6 (564 links) restore full connectivity and are retained as distance-based sensitivity checks: KNN-3 serves as the principal robustness specification, while KNN-6 verifies that results are not driven by the specific choice of $k$. Throughout, agreement in sign, magnitude and significance between Queen and KNN-3 estimates strengthens the credibility of conclusions regarding the spatial determinants of social housing density.
+
+
+
+\subsection{Spatial econometric models}
+
+Four nested models are considered. Their general form progresses from no spatial interaction (OLS) to the full Spatial Durbin Model (SDM).
+
+\paragraph{OLS (benchmark).}
+\begin{equation}
+y_i = \mathbf{x}_i'\beta + \varepsilon_i, \quad \varepsilon \sim \mathcal{N}(0,\sigma^2 I)
+\end{equation}
+Spatial dependence in residuals from OLS signals model misspecification and is diagnosed via Lagrange multiplier tests.
+
+\paragraph{SAR --- Spatial Autoregressive Model.}
+\begin{equation}
+y_i = \rho \sum_j w_{ij}\,y_j + \mathbf{x}_i'\beta + \varepsilon_i
+\end{equation}
+The scalar $\rho$ captures endogenous spatial lag: the social housing density of unit $i$ is partially determined by a weighted average of its neighbours' density (H3).
+
+\paragraph{SEM --- Spatial Error Model.}
+\begin{equation}
+y_i = \mathbf{x}_i'\beta + u_i, \qquad u_i = \lambda \sum_j w_{ij}\,u_j + \varepsilon_i
+\end{equation}
+Spatial dependence confined to the error term ($\lambda$) indicates omitted spatially correlated confounders rather than true spillovers.
+
+\paragraph{SDM --- Spatial Durbin Model (preferred specification).}
+
+The research question motivates the SDM as the primary model. It allows simultaneous testing of all three hypotheses within a single framework:
+
+\begin{equation}
+\underbrace{\mathrm{SHD}_{i,2024}}_{\text{Social Housing Density}} =
+  \underbrace{\rho}_{\substack{\text{spatial auto-}\\\text{regressive coeff.}}}
+  \underbrace{\sum_j w_{ij}\,\mathrm{SHD}_{j,2024}}_{W \cdot \mathrm{SHD}} +
+  \underbrace{\mathbf{X}_{i,2022}'\beta}_{\text{local effects}} +
+  \underbrace{\left(\sum_j w_{ij}\,\mathbf{X}_{j,2022}\right)'\theta}_{W\mathbf{X} \cdot \theta \;\text{(neighbour spillovers)}} +
+  \varepsilon_i
+\label{eq:sdm}
+\end{equation}
+
+where:
+\begin{itemize}
+  \item $\mathrm{SHD}_{i,2024}$ --- social housing density in departement $i$ (units per 10\,000 inhabitants, observation year 2024);
+  \item $\rho$ --- spatial autoregressive coefficient, measuring the extent to which the density in neighbouring departements feeds back into local density (H3: $\rho > 0$);
+  \item $W$ --- $n \times n$ row-standardised spatial weights matrix (Queen contiguity or $k$-NN);
+  \item $\mathbf{X}_{i,2022}$ --- vector of local social-structure covariates observed in 2022: single-parent ratio, immigrant stock, 10-year population change, poverty rate;
+  \item $\beta$ --- vector of local effect coefficients (H1: $\beta_{\text{single-parent}}>0$, $\beta_{\text{immigrant}}>0$);
+  \item $W\mathbf{X}_{i,2022} = \sum_j w_{ij}\,\mathbf{X}_{j,2022}$ --- spatially lagged social-structure variables (weighted average of neighbours' covariates);
+  \item $\theta$ --- neighbour social spillover coefficients (H2: $\theta_{\text{single-parent}}\neq 0$, $\theta_{\text{immigrant}}\neq 0$);
+  \item $\varepsilon_i \sim \mathcal{N}(0,\sigma^2)$ --- i.i.d.\ error term.
+\end{itemize}
+
+\medskip
+Note the \textbf{temporal gap}: covariates are measured in 2022 while the dependent variable refers to 2024, which reduces simultaneity concerns --- local social structure precedes the measured housing supply response.
+
+\medskip
+The SDM nests both the SAR ($\theta = 0$) and the SLX ($\rho = 0$) as testable restrictions, and reduces to OLS when $\rho = \theta = 0$. Model selection follows the \citet{elhorst2010} general-to-specific procedure: estimate the SDM first, then test $H_0\!:\theta=0$ (LR test, SAR restriction) and $H_0\!:\theta+\rho\beta=0$ (SEM restriction); retain the simplest specification not rejected by the data.
+
+\paragraph{Interpretation via impact decomposition.}
+Because $y$ appears on both sides of equation~\eqref{eq:sdm}, the estimated coefficients $\beta$ and $\theta$ do not directly equal marginal effects. Following \citet{lesage2009}, each regressor's total effect is decomposed into a \textbf{direct} component (own-departement response, including spatial feedback loops) and an \textbf{indirect} component (cross-departement spillover transmitted through the weight matrix). Inference on these impact measures uses 1\,000 Monte Carlo draws from the asymptotic distribution of the parameter estimates.
+
+
+
+%==================================================
+% 4. SPATIAL MODEL ESTIMATION
+%==================================================
+\section{Spatial model estimation}
+
+\subsection{Measuring global spatial autocorrelation}
+\label{sec:moran}
+
+\inputifexists{tables/moran_global.tex}
+
+\paragraph{Results.}
+
+\paragraph{Interpretation.}
+
+\paragraph{Moran scatter plots.}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.48\textwidth]{figures/fig_moran_queen.png}
+\includefig[width=0.48\textwidth]{figures/fig_moran_knn.png}
+\caption{Moran scatter plots: Queen contiguity (left) and KNN-3 (right). Each point is a departement; horizontal axis = standardised social housing density; vertical axis = spatial lag ($Wy$); slope of the regression line = Moran's $I$. Quadrants: \textbf{HH} high–high (top-right), \textbf{LL} low–low (bottom-left), \textbf{HL} high–low (top-left), \textbf{LH} low–high (bottom-right). \textit{Source: authors' calculations.}}
+\label{fig:moran_diag}
+\end{figure}
+
+
+\subsection{Model selection}
+
+\subsubsection{OLS estimation and multicollinearity}
+
+\paragraph{Spatial pattern of OLS residuals.}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.85\textwidth]{figures/fig_ols_residuals_map.png}
+\caption{Spatial distribution of OLS residuals. Positive values (red) indicate under-prediction; negative values (blue) indicate over-prediction. \textit{Source: authors' calculations based on IGN departement boundaries.}}
+\label{fig:ols_resid}
+\end{figure}
+
+\subsubsection{Moran test on OLS residuals}
+
+\inputifexists{tables/moran_residuals.tex}
+
+\subsubsection{Lagrange multiplier tests and model choice}
+\label{sec:lm}
+
+\inputifexists{tables/lm_tests.tex}
+
+\paragraph{Standard LM tests.}
+
+\paragraph{Robust LM tests.}
+
+
+\subsubsection{SAR and SEM estimation results}
+
+\inputifexists{tables/sar_sem_models.tex}
+
+\paragraph{Spatial parameters.}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.95\textwidth]{figures/fig_sar_sem_residuals.png}
+\caption{Residual distributions: SEM Queen (left) and SAR Queen (right). The tighter distribution of SEM residuals confirms its superior fit. \textit{Source: authors' calculations.}}
+\label{fig:sar_sem_resid}
+\end{figure}
+
+\subsection{Elhorst (2010) model selection procedure}
+\label{sec:elhorst}
+
+The Elhorst (2010) procedure starts from the most general feasible specification --- the Spatial Durbin Model (SDM) --- and tests downward restrictions toward SAR ($H_0\colon \theta = 0$) and SEM ($H_0\colon \theta + \rho\beta = 0$). If both restrictions are rejected, the SDM is retained. Table~\ref{tab:sdm} reports SDM estimates under both weight matrices; Tables~\ref{tab:lr_tests} and~\ref{tab:aic} summarise the LR tests and AIC ranking.
+
+\inputifexists{tables/sdm_models.tex}
+
+\inputifexists{tables/lr_tests_elhorst.tex}
+
+\inputifexists{tables/aic_comparison.tex}
+
+
+\subsection{Model interpretation: SDM impacts}
+\label{sec:impacts}
+
+\inputifexists{tables/sdm_impacts.tex}
+
+\medskip
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{llp{6cm}l}
+\toprule
+\textbf{Hypothesis} & \textbf{Variable} & \textbf{Key evidence} & \textbf{Verdict} \\
+\midrule
+H1 & $\mathrm{SPR}$ & Direct effect $= 90.06^{***}$ & \textbf{Accepted} \\
+H1 & $\mathrm{IMM}$ & Direct effect $\approx 0$, n.s. & \textbf{Not confirmed} \\
+H2 & $W\!\times\!\mathrm{SPR}$ & $\hat{\theta} = -54.4^{*}$ (negative) & \textbf{Rejected (direction)} \\
+H2 & $W\!\times\!\mathrm{IMM}$ & $\hat{\theta} \approx 0$, n.s. & \textbf{Not confirmed} \\
+H3 & $W\!\times\!\mathrm{SHD}$ & $\hat{\rho} = 0.537^{***}$ & \textbf{Accepted} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.7\textwidth]{figures/fig_sdm_residuals.png}
+\caption{Residual distribution of the preferred SDM (KNN-3). Residuals are approximately symmetric and show no strong spatial structure, confirming model adequacy. \textit{Source: authors' calculations.}}
+\label{fig:sdm_resid}
+\end{figure}
+
+
+%==================================================
+% 5. CONCLUSION
+%==================================================
+\section{Conclusion}
+
+%==================================================
+% ANNEXES
+%==================================================
+\newpage
+\appendix
+\section{Appendix}
+
+\subsection{Degree distribution of the Queen weight matrix}
+\label{app:nb_card_queen}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.75\textwidth]{figures/fig_nb_card_queen.png}
+\caption{Degree distribution (number of neighbours per departement) for the Queen contiguity weight matrix. The distribution reflects true geographic heterogeneity: peripheral departements (e.g.\ Finistère, Alpes-Maritimes) have fewer neighbours, while interior crossroads departements (e.g.\ Indre-et-Loire, Allier) have more. \textit{Source: authors' calculations based on IGN departement boundaries.}}
+\label{fig:nb_card_queen}
+\end{figure}
+
+\subsection{OLS benchmark results and multicollinearity diagnostics}
+\label{app:ols_vif}
+
+Table~\ref{tab:ols_results} reports the full OLS estimation results. The sign pattern broadly matches the hypotheses: single-parent ratio and immigrant stock enter positively, poverty rate positively, and population change with uncertain sign.
+
+\inputifexists{tables/ols_results.tex}
+
+\paragraph{Variance Inflation Factors.}
+Table~\ref{tab:vif} reports VIF values for the four regressors included in the baseline equation. The unemployment rate, though related to housing need, was excluded \emph{a priori} because it is strongly correlated with the poverty rate; the Spearman matrix (Figure~\ref{fig:corr_matrix}) confirmed $r > 0.5$ between the two.
+
+\inputifexists{tables/vif.tex}
+
+All VIF values remain well below the conventional threshold of 10, and three of the four regressors fall below 5:
+
+\begin{itemize}
+  \item Single-parent ratio ($\mathrm{SPR}$): VIF = 4.79 --- the highest in the model, reflecting expected socio-economic co-variation with poverty and immigration, but still within the acceptable range.
+  \item Immigrant stock ($\mathrm{IMM}$): VIF = 3.02 --- moderate, consistent with the urban concentration of both immigrant populations and social housing.
+  \item Poverty rate ($\mathrm{Pov}$): VIF = 2.34 --- low, confirming that poverty adds independent information once unemployment is excluded.
+  \item Population change ($\Delta\mathrm{Pop}$): VIF = 1.28 --- negligible, reflecting its near-independence from the social vulnerability indicators.
+\end{itemize}
+
+\textbf{Conclusion}: no severe multicollinearity is present. The modest elevation of the single-parent ratio VIF does not compromise estimation; coefficient estimates remain stable and interpretable.
+
+\newpage
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,46 @@
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Fri, Mar 20, 2026 - 15:58:57
+\begin{table}[!htbp] \centering 
+  \caption{Spatial regression models (SAR vs SEM) under alternative weight matrices} 
+  \label{tab:sar_sem} 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{Social housing per 10,000 (2024)} \\ 
+\\[-1.8ex] & \textit{spatial} & \textit{spatial} & \textit{spatial} & \textit{spatial} \\ 
+ & \textit{autoregressive} & \textit{error} & \textit{autoregressive} & \textit{error} \\ 
+ & SAR & SEM & SAR & SEM \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ Share single mothers & 57.296$^{***}$ & 81.801$^{***}$ & 52.463$^{***}$ & 73.769$^{***}$ \\ 
+  & (15.684) & (16.015) & (16.857) & (16.193) \\ 
+  & & & & \\ 
+ Number of immigrants & 0.0003 & 0.0003 & 0.0005$^{*}$ & 0.0004 \\ 
+  & (0.0003) & (0.0003) & (0.0003) & (0.0003) \\ 
+  & & & & \\ 
+ Pop. change 10y (%) & $-$5.492 & $-$0.694 & $-$8.197$^{**}$ & $-$4.328 \\ 
+  & (3.630) & (3.933) & (3.826) & (3.943) \\ 
+  & & & & \\ 
+ Unemployment rate (%) & $-$18.536$^{**}$ & $-$10.546 & $-$17.330$^{**}$ & $-$12.364 \\ 
+  & (7.893) & (7.642) & (8.674) & (7.757) \\ 
+  & & & & \\ 
+ Poverty rate (%) & $-$132.153 & $-$204.999 & 6.236 & $-$91.319 \\ 
+  & (118.492) & (156.358) & (125.726) & (153.947) \\ 
+  & & & & \\ 
+\hline \\[-1.8ex] 
+Weights matrix & Queen & Queen & KNN-3 & KNN-3 \\ 
+Spatial parameter & $\rho$=0.525 & $\lambda$=0.771 & $\rho$=0.359 & $\lambda$=0.659 \\ 
+Observations & 94 & 94 & 94 & 94 \\ 
+Log Likelihood & $-$601.376 & $-$594.537 & $-$605.497 & $-$597.978 \\ 
+$\sigma^{2}$ & 19,716.090 & 15,287.470 & 22,237.130 & 17,067.660 \\ 
+Akaike Inf. Crit. & 1,216.753 & 1,203.075 & 1,224.993 & 1,209.955 \\ 
+Wald Test (df = 1) & 31.550$^{***}$ & 123.715$^{***}$ & 18.423$^{***}$ & 72.535$^{***}$ \\ 
+LR Test (df = 1) & 24.023$^{***}$ & 37.701$^{***}$ & 15.783$^{***}$ & 30.821$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 

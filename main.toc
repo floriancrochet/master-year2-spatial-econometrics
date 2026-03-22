@@ -1,0 +1,46 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {section}{\numberline {2}Research question, hypotheses, and literature}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Significance and motivation}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Research question}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Hypotheses}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Methodological approach}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Data}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Social housing across French departements}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}The factors behind social housing provision}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Solo-mother households: the primary vulnerability indicator}{8}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Immigration: the second focal variable}{8}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Control variables: poverty and population dynamics}{8}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Descriptive analysis}{9}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Econometric methodology}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Spatial weight matrices}{11}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Definitions}{11}{subsubsection.4.1.1}%
+\contentsline {paragraph}{Queen contiguity.}{11}{section*.10}%
+\contentsline {paragraph}{$k$-nearest neighbours (KNN).}{12}{section*.11}%
+\contentsline {subsubsection}{\numberline {4.1.2}Connectivity analysis}{12}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Spatial econometric models}{14}{subsection.4.2}%
+\contentsline {paragraph}{OLS (benchmark).}{14}{section*.14}%
+\contentsline {paragraph}{SAR --- Spatial Autoregressive Model.}{14}{section*.15}%
+\contentsline {paragraph}{SEM --- Spatial Error Model.}{14}{section*.16}%
+\contentsline {paragraph}{SDM --- Spatial Durbin Model (preferred specification).}{14}{section*.17}%
+\contentsline {paragraph}{Interpretation via impact decomposition.}{15}{section*.18}%
+\contentsline {section}{\numberline {5}Spatial model estimation}{16}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Measuring global spatial autocorrelation}{16}{subsection.5.1}%
+\contentsline {paragraph}{Results.}{16}{section*.20}%
+\contentsline {paragraph}{Interpretation.}{16}{section*.21}%
+\contentsline {paragraph}{Moran scatter plots.}{16}{figure.caption.23}%
+\contentsline {subsection}{\numberline {5.2}Model selection}{17}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}OLS estimation and multicollinearity}{17}{subsubsection.5.2.1}%
+\contentsline {paragraph}{Spatial pattern of OLS residuals.}{17}{figure.caption.25}%
+\contentsline {subsubsection}{\numberline {5.2.2}Moran test on OLS residuals}{17}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Lagrange multiplier tests and model choice}{17}{subsubsection.5.2.3}%
+\contentsline {paragraph}{Standard LM tests.}{17}{section*.28}%
+\contentsline {paragraph}{Robust LM tests.}{18}{section*.29}%
+\contentsline {subsubsection}{\numberline {5.2.4}SAR and SEM estimation results}{18}{subsubsection.5.2.4}%
+\contentsline {paragraph}{Spatial parameters.}{19}{figure.caption.32}%
+\contentsline {subsection}{\numberline {5.3}Elhorst (2010) model selection procedure}{19}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Model interpretation: SDM impacts}{19}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Conclusion}{21}{section.6}%
+\contentsline {section}{\numberline {A}Appendix}{22}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Degree distribution of the Queen weight matrix}{22}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}OLS benchmark results and multicollinearity diagnostics}{22}{subsection.A.2}%
+\contentsline {paragraph}{Variance Inflation Factors.}{22}{section*.40}%

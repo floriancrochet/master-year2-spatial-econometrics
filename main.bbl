@@ -1,0 +1,44 @@
+\begin{thebibliography}{6}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Beenstock and Felsenstein(2015)]{beenstock2015}
+Michael Beenstock and Daniel Felsenstein.
+\newblock Spatial error correction and cointegration in nonstationary panel data: regional house prices in israel.
+\newblock \emph{Journal of Housing Economics}, 29:\penalty0 58--75, 2015.
+\newblock \doi{10.1016/j.jhe.2015.05.002}.
+
+\bibitem[Chapelle et~al.(2022)Chapelle, Eyméoud, and Verdugo]{chapelle2022}
+Guillaume Chapelle, Jean-Benoît Eyméoud, and Gregory Verdugo.
+\newblock Can policies fostering homeownership reduce social housing waiting lists? evidence from france.
+\newblock \emph{Regional Science and Urban Economics}, 97:\penalty0 103826, 2022.
+\newblock \doi{10.1016/j.regsciurbeco.2022.103826}.
+
+\bibitem[Elhorst(2010)]{elhorst2010}
+J.~Paul Elhorst.
+\newblock Applied spatial econometrics: Raising the bar.
+\newblock \emph{Spatial Economic Analysis}, 5\penalty0 (1):\penalty0 9--28, 2010.
+\newblock \doi{10.1080/17421770903541772}.
+
+\bibitem[LeSage and Pace(2009)]{lesage2009}
+James~P. LeSage and R.~Kelley Pace.
+\newblock \emph{Introduction to Spatial Econometrics}.
+\newblock CRC Press / Taylor \& Francis, Boca Raton, FL, 2009.
+\newblock \doi{10.1201/9781420064254}.
+
+\bibitem[Maaoui(2023)]{maaoui2023}
+Mouna Maaoui.
+\newblock Social housing allocation and local social composition in france.
+\newblock \emph{Urban Studies}, 60\penalty0 (4):\penalty0 712--731, 2023.
+\newblock \doi{10.1177/00420980221107622}.
+
+\bibitem[Wang(2025)]{wang2025}
+Rui Wang.
+\newblock Spatial interdependence in affordable housing supply: evidence from us metropolitan areas.
+\newblock \emph{Journal of Urban Economics}, 145:\penalty0 103560, 2025.
+\newblock \doi{10.1016/j.jue.2024.103560}.
+
+\end{thebibliography}

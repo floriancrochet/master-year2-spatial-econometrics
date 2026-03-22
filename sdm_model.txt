@@ -3,43 +3,43 @@ Spatial Durbin Model (SDM) – k-nearest neighbours
 ============================================================
                                     Dependent variable:     
                                 ----------------------------
-                                  Nb_log_sociaux_10000hab   
+                                   social_housing_density   
                                      (1)            (2)     
 ------------------------------------------------------------
-Part_femmes_seuls_enfant          79.991***      83.579***  
-                                   (16.747)      (15.835)   
+single_parent_ratio               89.354***      83.579***  
+                                   (16.999)      (15.835)   
                                                             
-Nb_immigres                         0.001*        0.0003    
+immigrant_stock                     0.0004        0.0003    
                                    (0.0003)      (0.0003)   
                                                             
-population_change_10yrs_pct         -4.761        -1.391    
-                                   (3.881)        (3.998)   
+population_change_10yrs_pct         -6.392        -1.391    
+                                   (3.919)        (3.998)   
                                                             
-poverty_rate_pct                   -14.913*       -11.544   
-                                   (8.054)        (7.396)   
+poverty_rate_pct                  -16.708**       -11.544   
+                                   (7.950)        (7.396)   
                                                             
-lag.Part_femmes_seuls_enfant       -22.121       -54.407*   
-                                   (27.770)      (28.394)   
+lag.single_parent_ratio            -39.567       -54.407*   
+                                   (24.358)      (28.394)   
                                                             
-lag.Nb_immigres                    -0.0003         0.001    
+lag.immigrant_stock                 0.0001         0.001    
                                    (0.0004)       (0.001)   
                                                             
-lag.population_change_10yrs_pct   -11.652**     -18.948***  
-                                   (5.695)        (6.320)   
+lag.population_change_10yrs_pct    -8.840*      -18.948***  
+                                   (5.324)        (6.320)   
                                                             
-lag.poverty_rate_pct               -24.309*       -15.210   
-                                   (13.263)      (14.063)   
+lag.poverty_rate_pct               -20.131*       -15.210   
+                                   (11.561)      (14.063)   
                                                             
-Constant                           178.075       318.262**  
-                                  (161.484)      (160.394)  
+Constant                           250.754       318.262**  
+                                  (155.629)      (160.394)  
                                                             
 ------------------------------------------------------------
-Spatial lag parameter (rho)         0.529          0.537    
+Spatial lag parameter (rho)         0.492          0.537    
 Observations                          94            94      
-Log Likelihood                     -590.664      -585.632   
-sigma2                            15,727.320    14,054.010  
-Akaike Inf. Crit.                 1,203.329      1,193.264  
-Wald Test (df = 1)                27.176***      26.560***  
-LR Test (df = 1)                  18.836***      19.306***  
+Log Likelihood                     -591.626      -585.632   
+sigma2                            15,982.270    14,054.010  
+Akaike Inf. Crit.                 1,205.251      1,193.264  
+Wald Test (df = 1)                26.178***      26.560***  
+LR Test (df = 1)                  19.092***      19.306***  
 ============================================================
 Note:                            *p<0.1; **p<0.05; ***p<0.01

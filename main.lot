@@ -1,0 +1,12 @@
+\contentsline {table}{\numberline {1}{\ignorespaces Descriptive statistics of key variables}}{9}{table.caption.7}%
+\contentsline {table}{\numberline {2}{\ignorespaces Connectivity statistics for each spatial weight matrix ($n = 94$ d\'epartements)}}{12}{table.caption.12}%
+\contentsline {table}{\numberline {3}{\ignorespaces Moran tests for different spatial weight matrices}}{16}{table.caption.19}%
+\contentsline {table}{\numberline {4}{\ignorespaces Moran tests on OLS regression residuals}}{17}{table.caption.26}%
+\contentsline {table}{\numberline {5}{\ignorespaces Spatial dependency tests (LM) using different weight matrices}}{18}{table.caption.27}%
+\contentsline {table}{\numberline {6}{\ignorespaces Spatial regression models (SAR vs SEM) under alternative weight matrices}}{18}{table.caption.30}%
+\contentsline {table}{\numberline {7}{\ignorespaces Spatial Durbin Model (SDM) under alternative weight matrices}}{20}{table.caption.33}%
+\contentsline {table}{\numberline {8}{\ignorespaces Likelihood ratio tests -- Elhorst (2010) procedure}}{21}{table.caption.34}%
+\contentsline {table}{\numberline {9}{\ignorespaces AIC comparison across spatial models}}{21}{table.caption.35}%
+\contentsline {table}{\numberline {10}{\ignorespaces Impact measures: direct, indirect, and total effects (SDM, KNN)}}{22}{table.caption.36}%
+\contentsline {table}{\numberline {11}{\ignorespaces OLS Regression Results}}{23}{table.caption.39}%
+\contentsline {table}{\numberline {12}{\ignorespaces Variance Inflation Factors (VIF)}}{24}{table.caption.41}%
