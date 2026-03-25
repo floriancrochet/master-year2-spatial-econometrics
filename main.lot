@@ -1,12 +1,16 @@
-\contentsline {table}{\numberline {1}{\ignorespaces Descriptive statistics of key variables}}{9}{table.caption.7}%
-\contentsline {table}{\numberline {2}{\ignorespaces Connectivity statistics for each spatial weight matrix ($n = 94$ d\'epartements)}}{12}{table.caption.12}%
+\contentsline {table}{\numberline {1}{\ignorespaces Descriptive statistics of key variables}}{9}{table.caption.6}%
+\contentsline {table}{\numberline {2}{\ignorespaces Connectivity statistics for each spatial weight matrix ($n = 94$ d\'epartements)}}{12}{table.caption.11}%
 \contentsline {table}{\numberline {3}{\ignorespaces Moran tests for different spatial weight matrices}}{16}{table.caption.19}%
-\contentsline {table}{\numberline {4}{\ignorespaces Moran tests on OLS regression residuals}}{17}{table.caption.26}%
-\contentsline {table}{\numberline {5}{\ignorespaces Spatial dependency tests (LM) using different weight matrices}}{18}{table.caption.27}%
-\contentsline {table}{\numberline {6}{\ignorespaces Spatial regression models (SAR vs SEM) under alternative weight matrices}}{18}{table.caption.30}%
-\contentsline {table}{\numberline {7}{\ignorespaces Spatial Durbin Model (SDM) under alternative weight matrices}}{20}{table.caption.33}%
-\contentsline {table}{\numberline {8}{\ignorespaces Likelihood ratio tests -- Elhorst (2010) procedure}}{21}{table.caption.34}%
-\contentsline {table}{\numberline {9}{\ignorespaces AIC comparison across spatial models}}{21}{table.caption.35}%
-\contentsline {table}{\numberline {10}{\ignorespaces Impact measures: direct, indirect, and total effects (SDM, KNN)}}{22}{table.caption.36}%
-\contentsline {table}{\numberline {11}{\ignorespaces OLS Regression Results}}{23}{table.caption.39}%
-\contentsline {table}{\numberline {12}{\ignorespaces Variance Inflation Factors (VIF)}}{24}{table.caption.41}%
+\contentsline {table}{\numberline {4}{\ignorespaces Moran tests on OLS regression residuals}}{18}{table.caption.26}%
+\contentsline {table}{\numberline {5}{\ignorespaces Spatial dependency tests (LM) using different weight matrices}}{19}{table.caption.27}%
+\contentsline {table}{\numberline {6}{\ignorespaces SAR and SEM: coefficient estimates and significance levels. Standard errors and full fit statistics in Table~\ref {tab:sar_sem} (Appendix~\ref {app:full}).}}{20}{table.caption.30}%
+\contentsline {table}{\numberline {7}{\ignorespaces Spatial Durbin Model (SDM): coefficient estimates and significance levels under KNN-3 and Queen weight matrices. Standard errors and full fit statistics in Table~\ref {tab:sdm} (Appendix~\ref {app:full}).}}{22}{table.caption.33}%
+\contentsline {table}{\numberline {8}{\ignorespaces Likelihood ratio tests -- Elhorst (2010) procedure}}{22}{table.caption.34}%
+\contentsline {table}{\numberline {9}{\ignorespaces AIC comparison across spatial models}}{23}{table.caption.35}%
+\contentsline {table}{\numberline {10}{\ignorespaces Impact decomposition: SDM vs SLX (KNN-3 weight matrix). SDM direct/indirect/total effects are computed via 1{,}000 Monte Carlo draws from the asymptotic distribution of the parameter estimates \citep {lesage2009}. SLX effects read directly from the coefficient vector ($\hat {\beta }$ = direct, $\hat {\theta }$ = indirect) since $\rho = 0$ eliminates feedback loops.}}{24}{table.caption.39}%
+\contentsline {table}{\numberline {11}{\ignorespaces SDM versus SLX: coefficient estimates and significance levels. Standard errors and full fit statistics in Table~\ref {tab:sdm_slx} (Appendix~\ref {app:full}).}}{26}{table.caption.45}%
+\contentsline {table}{\numberline {12}{\ignorespaces OLS Regression Results}}{29}{table.caption.48}%
+\contentsline {table}{\numberline {13}{\ignorespaces Variance Inflation Factors (VIF)}}{30}{table.caption.50}%
+\contentsline {table}{\numberline {14}{\ignorespaces Spatial regression models (SAR vs SEM) under alternative weight matrices}}{31}{table.caption.51}%
+\contentsline {table}{\numberline {15}{\ignorespaces Spatial Durbin Model (SDM) under alternative weight matrices}}{32}{table.caption.52}%
+\contentsline {table}{\numberline {16}{\ignorespaces SDM versus SLX: coefficient estimates under alternative weight matrices}}{33}{table.caption.53}%

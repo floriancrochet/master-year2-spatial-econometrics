@@ -1,0 +1,18 @@
+% latex table generated in R
+\begin{table}[ht]
+\centering
+\caption{Impact decomposition: SDM vs SLX (KNN-3 weight matrix). SDM direct/indirect/total effects are computed via 1{,}000 Monte Carlo draws from the asymptotic distribution of the parameter estimates \citep{lesage2009}. SLX effects read directly from the coefficient vector ($\hat{\beta}$ = direct, $\hat{\theta}$ = indirect) since $\rho = 0$ eliminates feedback loops.}
+\label{tab:impacts_combined}
+\begin{tabular}{lrrr|rrr}
+  \toprule
+  & \multicolumn{3}{c}{\textbf{SDM (KNN-3)}} & \multicolumn{3}{c}{\textbf{SLX (KNN-3)}} \\
+  \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+  Variable & Direct & Indirect & Total & Direct & Indirect & Total \\
+  \midrule
+  Solo-mother ratio (\%) & 90.059 & 7.924 & 97.983 & 95.499 & -9.933 & 85.566 \\
+  Immigrant stock & 0.000 & 0.000 & 0.001 & 0.000 & 0.001 & 0.001 \\
+  Pop. change 10y (\%) & -8.320 & -21.659 & -29.978 & -10.700 & -19.342 & -30.041 \\
+  Poverty rate (\%) & -21.267 & -51.234 & -72.500 & -21.435 & -42.235 & -63.669 \\
+  \bottomrule
+\end{tabular}
+\end{table}
