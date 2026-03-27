@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1774624013.01185 "main.aux" "main.bbl" "main" 1774624016.85707 0
+["bibtex main"] 1774624447.85683 "main.aux" "main.bbl" "main" 1774624463.58467 0
   "./references.bib" 1773955832.22739 1884 f1e53eb0c72943abd753da7f74474bba ""
   "/usr/local/texlive/2025basic/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1774624016.69894 20281 60fd0b96944900caf256eacb434f20c3 "pdflatex"
+  "main.aux" 1774624463.43402 20281 d817b67a2d20bf644755a5dd7b4e8a22 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1774624013.05762 "/Users/ss/Documents/ECAP2/Econ Spatiale/master-year2-spatial-econometrics/main.tex" "main.pdf" "main" 1774624016.85727 0
-  "/Users/ss/Documents/ECAP2/Econ Spatiale/master-year2-spatial-econometrics/main.tex" 1774624011.60719 30435 ea83ea2d8c5bfb96ae4ff26c716a9317 ""
+["pdflatex"] 1774624459.91748 "/Users/ss/Documents/ECAP2/Econ Spatiale/master-year2-spatial-econometrics/main.tex" "main.pdf" "main" 1774624463.58488 0
+  "/Users/ss/Documents/ECAP2/Econ Spatiale/master-year2-spatial-econometrics/main.tex" 1774624459.68045 31559 13bc1f4a2e54e9e2bc827145ee7415de ""
   "/Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk" 1769777084.65575 28952 03e6c7028d0fa059998f9e93b866e57e ""
   "/Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1769090359.00409 31928 975a6fbaf447a7e6f893f717a3f43342 ""
   "/Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk" 1769090360.8969 40112 cd05f9baf6241808533c23aca332a732 ""
@@ -166,13 +166,13 @@
   "figures/fig_sdm_residuals.png" 1774624005.52772 29560 ebe11eb8cf56af224610751b14ee02ba ""
   "figures/fig_slx_residuals.png" 1774624007.09211 29850 aacdeedf27cc3ad6bada220f1d519ba6 ""
   "iae_logo.png" 1774429956.23332 63353 f9ff89563b12034f8a61d7653a3c3aec ""
-  "main.aux" 1774624016.69894 20281 60fd0b96944900caf256eacb434f20c3 "pdflatex"
-  "main.bbl" 1774624013.05126 1966 336b24b08d705fb4db30856f371e8ad8 "bibtex main"
-  "main.lof" 1774624016.70241 3237 a098301f3577ae4b5da98bff2611674b "pdflatex"
-  "main.lot" 1774624016.70246 2447 5201fb6c9d594dd9648dba4cba0ba2bc "pdflatex"
-  "main.out" 1774624016.70178 6917 0a0077b11b1c363f284a85497cb7b2ed "pdflatex"
-  "main.tex" 1774624011.60719 30435 ea83ea2d8c5bfb96ae4ff26c716a9317 ""
-  "main.toc" 1774624016.70227 4353 447723efed3c1f8b663d33674ca96cb0 "pdflatex"
+  "main.aux" 1774624463.43402 20281 d817b67a2d20bf644755a5dd7b4e8a22 "pdflatex"
+  "main.bbl" 1774624447.87932 1966 336b24b08d705fb4db30856f371e8ad8 "bibtex main"
+  "main.lof" 1774624463.43754 3237 8aac6a45ca9706048951a3f01f245a3c "pdflatex"
+  "main.lot" 1774624463.43759 2447 22823ba50a5368cf0382161de67e1659 "pdflatex"
+  "main.out" 1774624463.4369 6917 0a0077b11b1c363f284a85497cb7b2ed "pdflatex"
+  "main.tex" 1774624459.68045 31559 13bc1f4a2e54e9e2bc827145ee7415de ""
+  "main.toc" 1774624463.4374 4353 5dd485b706b67af6675521ddf546c55b "pdflatex"
   "nu_logo.png" 1774429890.77358 56864 3f43b0d1383d16112540058037b3643c ""
   "qgis/layout_v1.pdf" 1773937537.33016 4252723 549d82f3c0483b4db1fc0239384e6a7b ""
   "tables/aic_comparison.tex" 1774624007.10001 520 5b94e57037ec4324592701b90f14550d ""

@@ -388,7 +388,7 @@ Table~\ref{tab:lm_tests} reports the LM diagnostics. Standard tests reject no-sp
 
 \inputifexists{tables/sar_sem_compact.tex}
 
-Table~\ref{tab:sar_sem_compact} reports SAR and SEM estimates under both matrices. The spatial parameters are significant (both $p < 0.01$). The solo-mother ratio remains the dominant predictor across all specifications, while the log-transformed immigrant stock is not significant once spatial structure is modelled. The poverty rate is sensitive to the specification, reinforcing the need for the SDM. Residual diagnostics for these non-retained models are in Appendix~\ref{app:residuals}.
+Table~\ref{tab:sar_sem_compact} reports SAR and SEM estimates under both matrices. The spatial parameters are significant (both $p < 0.01$). The solo-mother ratio remains the dominant predictor across all specifications. The log-transformed immigrant stock is also significant ($p < 0.05$ under Queen, $p < 0.01$ under KNN-3), confirming the local-need channel for immigration even after controlling for spatial structure. The poverty rate is sensitive to the specification, reinforcing the need for the SDM. Residual diagnostics for these non-retained models are in Appendix~\ref{app:residuals}.
 
 \subsection{Elhorst (2010) model selection procedure}
 \label{sec:elhorst}
@@ -408,7 +408,7 @@ All three LR tests reject their null (Table~\ref{tab:lr_tests}): SDM vs.\ SAR ($
 The AIC ranking (Table~\ref{tab:aic}) selects \textbf{SDM Queen} as the best-fitting combination. This is consistent with the institutional logic: social housing administration follows administrative borders rather than straight-line distances.
 
 \paragraph{SDM coefficient interpretation (Queen).}
-Under the preferred specification (Table~\ref{tab:sdm_compact}), the spatial autoregressive parameter and the solo-mother ratio remain highly significant. The log-transformed immigrant stock, $\ln\mathrm{IMM}$, is not significant --- consistent with all other spatial specifications. Among the spatially lagged covariates, $W\!\times\!\mathrm{SMR}$ and $W\!\times\!\Delta\mathrm{Pop}$ are the most notable. The impact decomposition below provides the proper marginal-effect reading.
+Under the preferred specification (Table~\ref{tab:sdm_compact}), the spatial autoregressive parameter and the solo-mother ratio remain highly significant. The log-transformed immigrant stock, $\ln\mathrm{IMM}$, is also significant ($\hat{\beta} = 61.9$, $p < 0.05$), confirming that departements with larger immigrant populations provide more social housing, even after controlling for spatial structure. Its spatially lagged counterpart $W\!\times\!\ln\mathrm{IMM}$ is, however, not significant ($\hat{\theta} \approx 4.6$), indicating no exogenous cross-border spillover from neighbours' immigrant stock. Among the other spatially lagged covariates, $W\!\times\!\Delta\mathrm{Pop}$ is significant ($p < 0.05$). The impact decomposition below provides the proper marginal-effect reading.
 
 \begin{figure}[H]
 \centering
@@ -426,10 +426,10 @@ Table~\ref{tab:impacts_combined} presents the impact decomposition for the prefe
 \inputifexists{tables/sdm_slx_impacts.tex}
 
 \paragraph{Direct effects (H1).}
-The solo-mother ratio has the largest direct effect, confirming \textbf{H1 for SMR}. The log-transformed immigrant stock has a direct effect that is not significant (\textbf{H1 for $\ln$IMM not confirmed}). Because $\ln\mathrm{IMM}$ enters the equation, the coefficient represents the effect of a one-percent increase in immigrant stock on social housing density; the near-zero and insignificant estimate indicates that, conditional on the other covariates and spatial structure, the size of the immigrant population does not independently predict departement-level social housing provision.
+The solo-mother ratio has the largest direct effect, confirming \textbf{H1 for SMR}. The log-transformed immigrant stock also has a significant direct effect (\textbf{H1 for $\ln$IMM accepted}). Because $\ln\mathrm{IMM}$ enters the equation in log form, the direct effect of approximately~68 means that a 10\% increase in a departement's immigrant stock is associated with roughly~6.5 additional social housing units per 10\,000 inhabitants, holding all else constant. This confirms that, conditional on the other covariates and the spatial structure, the size of the local immigrant population is a significant predictor of departement-level social housing provision.
 
 \paragraph{Indirect effects (H2).}
-The indirect effect of the solo-mother ratio is negative, opposite to the hypothesised direction, suggesting concentration rather than diffusion of social housing within high-need clusters. \textbf{H2 for SMR is rejected}; \textbf{H2 for $\ln$IMM is not confirmed} ($\hat{\theta}_{\ln\mathrm{IMM}} \approx 0$).
+The indirect effect of the solo-mother ratio is negative, opposite to the hypothesised direction, suggesting concentration rather than diffusion of social housing within high-need clusters. \textbf{H2 for SMR is rejected}. The exogenous covariate spillover for log-immigrant stock ($W\!\times\!\ln\mathrm{IMM}$) is not significant in any specification ($\hat{\theta}_{\ln\mathrm{IMM}} \approx 4.6$, n.s.), so \textbf{H2 for $\ln$IMM is not confirmed}: there is no evidence that the immigrant population in neighbouring departements independently affects local social housing supply, beyond what is captured by the endogenous feedback channel ($\rho$).
 
 \paragraph{Outcome-dependence channel (H3).}
 \textbf{H3 is accepted}: the spatial autoregressive parameter $\hat{\rho}$ is highly significant (Queen, $p < 0.01$). Social housing density in a departement is significantly associated with supply levels in adjacent territories.
@@ -445,9 +445,9 @@ The indirect effect of the solo-mother ratio is negative, opposite to the hypoth
 \textbf{Hyp.} & \textbf{Variable} & \textbf{Key evidence} & \textbf{Verdict} \\
 \midrule
 H1 & $\mathrm{SMR}$ & SDM Queen: largest direct effect, highly significant (Tab.~\ref{tab:impacts_combined}) & \textbf{Accepted} \\
-H1 & $\ln\mathrm{IMM}$ & SDM direct effect $\approx 0$, n.s.\ (all specs, both matrices) & \textbf{Not confirmed} \\
+H1 & $\ln\mathrm{IMM}$ & SDM Queen: $\hat{\beta} = 61.9^{**}$; direct effect $\approx 68$ (Tab.~\ref{tab:impacts_combined}) & \textbf{Accepted} \\
 H2 & $W\!\times\!\mathrm{SMR}$ & SDM Queen: $\hat{\theta}$ negative, marginally significant (Tab.~\ref{tab:sdm_compact}) & \textbf{Rejected (sign)} \\
-H2 & $W\!\times\!\ln\mathrm{IMM}$ & $\hat{\theta} \approx 0$, n.s.\ in all specs & \textbf{Not confirmed} \\
+H2 & $W\!\times\!\ln\mathrm{IMM}$ & $\hat{\theta} \approx 4.6$, n.s.\ in all specs; no exogenous spillover & \textbf{Not confirmed} \\
 H3 & $W\!\times\!\mathrm{SHD}$ & $\hat{\rho}$ highly significant (Queen, Tab.~\ref{tab:sdm_compact}) & \textbf{Accepted} \\
 \bottomrule
 \end{tabular}
@@ -463,9 +463,9 @@ The SLX ($\rho = 0$ restriction of the SDM) was also estimated under both weight
 
 This paper investigated whether the density of social housing across French departements is shaped solely by local demographic pressures or also by interactions with neighbouring jurisdictions. Using a Spatial Durbin Model under Queen contiguity --- selected via the \citet{elhorst2010} general-to-specific procedure and confirmed by AIC --- we tested three hypotheses.
 
-\textbf{H1} is partially supported: the solo-mother ratio is the strongest local predictor of social housing density. The log-transformed immigrant stock, however, is not significant in any spatial specification; the apparent association visible in the non-spatial baseline reflects geographic co-location in urban departements rather than an independent effect.
+\textbf{H1} is supported: the solo-mother ratio is the strongest local predictor of social housing density, and the log-transformed immigrant stock is also significant ($p < 0.05$) across all spatial specifications. The log transformation corrects the heavy right-skew of the raw immigrant variable and yields a stable, positive association: departements with larger immigrant populations provide more social housing, consistent with a local-need channel.
 
-\textbf{H2} is not confirmed in the hypothesised direction. The indirect effect of the solo-mother ratio is negative and only marginally significant, suggesting that social housing tends to concentrate within high-need clusters rather than spreading across neighbouring departements. The log-transformed immigrant stock exerts no detectable cross-border influence.
+\textbf{H2} is not confirmed in the hypothesised direction. The indirect effect of the solo-mother ratio is negative and only marginally significant, suggesting that social housing tends to concentrate within high-need clusters rather than spreading across neighbouring departements. The exogenous covariate spillover for log-immigrant stock ($W\!\times\!\ln\mathrm{IMM}$) is small and not significant, indicating no direct cross-border influence from neighbours' immigrant populations on local housing supply.
 
 \textbf{H3} is accepted: the spatial autoregressive coefficient is highly significant ($p < 0.01$), indicating substantial interdependence in social housing provision between adjacent departements. This outcome-to-outcome link is the most robust spatial channel in the data and persists across weight matrix specifications.
 

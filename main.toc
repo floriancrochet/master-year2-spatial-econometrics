@@ -42,8 +42,8 @@
 \contentsline {paragraph}{Outcome-dependence channel (H3).}{18}{section*.36}%
 \contentsline {paragraph}{Hypothesis summary.}{18}{section*.37}%
 \contentsline {section}{\numberline {6}Conclusion}{19}{section.6}%
-\contentsline {section}{\numberline {A}Appendix}{20}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Degree distribution of the Queen weight matrix}{20}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}OLS benchmark and multicollinearity}{20}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Full estimation tables}{20}{subsection.A.3}%
-\contentsline {subsection}{\numberline {A.4}Residual distributions of non-retained models}{25}{subsection.A.4}%
+\contentsline {section}{\numberline {A}Appendix}{21}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Degree distribution of the Queen weight matrix}{21}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}OLS benchmark and multicollinearity}{21}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Full estimation tables}{21}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}Residual distributions of non-retained models}{26}{subsection.A.4}%
