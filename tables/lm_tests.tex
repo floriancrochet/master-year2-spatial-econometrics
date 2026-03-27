@@ -8,10 +8,12 @@
   \toprule
 Test & Queen stat. & Queen p-val. & KNN-3 stat. & KNN-3 p-val. \\ 
   \midrule
-LMerr & 21.75 & 0.00 & 19.33 & 0.00 \\ 
-  LMlag & 28.02 & 0.00 & 17.89 & 0.00 \\ 
-  RLMerr & 0.64 & 0.43 & 3.93 & 0.05 \\ 
-  RLMlag & 6.90 & 0.01 & 2.49 & 0.11 \\ 
+LMerr & 21.75 & 0.00 & 19.33 & 0.00 \\
+  LMlag & 28.02 & 0.00 & 17.89 & 0.00 \\
+  RLMerr & 0.64 & 0.43 & \textbf{3.93} & \textbf{0.05} \\
+  RLMlag & \textbf{6.90} & \textbf{0.01} & 2.49 & 0.11 \\
    \bottomrule
+\multicolumn{5}{l}{\footnotesize \textit{Note:} Bold figures indicate the significant robust LM test per weight matrix.}\\
+\multicolumn{5}{l}{\footnotesize Under Queen, \textbf{RLMlag} ($p=0.01$) points to SAR; under KNN-3, \textbf{RLMerr} ($p=0.05$) points to SEM.}
 \end{tabular}
 \end{table}

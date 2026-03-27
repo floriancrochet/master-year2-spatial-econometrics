@@ -60,9 +60,9 @@
 
 \thispagestyle{empty}
 
-%--------------------------------------------------
+%----------------------------------
 % TITLE PAGE
-%--------------------------------------------------
+%----------------------------------
 \begin{titlepage}
 	\thispagestyle{empty}
 	
@@ -117,23 +117,21 @@
 %==================================================
 \section{Introduction}
 
+Despite the \emph{Solidarité et Renouvellement Urbain} (SRU) law, first enacted in 2000 and progressively tightened to a 25\% social housing target by 2025, supply remains deeply uneven across French departements. As of 2025, over 1\,000 municipalities were still classified as \emph{carences} for persistent supply shortfalls, and the national social housing rate -- averaging roughly 15\% of all dwellings -- masks a departement-level range from just 5\% to 37\% (Table~\ref{tab:desc_stats}). With waiting lists for social housing exceeding 2.4 million applicants nationwide by early 2025, understanding the territorial determinants of supply has both academic and policy urgency.
+
 \medskip
 
-The remainder of the paper is structured as follows. Section~2 establishes the research question, hypotheses, and literature motivation. Section~3 presents the data and exploratory spatial analysis. Section~4 describes the econometric methodology and weight matrices. Section~5 reports estimation results and spatial impact measures. Section~6 concludes.
+Whether this unevenness stems solely from local demographic pressures or also from interactions with neighbouring jurisdictions is a key question for spatial policy design. \citet{chapelle2022} and \citet{maaoui2023} relate social housing supply to local social composition, while \citet{wang2025} and \citet{beenstock2015} document spatial dependence in housing provision across jurisdictions. Ignoring such interactions risks biased estimates and misleading policy conclusions. This paper addresses this gap by applying spatial econometric methods to a cross-section of 94 French metropolitan departements.
+
+\medskip
+
+The remainder of the paper is structured as follows. Section~2 establishes the research question, hypotheses, and methodological approach. Section~3 presents the data and exploratory spatial analysis. Section~4 describes the econometric framework and weight matrices. Section~5 reports estimation results and spatial impact measures. Section~6 concludes.
 
 
 %==================================================
 % 2. RESEARCH QUESTION, HYPOTHESES, AND LITERATURE
 %==================================================
-\section{Research question, hypotheses, and literature}
-
-\subsection{Significance and motivation}
-
-Despite the \emph{Solidarité et Renouvellement Urbain} (SRU) law mandating a minimum social housing share for larger municipalities, supply remains unevenly distributed across the territory. Whether this unevenness stems solely from local demographic pressures or also from interactions with neighbouring jurisdictions is an important policy question.
-
-\medskip
-
-\citet{chapelle2022} and \citet{maaoui2023} relate social housing supply to local social composition, while \citet{wang2025} and \citet{beenstock2015} document spatial dependence in housing provision across jurisdictions. Ignoring such interactions risks biased estimates and misleading policy conclusions.
+\section{Research question, hypotheses, and methods}
 
 \subsection{Research question}
 
@@ -159,11 +157,11 @@ H3 & Social housing density in a departement is positively associated with densi
 \end{tabular}
 \end{center}
 
-H1 captures the local-need channel: territories with more vulnerable households should provide more social housing. H2 asks whether need in adjacent departements spills over --- for instance through inter-communal planning bodies or cross-border migration. H3 captures a direct outcome-to-outcome link, consistent with policy coordination or shared housing-market dynamics \citep{wang2025, beenstock2015}.
+H1 captures the local-need channel: territories with more vulnerable households should provide more social housing. H2 asks whether need in adjacent departements spills over -- for instance through inter-communal planning bodies or cross-border migration. H3 captures a direct outcome-to-outcome link, consistent with policy coordination or shared housing-market dynamics \citep{wang2025, beenstock2015}.
 
 \subsection{Methodological approach}
 
-To test these hypotheses we proceed as follows. A non-spatial OLS regression serves as the baseline; its residuals are checked for spatial autocorrelation (Moran's $I$, LM tests). If spatial dependence is detected, we estimate a series of spatial models --- SAR, SEM, SLX, and the general Spatial Durbin Model (SDM) --- under two neighbourhood definitions (Queen contiguity and $k$-nearest neighbours). The \citet{elhorst2010} general-to-specific procedure selects the most parsimonious specification not rejected by the data, and the \citet{lesage2009} impact decomposition separates own-departement effects from cross-departement spillovers. Full model definitions are presented in Section~4.
+To test these hypotheses we proceed as follows. A non-spatial OLS regression serves as the baseline; its residuals are checked for spatial autocorrelation (Moran's $I$, LM tests). If spatial dependence is detected, we estimate a series of spatial models -- SAR, SEM, SLX, and the general Spatial Durbin Model (SDM) -- under two neighbourhood definitions (Queen contiguity and $k$-nearest neighbours). The \citet{elhorst2010} general-to-specific procedure selects the most parsimonious specification not rejected by the data, and the impact decomposition separates own-departement effects from cross-departement spillovers. Full model definitions are presented in Section~4.
 
 
 %==================================================
@@ -186,7 +184,7 @@ Social housing density ranges from 228 (Ariège) to 1\,414 (Seine-Saint-Denis), 
 }{%
   \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}\textbf{[Map pending: qgis/layout\_v1.pdf]}\vspace{2cm}}}%
 }
-\caption{Social housing density across French departements --- main cartographic layout. Choropleth in quantile classification; RGF93/Lambert-93 (EPSG:2154). \textit{Source: IGN (DEPARTEMENT boundaries), INSEE (Repertoire des logements locatifs des bailleurs sociaux). Authors' cartography.}}
+\caption{Social housing density across French departements -- main cartographic layout. Choropleth in quantile classification; RGF93/Lambert-93 (EPSG:2154). \textit{Source: IGN, INSEE, RPLS. Authors' cartography designed in QGIS.}}
 \label{fig:layout_main}
 \end{figure}
 
@@ -208,7 +206,7 @@ where $\mathrm{SHD}$ = social housing density (units per 10\,000 inhabitants), $
 \begin{figure}[H]
 \centering
 \includefig[width=\textwidth]{figures/fig_choropleth_all_variables.png}
-\caption{Spatial distribution of model variables: social housing density (top-left), solo-mother ratio (top-centre), immigrant stock --- log scale (top-right), 10-year population change (bottom-left), poverty rate (bottom-centre). All maps use quantile colour scales; RGF93/Lambert-93 projection. \textit{Source: INSEE, authors' calculations based on IGN departement boundaries.}}
+\caption{Spatial distribution of model variables: social housing density (top-left), solo-mother ratio (top-centre), immigrant stock -- log scale (top-right), 10-year population change (bottom-left), poverty rate (bottom-centre). All maps use quantile colour scales; RGF93/Lambert-93 projection. \textit{Source: INSEE, authors' calculations based on IGN departement boundaries.}}
 \label{fig:choropleth_all}
 \end{figure}
 
@@ -226,13 +224,6 @@ Social housing density averages 680 units per 10\,000 inhabitants but ranges wid
 \includefig[width=0.75\textwidth]{figures/fig_correlation_matrix.png}
 \caption{Spearman correlation matrix between key variables. \textit{Source: INSEE, authors' calculations.}}
 \label{fig:corr_matrix}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includefig[width=0.95\textwidth]{figures/fig_hist_boxplot_focal_vars.png}
-\caption{Distribution of the five main equation variables: social housing density (row~1), solo-mother ratio (row~2), immigrant stock in levels (row~3), population change over 10 years (row~4), and poverty rate (row~5). Histogram (left) and box-plot with outlier labels (right) in each row. \textit{Source: INSEE, authors' calculations.}}
-\label{fig:hist_boxplot_focal}
 \end{figure}
 
 
@@ -288,26 +279,26 @@ y_i = \mathbf{x}_i'\beta + \varepsilon_i, \quad \varepsilon \sim \mathcal{N}(0,\
 \end{equation}
 Spatial dependence in residuals from OLS signals model misspecification and is diagnosed via Lagrange multiplier tests.
 
-\paragraph{SAR --- Spatial Autoregressive Model.}
+\paragraph{SAR -- Spatial Autoregressive Model.}
 \begin{equation}
 y_i = \rho \sum_j w_{ij}\,y_j + \mathbf{x}_i'\beta + \varepsilon_i
 \end{equation}
 The scalar $\rho$ captures endogenous spatial lag: the social housing density of unit $i$ is partially determined by a weighted average of its neighbours' density (H3).
 
-\paragraph{SEM --- Spatial Error Model.}
+\paragraph{SEM -- Spatial Error Model.}
 \begin{equation}
 y_i = \mathbf{x}_i'\beta + u_i, \qquad u_i = \lambda \sum_j w_{ij}\,u_j + \varepsilon_i
 \end{equation}
 Spatial dependence confined to the error term ($\lambda$) indicates omitted spatially correlated confounders rather than true spillovers.
 
-\paragraph{SLX --- Spatial Lag of X Model.}
+\paragraph{SLX -- Spatial Lag of X Model.}
 \begin{equation}
 y_i = \mathbf{x}_i'\beta + \sum_j w_{ij}\,\mathbf{x}_j'\theta + \varepsilon_i
 \label{eq:slx}
 \end{equation}
-The SLX extends OLS by adding spatially weighted neighbours' covariates ($W\mathbf{X}$) while imposing $\rho = 0$. Direct and indirect effects equal $\hat{\beta}_k$ and $\hat{\theta}_k$ exactly --- no simulation is needed. The SLX is the $\rho = 0$ restriction of the SDM and can be tested against it via a likelihood ratio test.
+The SLX extends OLS by adding spatially weighted neighbours' covariates ($W\mathbf{X}$) while imposing $\rho = 0$. Direct and indirect effects equal $\hat{\beta}_k$ and $\hat{\theta}_k$ exactly -- no simulation is needed. The SLX is the $\rho = 0$ restriction of the SDM and can be tested against it via a likelihood ratio test.
 
-\paragraph{SDM --- Spatial Durbin Model (preferred specification).}
+\paragraph{SDM -- Spatial Durbin Model (preferred specification).}
 
 The research question motivates the SDM as the primary model. It allows simultaneous testing of all three hypotheses within a single framework:
 
@@ -327,7 +318,7 @@ where $\rho$ is the spatial autoregressive coefficient (H3), $W$ is the row-stan
 The SDM nests the SAR ($\theta = 0$), SLX ($\rho = 0$), and OLS ($\rho = \theta = 0$). Model selection follows \citet{elhorst2010}: estimate the SDM first, then test restrictions via likelihood ratio tests; retain the simplest non-rejected specification.
 
 \paragraph{Interpretation via impact decomposition.}
-Because $y$ appears on both sides of equation~\eqref{eq:sdm}, $\beta$ and $\theta$ do not directly equal marginal effects. Following \citet{lesage2009}, each regressor's total effect is decomposed into direct (own-departement) and indirect (cross-departement spillover) components via 1\,000 Monte Carlo draws.
+Because $y$ appears on both sides of equation~\eqref{eq:sdm}, $\beta$ and $\theta$ do not directly equal marginal effects; each regressor's total effect is therefore decomposed into direct (own-departement) and indirect (cross-departement spillover) components via 1\,000 Monte Carlo draws.
 
 
 
@@ -338,6 +329,8 @@ Because $y$ appears on both sides of equation~\eqref{eq:sdm}, $\beta$ and $\thet
 
 \subsection{Measuring global spatial autocorrelation}
 \label{sec:moran}
+
+Moran's $I$ statistic provides the first formal test of whether social housing density clusters geographically: a significantly positive value indicates that departements with similar supply levels tend to be spatially adjacent, justifying the move from a non-spatial OLS to spatial modelling.
 
 \inputifexists{tables/moran_global.tex}
 
@@ -381,14 +374,14 @@ Table~\ref{tab:moran_resid} confirms significant residual autocorrelation under 
 
 \inputifexists{tables/lm_tests.tex}
 
-Table~\ref{tab:lm_tests} reports the LM diagnostics. Standard tests reject no-spatial-dependence under both matrices ($p < 0.01$). The robust LM tests point to the SAR under Queen (RLM-lag $p = 0.04$) and the SEM under KNN-3 (RLM-err $p = 0.01$). This divergence motivates the SDM, which accommodates both channels.
+Table~\ref{tab:lm_tests} reports the LM diagnostics. Standard tests reject no-spatial-dependence under both matrices ($p < 0.01$). The robust LM tests point to the SAR under Queen (RLM-lag: $\chi^2 = 6.90$, $p = 0.01$; RLM-err: $p = 0.43$) and to the SEM under KNN-3 (RLM-err: $\chi^2 = 3.93$, $p = 0.05$; RLM-lag: $p = 0.11$). This matrix-dependent divergence --- endogenous supply-to-supply feedback dominates along shared administrative borders, while spatially correlated unobservables take over under distance-based neighbourhood definitions --- indicates that both channels plausibly operate simultaneously, making the SDM, which nests both the lagged outcome and spatially lagged covariates, the natural general starting specification.
 
 
 \subsubsection{SAR and SEM estimation results}
 
 \inputifexists{tables/sar_sem_compact.tex}
 
-Table~\ref{tab:sar_sem_compact} reports SAR and SEM estimates under both matrices. The spatial parameters are significant (both $p < 0.01$). The solo-mother ratio remains the dominant predictor across all specifications. The log-transformed immigrant stock is also significant ($p < 0.05$ under Queen, $p < 0.01$ under KNN-3), confirming the local-need channel for immigration even after controlling for spatial structure. The poverty rate is sensitive to the specification, reinforcing the need for the SDM. Residual diagnostics for these non-retained models are in Appendix~\ref{app:residuals}.
+Table~\ref{tab:sar_sem_compact} reports SAR and SEM estimates under both matrices. The spatial parameters are significant (both $p < 0.01$). The solo-mother ratio remains the dominant predictor across all specifications. The log-transformed immigrant stock is also significant ($p < 0.05$ under Queen, $p < 0.01$ under KNN-3), confirming the local-need channel for immigration even after controlling for spatial structure. The poverty rate is consistently insignificant across all SAR and SEM variants (Table~\ref{tab:sar_sem_compact}), losing the borderline significance it shows under OLS once the spatial structure is absorbed, reinforcing the case for the more flexible SDM. Residual distributions for these non-retained models (Appendix~\ref{app:residuals}) are approximately symmetric and centred on zero, supporting the normality assumption of maximum likelihood estimation, although slightly heavier tails are visible under KNN-3, suggesting residual local heterogeneity not fully captured by a single-channel spatial specification.
 
 \subsection{Elhorst (2010) model selection procedure}
 \label{sec:elhorst}
@@ -402,13 +395,13 @@ Following \citet{elhorst2010}, the SDM is estimated first, then tested against r
 \inputifexists{tables/aic_comparison.tex}
 
 \paragraph{Restriction tests.}
-All three LR tests reject their null (Table~\ref{tab:lr_tests}): SDM vs.\ SAR ($p < 0.01$), SDM vs.\ SEM ($p < 0.01$ Queen; $p = 0.01$ KNN-3), and SDM vs.\ SLX ($p < 0.001$). The \textbf{SDM is therefore retained}.
+The procedure proceeds in three steps (Table~\ref{tab:lr_tests}): (i)~dropping $W\!\mathbf{X}$ terms (SDM vs.\ SAR, $H_0\colon\theta = 0$) is rejected under both matrices (LR $= 29.84$, $p < 0.001$ Queen; LR $= 27.64$, $p < 0.001$ KNN-3), confirming that neighbouring departements' social characteristics carry independent explanatory power beyond what the outcome lag captures; (ii)~replacing the lagged outcome with spatially correlated errors (SDM vs.\ SEM, $H_0\colon\theta + \rho\beta = 0$) is likewise rejected (LR $= 23.07$, $p < 0.001$ Queen; LR $= 13.15$, $p = 0.01$ KNN-3), ruling out that the spatial clustering is driven purely by shared unobserved confounders; and (iii)~setting $\rho = 0$ (SDM vs.\ SLX) is rejected (LR $= 18.87$ Queen; LR $= 18.00$ KNN-3, both $p < 0.001$), confirming that endogenous outcome feedback between adjacent departements is a statistically necessary model component. The \textbf{SDM is therefore retained}.
 
 \paragraph{Weight matrix selection.}
 The AIC ranking (Table~\ref{tab:aic}) selects \textbf{SDM Queen} as the best-fitting combination. This is consistent with the institutional logic: social housing administration follows administrative borders rather than straight-line distances.
 
 \paragraph{SDM coefficient interpretation (Queen).}
-Under the preferred specification (Table~\ref{tab:sdm_compact}), the spatial autoregressive parameter and the solo-mother ratio remain highly significant. The log-transformed immigrant stock, $\ln\mathrm{IMM}$, is also significant ($\hat{\beta} = 61.9$, $p < 0.05$), confirming that departements with larger immigrant populations provide more social housing, even after controlling for spatial structure. Its spatially lagged counterpart $W\!\times\!\ln\mathrm{IMM}$ is, however, not significant ($\hat{\theta} \approx 4.6$), indicating no exogenous cross-border spillover from neighbours' immigrant stock. Among the other spatially lagged covariates, $W\!\times\!\Delta\mathrm{Pop}$ is significant ($p < 0.05$). The impact decomposition below provides the proper marginal-effect reading.
+Under the preferred specification (Table~\ref{tab:sdm_compact}), the spatial autoregressive parameter and the solo-mother ratio remain highly significant. The log-transformed immigrant stock, $\ln\mathrm{IMM}$, is also significant ($\hat{\beta} = 61.9$, $p < 0.05$), confirming that departements with larger immigrant populations provide more social housing, even after controlling for spatial structure. Its spatially lagged counterpart $W\!\times\!\ln\mathrm{IMM}$ is, however, not significant ($\hat{\theta} \approx 4.6$), indicating no exogenous cross-border spillover from neighbours' immigrant stock. Among the other spatially lagged covariates, $W\!\times\!\Delta\mathrm{Pop}$ is significant ($\hat{\theta} = -15.65$, $p < 0.05$, Queen): departements surrounded by fast-growing neighbours register lower social housing density, possibly because rapid demographic expansion in adjacent areas inflates private-market pressure faster than the regulated social sector can respond. The spatial autoregressive parameter $\hat{\rho} = 0.546$ (Wald $= 27.67$, $p < 0.001$; Table~\ref{tab:sdm_slx}) implies that a 100-unit increase in the average social housing density of a departement's neighbours is associated with roughly 55 additional units locally --- consistent with inter-jurisdictional coordination in allocation decisions or shared regional housing-market dynamics. The impact decomposition below provides the full marginal-effect reading.
 
 \begin{figure}[H]
 \centering
@@ -417,19 +410,20 @@ Under the preferred specification (Table~\ref{tab:sdm_compact}), the spatial aut
 \label{fig:sdm_resid}
 \end{figure}
 
+The approximately symmetric, near-zero-centred residual distribution (Figure~\ref{fig:sdm_resid}) confirms that the SDM adequately captures the spatial structure of social housing provision: no systematic over- or under-prediction pattern remains across the territory, and no single departement --- such as an isolated metropolitan pole or a border territory --- appears to exert undue leverage on the fit.
 
 \subsection{Model interpretation: SDM Queen impacts}
 \label{sec:impacts}
 
-Table~\ref{tab:impacts_combined} presents the impact decomposition for the preferred specification --- the SDM under Queen contiguity. Direct, indirect, and total effects are obtained via 1\,000 Monte Carlo draws from the asymptotic parameter distribution \citep{lesage2009}. In the SDM, the raw coefficients $\hat{\beta}$ and $\hat{\theta}$ do not directly equal marginal effects because spatial feedback loops redistribute every shock across the network; the impact decomposition accounts for this.
+Table~\ref{tab:impacts_combined} presents the impact decomposition for the preferred specification --- the SDM under Queen contiguity. Direct, indirect, and total effects are obtained via 1\,000 Monte Carlo draws from the asymptotic parameter distribution. In the SDM, the raw coefficients $\hat{\beta}$ and $\hat{\theta}$ do not directly equal marginal effects because spatial feedback loops redistribute every shock across the network; the impact decomposition accounts for this.
 
 \inputifexists{tables/sdm_slx_impacts.tex}
 
 \paragraph{Direct effects (H1).}
-The solo-mother ratio has the largest direct effect, confirming \textbf{H1 for SMR}. The log-transformed immigrant stock also has a significant direct effect (\textbf{H1 for $\ln$IMM accepted}). Because $\ln\mathrm{IMM}$ enters the equation in log form, the direct effect of approximately~68 means that a 10\% increase in a departement's immigrant stock is associated with roughly~6.5 additional social housing units per 10\,000 inhabitants, holding all else constant. This confirms that, conditional on the other covariates and the spatial structure, the size of the local immigrant population is a significant predictor of departement-level social housing provision.
+The solo-mother ratio has the largest direct effect ($\approx 71.2$), confirming \textbf{H1 for SMR}: departements with a higher share of single-parent households are systematically better supplied with social housing, consistent with the SRU's need-based allocation logic and suggesting that local authorities do respond to this specific form of residential vulnerability. The log-transformed immigrant stock also has a significant direct effect of $\approx 68$ (\textbf{H1 for $\ln$IMM accepted}): a 10\% increase in a departement's immigrant stock is associated with roughly 6.5 additional social housing units per 10\,000 inhabitants, confirming that the size of the local immigrant population is a robust predictor of departement-level supply even after controlling for poverty, population dynamics, and spatial interactions with neighbouring territories.
 
 \paragraph{Indirect effects (H2).}
-The indirect effect of the solo-mother ratio is negative, opposite to the hypothesised direction, suggesting concentration rather than diffusion of social housing within high-need clusters. \textbf{H2 for SMR is rejected}. The exogenous covariate spillover for log-immigrant stock ($W\!\times\!\ln\mathrm{IMM}$) is not significant in any specification ($\hat{\theta}_{\ln\mathrm{IMM}} \approx 4.6$, n.s.), so \textbf{H2 for $\ln$IMM is not confirmed}: there is no evidence that the immigrant population in neighbouring departements independently affects local social housing supply, beyond what is captured by the endogenous feedback channel ($\rho$).
+The indirect effect of the solo-mother ratio is small and positive ($\approx +7.9$, Table~\ref{tab:impacts_combined}) but not statistically distinguishable from zero, indicating no robust cross-border diffusion: social housing associated with solo-mother vulnerability is absorbed locally rather than prompting coordinated supply responses in adjacent territories, suggesting fragmented rather than inter-jurisdictional responses to this form of social need (\textbf{H2 for SMR: not confirmed}). The exogenous covariate spillover for log-immigrant stock ($W\!\times\!\ln\mathrm{IMM}$) is likewise not significant ($\hat{\theta}_{\ln\mathrm{IMM}} \approx 4.6$, n.s.), so \textbf{H2 for $\ln$IMM is not confirmed}: in policy terms, a departement's social housing supply does not adjust to the immigration level of its neighbours beyond the indirect path already captured by the endogenous feedback channel ($\rho$), indicating that immigration-driven housing need is managed as a local rather than inter-jurisdictional concern.
 
 \paragraph{Outcome-dependence channel (H3).}
 \textbf{H3 is accepted}: the spatial autoregressive parameter $\hat{\rho}$ is highly significant (Queen, $p < 0.01$). Social housing density in a departement is significantly associated with supply levels in adjacent territories.
@@ -446,14 +440,14 @@ The indirect effect of the solo-mother ratio is negative, opposite to the hypoth
 \midrule
 H1 & $\mathrm{SMR}$ & SDM Queen: largest direct effect, highly significant (Tab.~\ref{tab:impacts_combined}) & \textbf{Accepted} \\
 H1 & $\ln\mathrm{IMM}$ & SDM Queen: $\hat{\beta} = 61.9^{**}$; direct effect $\approx 68$ (Tab.~\ref{tab:impacts_combined}) & \textbf{Accepted} \\
-H2 & $W\!\times\!\mathrm{SMR}$ & SDM Queen: $\hat{\theta}$ negative, marginally significant (Tab.~\ref{tab:sdm_compact}) & \textbf{Rejected (sign)} \\
+H2 & $W\!\times\!\mathrm{SMR}$ & SDM Queen: indirect effect $\approx +7.9$ (n.s.); $\hat{\theta}$ negative but not significant (Tab.~\ref{tab:sdm_compact}) & \textbf{Not confirmed} \\
 H2 & $W\!\times\!\ln\mathrm{IMM}$ & $\hat{\theta} \approx 4.6$, n.s.\ in all specs; no exogenous spillover & \textbf{Not confirmed} \\
 H3 & $W\!\times\!\mathrm{SHD}$ & $\hat{\rho}$ highly significant (Queen, Tab.~\ref{tab:sdm_compact}) & \textbf{Accepted} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The SLX ($\rho = 0$ restriction of the SDM) was also estimated under both weight matrices; its LR test against the SDM is decisively rejected ($p < 0.001$), confirming that the outcome-to-outcome feedback channel ($\rho$) adds significant explanatory power beyond exogenous covariate spillovers alone. Coefficient estimates and residual distributions for the SLX and all other non-retained specifications are reported in Appendix~\ref{app:full}.
+The SLX ($\rho = 0$ restriction of the SDM) was also estimated under both weight matrices; its LR test against the SDM is decisively rejected ($p < 0.001$), confirming that the outcome-to-outcome feedback channel ($\rho$) adds significant explanatory power beyond exogenous covariate spillovers alone. In social housing terms, this means that knowing a departement's own demographic profile and that of its neighbours is not sufficient to explain its supply level: the \emph{current stock} of social housing in adjacent departements itself pulls local provision upward, reflecting either inter-communal planning solidarity, shared sub-regional housing-market pressures, or political-economy mechanisms linked to the SRU compliance benchmarks applied at the intercommunal level. Coefficient estimates and residual distributions for the SLX and all other non-retained specifications are reported in Appendix~\ref{app:full}.
 
 
 %==================================================
@@ -461,7 +455,7 @@ The SLX ($\rho = 0$ restriction of the SDM) was also estimated under both weight
 %==================================================
 \section{Conclusion}
 
-This paper investigated whether the density of social housing across French departements is shaped solely by local demographic pressures or also by interactions with neighbouring jurisdictions. Using a Spatial Durbin Model under Queen contiguity --- selected via the \citet{elhorst2010} general-to-specific procedure and confirmed by AIC --- we tested three hypotheses.
+This paper investigated whether the density of social housing across French departements is shaped solely by local demographic pressures or also by interactions with neighbouring jurisdictions. Using a Spatial Durbin Model under Queen contiguity -- selected via the \citet{elhorst2010} general-to-specific procedure and confirmed by AIC -- we tested three hypotheses.
 
 \textbf{H1} is supported: the solo-mother ratio is the strongest local predictor of social housing density, and the log-transformed immigrant stock is also significant ($p < 0.05$) across all spatial specifications. The log transformation corrects the heavy right-skew of the raw immigrant variable and yields a stable, positive association: departements with larger immigrant populations provide more social housing, consistent with a local-need channel.
 
@@ -469,9 +463,11 @@ This paper investigated whether the density of social housing across French depa
 
 \textbf{H3} is accepted: the spatial autoregressive coefficient is highly significant ($p < 0.01$), indicating substantial interdependence in social housing provision between adjacent departements. This outcome-to-outcome link is the most robust spatial channel in the data and persists across weight matrix specifications.
 
-The main policy implication is that social housing planning at the departement level cannot be treated in isolation. The significant spatial lag suggests that supply decisions in one jurisdiction are associated with --- and potentially influence --- supply in its neighbours. Coordinated regional approaches to social housing allocation are likely to be more effective than fragmented departement-by-departement planning.
+\paragraph{Policy implications.}
+Social housing planning at the departement level cannot be treated in isolation. The significant spatial lag suggests that supply decisions in one jurisdiction are associated with --- and potentially influence --- supply in its neighbours. Coordinated regional approaches to social housing allocation are likely to be more effective than fragmented departement-by-departement planning.
 
-Several limitations should be acknowledged. First, the analysis is cross-sectional ($n = 94$): no causal claims can be made, and reverse causality --- social housing attracting vulnerable populations rather than responding to them --- cannot be ruled out. Second, the small sample constrains the degrees of freedom available for the SDM's eight regressors plus spatial lag, though Monte Carlo inference on impact measures partially addresses finite-sample concerns. Third, the two-year gap between covariates (2022) and the dependent variable (2024) reduces simultaneity but may introduce measurement error if social structure shifted over that period. Finally, the analysis does not account for unobserved political or historical determinants of housing stock, which likely vary across territories.
+\paragraph{Limitations.}
+Several limitations should be acknowledged. First, the analysis is cross-sectional ($n = 94$): no causal claims can be made, and reverse causality -- social housing attracting vulnerable populations rather than responding to them -- cannot be ruled out. Second, the small sample constrains the degrees of freedom available for the SDM's eight regressors plus spatial lag, though Monte Carlo inference on impact measures partially addresses finite-sample concerns. Third, the two-year gap between covariates (2022) and the dependent variable (2024) reduces simultaneity but may introduce measurement error if social structure shifted over that period. Finally, the analysis does not account for unobserved political or historical determinants of housing stock, which likely vary across territories.
 
 %==================================================
 % ANNEXES
@@ -506,9 +502,17 @@ Complete estimation output with standard errors and fit measures for all spatial
 
 \inputifexists{tables/sar_sem_models.tex}
 
-\inputifexists{tables/sdm_models.tex}
-
 \inputifexists{tables/sdm_slx_comparison.tex}
+
+\subsection{Variable distributions}
+\label{app:var_dist}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.95\textwidth]{figures/fig_hist_boxplot_focal_vars.png}
+\caption{Distribution of the five main equation variables: social housing density (row~1), solo-mother ratio (row~2), immigrant stock in levels (row~3), population change over 10 years (row~4), and poverty rate (row~5). Histogram (left) and box-plot with outlier labels (right) in each row. \textit{Source: INSEE, authors' calculations.}}
+\label{fig:hist_boxplot_focal}
+\end{figure}
 
 \subsection{Residual distributions of non-retained models}
 \label{app:residuals}
