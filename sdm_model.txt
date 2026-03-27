@@ -6,40 +6,40 @@ Spatial Durbin Model (SDM) – k-nearest neighbours
                                    social_housing_density   
                                      (1)            (2)     
 ------------------------------------------------------------
-single_parent_ratio               89.354***      83.579***  
-                                   (16.999)      (15.835)   
+single_parent_ratio               75.953***      70.599***  
+                                   (16.676)      (15.891)   
                                                             
-immigrant_stock                     0.0004        0.0003    
-                                   (0.0003)      (0.0003)   
+log_immigrant_stock               66.222***      61.854**   
+                                   (24.363)      (24.740)   
                                                             
-population_change_10yrs_pct         -6.392        -1.391    
-                                   (3.919)        (3.998)   
+population_change_10yrs_pct       -10.826**       -6.115    
+                                   (4.285)        (4.405)   
                                                             
-poverty_rate_pct                  -16.708**       -11.544   
-                                   (7.950)        (7.396)   
+poverty_rate_pct                   -10.673        -6.176    
+                                   (8.118)        (7.761)   
                                                             
-lag.single_parent_ratio            -39.567       -54.407*   
-                                   (24.358)      (28.394)   
+lag.single_parent_ratio            -36.297        -34.721   
+                                   (23.472)      (27.536)   
                                                             
-lag.immigrant_stock                 0.0001         0.001    
-                                   (0.0004)       (0.001)   
+lag.log_immigrant_stock             4.069          4.561    
+                                   (41.182)      (52.504)   
                                                             
-lag.population_change_10yrs_pct    -8.840*      -18.948***  
-                                   (5.324)        (6.320)   
+lag.population_change_10yrs_pct     -7.567       -15.651**  
+                                   (6.168)        (7.307)   
                                                             
-lag.poverty_rate_pct               -20.131*       -15.210   
-                                   (11.561)      (14.063)   
+lag.poverty_rate_pct               -21.259*       -22.767   
+                                   (12.385)      (14.930)   
                                                             
-Constant                           250.754       318.262**  
-                                  (155.629)      (160.394)  
+Constant                           -394.832      -381.330   
+                                  (323.542)      (388.817)  
                                                             
 ------------------------------------------------------------
-Spatial lag parameter (rho)         0.492          0.537    
+Spatial lag parameter (rho)         0.489          0.546    
 Observations                          94            94      
-Log Likelihood                     -591.626      -585.632   
-sigma2                            15,982.270    14,054.010  
-Akaike Inf. Crit.                 1,205.251      1,193.264  
-Wald Test (df = 1)                26.178***      26.560***  
-LR Test (df = 1)                  19.092***      19.306***  
+Log Likelihood                     -589.113      -584.151   
+sigma2                            15,162.440    13,577.890  
+Akaike Inf. Crit.                 1,200.226      1,190.302  
+Wald Test (df = 1)                25.932***      27.671***  
+LR Test (df = 1)                  18.005***      18.871***  
 ============================================================
 Note:                            *p<0.1; **p<0.05; ***p<0.01

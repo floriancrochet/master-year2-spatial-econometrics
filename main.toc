@@ -4,53 +4,46 @@
 \contentsline {subsection}{\numberline {2.2}Research question}{4}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Hypotheses}{4}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Methodological approach}{5}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Data}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Social housing across French departements}{6}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}The factors behind social housing provision}{7}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Solo-mother households: the primary vulnerability indicator}{8}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Immigration: the second focal variable}{8}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Control variables: poverty and population dynamics}{8}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Descriptive analysis}{9}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Econometric methodology}{12}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Spatial weight matrices}{12}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Definitions}{12}{subsubsection.4.1.1}%
-\contentsline {paragraph}{Queen contiguity.}{12}{section*.9}%
-\contentsline {paragraph}{$k$-nearest neighbours (KNN).}{12}{section*.10}%
-\contentsline {subsubsection}{\numberline {4.1.2}Connectivity analysis}{12}{subsubsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.2}Spatial econometric models}{14}{subsection.4.2}%
-\contentsline {paragraph}{OLS (benchmark).}{14}{section*.13}%
-\contentsline {paragraph}{SAR --- Spatial Autoregressive Model.}{14}{section*.14}%
-\contentsline {paragraph}{SEM --- Spatial Error Model.}{14}{section*.15}%
-\contentsline {paragraph}{SLX --- Spatial Lag of X Model.}{14}{section*.16}%
-\contentsline {paragraph}{SDM --- Spatial Durbin Model (preferred specification).}{15}{section*.17}%
-\contentsline {paragraph}{Interpretation via impact decomposition.}{16}{section*.18}%
-\contentsline {section}{\numberline {5}Spatial model estimation}{16}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Measuring global spatial autocorrelation}{16}{subsection.5.1}%
-\contentsline {paragraph}{Results.}{16}{section*.20}%
-\contentsline {paragraph}{Interpretation.}{16}{section*.21}%
-\contentsline {paragraph}{Moran scatter plots.}{17}{section*.22}%
-\contentsline {subsection}{\numberline {5.2}Model selection}{17}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}OLS estimation and multicollinearity}{17}{subsubsection.5.2.1}%
-\contentsline {paragraph}{Spatial pattern of OLS residuals.}{18}{section*.24}%
-\contentsline {subsubsection}{\numberline {5.2.2}Moran test on OLS residuals}{18}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Lagrange multiplier tests and model choice}{19}{subsubsection.5.2.3}%
-\contentsline {paragraph}{Standard LM tests.}{19}{section*.28}%
-\contentsline {paragraph}{Robust LM tests.}{19}{section*.29}%
-\contentsline {subsubsection}{\numberline {5.2.4}SAR and SEM estimation results}{20}{subsubsection.5.2.4}%
-\contentsline {paragraph}{Spatial parameters.}{20}{section*.31}%
-\contentsline {subsection}{\numberline {5.3}Elhorst (2010) model selection procedure}{21}{subsection.5.3}%
-\contentsline {paragraph}{Restriction tests.}{21}{section*.36}%
-\contentsline {paragraph}{Weight matrix selection.}{22}{section*.37}%
-\contentsline {paragraph}{SDM coefficient interpretation (Queen).}{23}{section*.38}%
-\contentsline {subsection}{\numberline {5.4}Model interpretation: SDM and SLX impacts}{23}{subsection.5.4}%
-\contentsline {paragraph}{Direct effects (H1).}{24}{section*.40}%
-\contentsline {paragraph}{Indirect effects (H2).}{24}{section*.41}%
-\contentsline {paragraph}{Outcome-dependence channel (H3).}{24}{section*.42}%
-\contentsline {paragraph}{Hypothesis summary.}{25}{section*.43}%
-\contentsline {subsection}{\numberline {5.5}SDM vs SLX: disentangling spillover channels}{25}{subsection.5.5}%
-\contentsline {section}{\numberline {6}Conclusion}{27}{section.6}%
-\contentsline {section}{\numberline {A}Appendix}{28}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Degree distribution of the Queen weight matrix}{28}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}OLS benchmark results and multicollinearity diagnostics}{28}{subsection.A.2}%
-\contentsline {paragraph}{Variance Inflation Factors.}{28}{section*.49}%
-\contentsline {subsection}{\numberline {A.3}Full spatial model estimation tables}{30}{subsection.A.3}%
+\contentsline {section}{\numberline {3}Data}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Social housing across French departements}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}The factors behind social housing provision}{6}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Solo-mother households: the primary vulnerability indicator}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Immigration: the second focal variable}{7}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Control variables: poverty and population dynamics}{7}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Descriptive analysis}{8}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Econometric methodology}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Spatial weight matrices}{10}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Definitions}{10}{subsubsection.4.1.1}%
+\contentsline {paragraph}{Queen contiguity.}{10}{section*.9}%
+\contentsline {paragraph}{$k$-nearest neighbours (KNN).}{10}{section*.10}%
+\contentsline {subsubsection}{\numberline {4.1.2}Connectivity analysis}{10}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Spatial econometric models}{11}{subsection.4.2}%
+\contentsline {paragraph}{OLS (benchmark).}{11}{section*.13}%
+\contentsline {paragraph}{SAR --- Spatial Autoregressive Model.}{12}{section*.14}%
+\contentsline {paragraph}{SEM --- Spatial Error Model.}{12}{section*.15}%
+\contentsline {paragraph}{SLX --- Spatial Lag of X Model.}{12}{section*.16}%
+\contentsline {paragraph}{SDM --- Spatial Durbin Model (preferred specification).}{12}{section*.17}%
+\contentsline {paragraph}{Interpretation via impact decomposition.}{13}{section*.18}%
+\contentsline {section}{\numberline {5}Spatial model estimation}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Measuring global spatial autocorrelation}{13}{subsection.5.1}%
+\contentsline {paragraph}{Moran scatter plots.}{13}{section*.20}%
+\contentsline {subsection}{\numberline {5.2}Model selection}{14}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}OLS estimation and multicollinearity}{14}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Moran test on OLS residuals}{14}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Lagrange multiplier tests and model choice}{14}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}SAR and SEM estimation results}{15}{subsubsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.3}Elhorst (2010) model selection procedure}{15}{subsection.5.3}%
+\contentsline {paragraph}{Restriction tests.}{15}{section*.29}%
+\contentsline {paragraph}{Weight matrix selection.}{16}{section*.30}%
+\contentsline {paragraph}{SDM coefficient interpretation (Queen).}{16}{section*.31}%
+\contentsline {subsection}{\numberline {5.4}Model interpretation: SDM Queen impacts}{17}{subsection.5.4}%
+\contentsline {paragraph}{Direct effects (H1).}{17}{section*.34}%
+\contentsline {paragraph}{Indirect effects (H2).}{18}{section*.35}%
+\contentsline {paragraph}{Outcome-dependence channel (H3).}{18}{section*.36}%
+\contentsline {paragraph}{Hypothesis summary.}{18}{section*.37}%
+\contentsline {section}{\numberline {6}Conclusion}{19}{section.6}%
+\contentsline {section}{\numberline {A}Appendix}{20}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Degree distribution of the Queen weight matrix}{20}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}OLS benchmark and multicollinearity}{20}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Full estimation tables}{20}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}Residual distributions of non-retained models}{25}{subsection.A.4}%
