@@ -136,58 +136,58 @@ summary(stats_desc)
 par(mfrow = c(2, 2))
 
 # Social Housing Density
-hist(base_dept$social_housing_density, main = "Distribution: Housing Density", xlab = "Nb/10k hab", ylab = "Frequency", col = "lightblue", border = "white")
+hist(base_dept$social_housing_density, main = "Social Housing Density", xlab = "Units per 10.000 hab.", ylab = "Frequency", col = "lightblue", border = "white")
 grid()
 box()
-boxplot(base_dept$social_housing_density, main = "Dispersion: Housing Density", col = "lightblue", horizontal = TRUE)
+boxplot(base_dept$social_housing_density, main = "Social Housing Density", xlab = "Units per 10.000 hab.", col = "lightblue", horizontal = TRUE)
 
 # Single Parent Ratio
-hist(base_dept$single_parent_ratio, main = "Distribution: Single-Parent Ratio", xlab = "%", ylab = "Frequency", col = "lightgreen", border = "white")
+hist(base_dept$single_parent_ratio, main = "Single-Parent Ratio", xlab = "Share (%)", ylab = "Frequency", col = "lightgreen", border = "white")
 grid()
 box()
-boxplot(base_dept$single_parent_ratio, main = "Dispersion: Single-Parent Ratio", col = "lightgreen", horizontal = TRUE)
+boxplot(base_dept$single_parent_ratio, main = "Single-Parent Ratio", xlab = "Share (%)", col = "lightgreen", horizontal = TRUE)
 
 # Immigrant Stock
-hist(base_dept$immigrant_stock, main = "Distribution: Immigrant Stock", xlab = "Levels", ylab = "Frequency", col = "orange", border = "white")
+hist(base_dept$immigrant_stock, main = "Immigrant Stock", xlab = "Stocks (individuals)", ylab = "Frequency", col = "orange", border = "white")
 grid()
 box()
-boxplot(base_dept$immigrant_stock, main = "Dispersion: Immigrant Stock", col = "orange", horizontal = TRUE)
+boxplot(base_dept$immigrant_stock, main = "Immigrant Stock", xlab = "Stocks (individuals)", col = "orange", horizontal = TRUE)
 
 # Log Immigrant Stock
-hist(base_dept$log_immigrant_stock, main = "Distribution: Log Immig. Stock", xlab = "Log", ylab = "Frequency", col = "salmon", border = "white")
+hist(base_dept$log_immigrant_stock, main = "Log Immigrant Stock", xlab = "Log(individuals)", ylab = "Frequency", col = "salmon", border = "white")
 grid()
 box()
-boxplot(base_dept$log_immigrant_stock, main = "Dispersion: Log Immig. Stock", col = "salmon", horizontal = TRUE)
+boxplot(base_dept$log_immigrant_stock, main = "Log Immigrant Stock", xlab = "Log(individuals)", col = "salmon", horizontal = TRUE)
 
 # Housing Units
-hist(base_dept$housing_units, main = "Distribution: Housing Units", xlab = "Units", ylab = "Frequency", col = "steelblue", border = "white")
+hist(base_dept$housing_units, main = "Housing Units", xlab = "Total units", ylab = "Frequency", col = "steelblue", border = "white")
 grid()
 box()
-boxplot(base_dept$housing_units, main = "Dispersion: Housing Units", col = "steelblue", horizontal = TRUE)
+boxplot(base_dept$housing_units, main = "Housing Units", xlab = "Total units", col = "steelblue", horizontal = TRUE)
 
 # Population Change 10Y
-hist(base_dept$population_change_10yrs_pct, main = "Distribution: Pop. Change 10Y (%)", xlab = "%", ylab = "Frequency", col = "mediumpurple", border = "white")
+hist(base_dept$population_change_10yrs_pct, main = "Pop. Change over 10 Years", xlab = "Change (%)", ylab = "Frequency", col = "mediumpurple", border = "white")
 grid()
 box()
-boxplot(base_dept$population_change_10yrs_pct, main = "Dispersion: Pop. Change 10Y (%)", col = "mediumpurple", horizontal = TRUE)
+boxplot(base_dept$population_change_10yrs_pct, main = "Pop. Change over 10 Years", xlab = "Change (%)", col = "mediumpurple", horizontal = TRUE)
 
 # Unemployment Rate
-hist(base_dept$unemployment_rate_pct, main = "Distribution: Unemployment (%)", xlab = "%", ylab = "Frequency", col = "tomato", border = "white")
+hist(base_dept$unemployment_rate_pct, main = "Unemployment", xlab = "Rate (%)", ylab = "Frequency", col = "tomato", border = "white")
 grid()
 box()
-boxplot(base_dept$unemployment_rate_pct, main = "Dispersion: Unemployment (%)", col = "tomato", horizontal = TRUE)
+boxplot(base_dept$unemployment_rate_pct, main = "Unemployment", xlab = "Rate (%)", col = "tomato", horizontal = TRUE)
 
 # Poverty Rate
-hist(base_dept$poverty_rate_pct, main = "Distribution: Poverty Rate (%)", xlab = "%", ylab = "Frequency", col = "goldenrod", border = "white")
+hist(base_dept$poverty_rate_pct, main = "Poverty Rate", xlab = "Rate (%)", ylab = "Frequency", col = "goldenrod", border = "white")
 grid()
 box()
-boxplot(base_dept$poverty_rate_pct, main = "Dispersion: Poverty Rate (%)", col = "goldenrod", horizontal = TRUE)
+boxplot(base_dept$poverty_rate_pct, main = "Poverty Rate", xlab = "Rate (%)", col = "goldenrod", horizontal = TRUE)
 
 # Social Housing Rate
-hist(base_dept$social_housing_rate_pct, main = "Distribution: Social Housing Rate (%)", xlab = "%", ylab = "Frequency", col = "seagreen", border = "white")
+hist(base_dept$social_housing_rate_pct, main = "Social Housing Rate", xlab = "Rate (%)", ylab = "Frequency", col = "seagreen", border = "white")
 grid()
 box()
-boxplot(base_dept$social_housing_rate_pct, main = "Dispersion: Social Housing Rate (%)", col = "seagreen", horizontal = TRUE)
+boxplot(base_dept$social_housing_rate_pct, main = "Social Housing Rate", xlab = "Rate (%)", col = "seagreen", horizontal = TRUE)
 
 par(mfrow = c(1, 1))
 
