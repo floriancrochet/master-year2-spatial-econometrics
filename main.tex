@@ -24,7 +24,7 @@
 \setstretch{1.2}
 \setlength{\parindent}{0in}
 \usepackage{fancyhdr}
-\usepackage[htt]{hyphenat}
+\usepackage{hyphenat}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{amsmath}
 \usepackage[authoryear,round]{natbib}
@@ -143,16 +143,13 @@ Three hypotheses guide the analysis:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{cl}
+\begin{tabular}{cp{0.85\linewidth}}
 \toprule
 \textbf{Hyp.} & \textbf{Statement} \\
 \midrule
-H1 & A departement's own vulnerability profile (solo-mother ratio, immigrant stock) is \\
-   & positively associated with its social housing density. \\
-H2 & The vulnerability profile of \emph{neighbouring} departements also affects local supply \\
-   & (cross-border spillovers in social need). \\
-H3 & Social housing density in a departement is positively associated with density \\
-   & in its neighbours (inter-jurisdictional coordination or imitation). \\
+H1 & A departement's own vulnerability profile (solo-mother ratio, immigrant stock) is positively associated with its social housing density. \\
+H2 & The vulnerability profile of \emph{neighbouring} departements also affects local supply (cross-border spillovers in social need). \\
+H3 & Social housing density in a departement is positively associated with density in its neighbours (inter-jurisdictional coordination or imitation). \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -184,7 +181,7 @@ Social housing density ranges from 228 (Ariège) to 1\,414 (Seine-Saint-Denis), 
 }{%
   \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}\textbf{[Map pending: qgis/layout\_v1.pdf]}\vspace{2cm}}}%
 }
-\caption{Social housing density across French departements -- main cartographic layout. Choropleth in quantile classification; RGF93/Lambert-93 (EPSG:2154). \textit{Source: IGN, INSEE, RPLS. Authors' cartography designed in QGIS.}}
+\caption[Social housing density across French departements]{Social housing density across French departements -- main cartographic layout. Choropleth in quantile classification; RGF93/Lambert-93 (EPSG:2154). \textit{Source: IGN, INSEE, RPLS. Authors' cartography designed in QGIS.}}
 \label{fig:layout_main}
 \end{figure}
 
@@ -206,18 +203,41 @@ where $\mathrm{SHD}$ = social housing density (units per 10\,000 inhabitants), $
 \begin{figure}[H]
 \centering
 \includefig[width=\textwidth]{figures/fig_choropleth_all_variables.png}
-\caption{Spatial distribution of model variables: social housing density (top-left), solo-mother ratio (top-centre), immigrant stock -- log scale (top-right), 10-year population change (bottom-left), poverty rate (bottom-centre). All maps use quantile colour scales; RGF93/Lambert-93 projection. \textit{Source: INSEE, authors' calculations based on IGN departement boundaries.}}
+\caption[Spatial distribution of model variables]{Spatial distribution of model variables: social housing density (top-left), solo-mother ratio (top-centre), immigrant stock -- log scale (top-right), 10-year population change (bottom-left), poverty rate (bottom-centre). All maps use quantile colour scales; RGF93/Lambert-93 projection. \textit{Source: INSEE, authors' calculations based on IGN departement boundaries.}}
 \label{fig:choropleth_all}
 \end{figure}
 
 \newpage
 \subsection{Descriptive analysis}
 
+\textbf{Statistics}
+\vspace{2pt}
+
 Table~\ref{tab:desc_stats} summarizes the cross-sectional distributions of the dependent variable and the principal socio-demographic covariates for the 94 French departements in our sample.
 
 \inputifexists{tables/descriptive_stats.tex}
 
 Social housing density averages 680 units per 10\,000 inhabitants but ranges widely (228--1\,414), underlining territorial inequality. The solo-mother ratio is roughly symmetric around 12.5\%, whereas immigrant stock is heavily right-skewed, concentrated in a few urban departements (\^Ile-de-France, Rh\^one, Nord; see Figure~\ref{fig:layout_main}). This skewness motivates entering immigrant stock in logarithmic form in all estimations.
+
+\vspace{20pt}
+\textbf{Distributions}
+\vspace{2pt}
+
+An examination of the histograms for the nine variables (see Appendix~\ref{app:var_dist}) reveals two distinct distributional profiles. On one hand, several variables display a pronounced asymmetric, right-skewed pattern: Social Housing Density, Immigrant Stock, Housing Units, Poverty Rate, and Social Housing Rate. On the other hand, the remaining histograms exhibit roughly symmetric distributions, specifically Single-Parent Ratio, Log Immigrant Stock, Pop. Change over 10 Years, and Unemployment.
+
+Complementing this analysis, the boxplots highlight the prevalence of extreme values across the departements. The vast majority of the variables contain potential outliers, as evidenced by observations plotted beyond the whiskers; this group includes Social Housing Density, Single-Parent Ratio, Immigrant Stock, Housing Units, Pop. Change over 10 Years, Unemployment, Poverty Rate, and Social Housing Rate. The only variable with a boxplot showing no potential outliers is Log Immigrant Stock, demonstrating that the logarithmic transformation effectively absorbs the extreme values present in the raw data.
+
+\newpage
+\textbf{Outliers}
+\vspace{2pt}
+
+\vspace{20pt}
+\textbf{Normality}
+\vspace{2pt}
+
+\vspace{20pt}
+\textbf{Correlation}
+\vspace{2pt}
 
 \begin{figure}[H]
 \centering
@@ -244,7 +264,7 @@ The spatial weight matrix $W$ encodes which units are considered neighbours and 
 \subsubsection{Definitions}
 
 \paragraph{Queen contiguity.}
-Two departements are neighbours if their polygons share at least one boundary point (edge or corner). This symmetric matrix captures interactions through shared administrative borders.
+Two departements are considered neighbours if they share at least one point (edge or corner) on their boundaries. This symmetric matrix captures interactions across administrative borders.
 
 \paragraph{$k$-nearest neighbours (KNN).}
 Each departement's centroid is connected to its $k$ nearest centroids regardless of border adjacency. We consider $k \in \{1, 3, 6\}$: KNN-1 is a structural reference only (27 disconnected subgraphs); KNN-3 is the primary distance-based alternative; KNN-6 is a robustness check. KNN matrices are asymmetric by construction.
@@ -261,7 +281,7 @@ All matrices are \textbf{row-standardised} so that $Wy$ represents a weighted av
 \includefig[width=0.48\textwidth]{figures/fig_contiguity_knn.png}\\[4pt]
 \includefig[width=0.48\textwidth]{figures/fig_contiguity_knn3.png}
 \includefig[width=0.48\textwidth]{figures/fig_contiguity_knn6.png}
-\caption{Neighbourhood graphs: Queen contiguity (top-left), KNN-1 reference (top-right), KNN-3 (bottom-left), KNN-6 (bottom-right). \textit{Source: authors' calculations based on IGN departement boundaries.}}
+\caption[Neighbourhood graphs: Queen contiguity and KNN]{Neighbourhood graphs: Queen contiguity (top-left), KNN-1 reference (top-right), KNN-3 (bottom-left), KNN-6 (bottom-right). \textit{Source: authors' calculations based on IGN departement boundaries.}}
 \label{fig:neighbourhood}
 \end{figure}
 
@@ -345,7 +365,7 @@ Figure~\ref{fig:moran_diag} confirms the pattern: most departements fall in the 
 \centering
 \includefig[width=0.48\textwidth]{figures/fig_moran_queen.png}
 \includefig[width=0.48\textwidth]{figures/fig_moran_knn.png}
-\caption{Moran scatter plots: Queen contiguity (left) and KNN-3 (right). Each point is a departement; horizontal axis = standardised social housing density; vertical axis = spatial lag ($Wy$); slope of the regression line = Moran's $I$. Quadrants: \textbf{HH} high–high (top-right), \textbf{LL} low–low (bottom-left), \textbf{HL} high–low (top-left), \textbf{LH} low–high (bottom-right). \textit{Source: authors' calculations.}}
+\caption[Moran scatter plots: Queen contiguity and KNN-3]{Moran scatter plots: Queen contiguity (left) and KNN-3 (right). Each point is a departement; horizontal axis = standardised social housing density; vertical axis = spatial lag ($Wy$); slope of the regression line = Moran's $I$. Quadrants: \textbf{HH} high–high (top-right), \textbf{LL} low–low (bottom-left), \textbf{HL} high–low (top-left), \textbf{LH} low–high (bottom-right). \textit{Source: authors' calculations.}}
 \label{fig:moran_diag}
 \end{figure}
 
@@ -482,7 +502,7 @@ Several limitations should be acknowledged. First, the analysis is cross-section
 \begin{figure}[H]
 \centering
 \includefig[width=0.75\textwidth]{figures/fig_nb_card_queen.png}
-\caption{Degree distribution of the Queen contiguity matrix. Peripheral departements have fewer neighbours; interior crossroads departements have more. \textit{Source: authors' calculations.}}
+\caption[Degree distribution of the Queen contiguity matrix]{Degree distribution of the Queen contiguity matrix. Peripheral departements have fewer neighbours; interior crossroads departements have more. \textit{Source: authors' calculations.}}
 \label{fig:nb_card_queen}
 \end{figure}
 
@@ -510,9 +530,31 @@ Complete estimation output with standard errors and fit measures for all spatial
 \begin{figure}[H]
 \centering
 \includefig[width=0.95\textwidth]{figures/fig_hist_boxplot_focal_vars.png}
-\caption{Distribution of the five main equation variables: social housing density (row~1), solo-mother ratio (row~2), immigrant stock in levels (row~3), population change over 10 years (row~4), and poverty rate (row~5). Histogram (left) and box-plot with outlier labels (right) in each row. \textit{Source: INSEE, authors' calculations.}}
+\caption[Distribution of the five main equation variables]{Distribution of the five main equation variables: social housing density (row~1), solo-mother ratio (row~2), immigrant stock in levels (row~3), population change over 10 years (row~4), and poverty rate (row~5). Histogram (left) and box-plot with outlier labels (right) in each row. \textit{Source: INSEE, authors' calculations.}}
 \label{fig:hist_boxplot_focal}
 \end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.95\textwidth]{figures_flo/distri_social_housing_density_single_parent_ratio.png}
+\includefig[width=0.95\textwidth]{figures_flo/distri_immigrant_stock_log_immigrant_stock.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.95\textwidth]{figures_flo/distri_housing_units_population_change_10yrs_pct.png}
+\includefig[width=0.95\textwidth]{figures_flo/distri_unemployment_rate_pct_poverty_rate_pct.png}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.95\textwidth]{figures_flo/distri_social_housing_rate_pct.png}
+\end{figure}
+
+\newpage
 
 \subsection{Residual distributions of non-retained models}
 \label{app:residuals}
@@ -521,7 +563,7 @@ Complete estimation output with standard errors and fit measures for all spatial
 \centering
 \includefig[width=0.95\textwidth]{figures/fig_sar_sem_residuals.png}\\[6pt]
 \includefig[width=0.55\textwidth]{figures/fig_slx_residuals.png}
-\caption{Residual distributions of non-retained specifications. Top: SEM KNN-3 (left) and SAR Queen (right). Bottom: SLX KNN-3. \textit{Source: authors' calculations.}}
+\caption[Residual distributions of non-retained specifications]{Residual distributions of non-retained specifications. Top: SEM KNN-3 (left) and SAR Queen (right). Bottom: SLX KNN-3. \textit{Source: authors' calculations.}}
 \label{fig:resid_nonretained}
 \end{figure}
 
