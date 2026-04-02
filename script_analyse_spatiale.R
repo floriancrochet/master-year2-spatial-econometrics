@@ -192,82 +192,82 @@ boxplot(base_dept$social_housing_rate_pct, main = "Social Housing Rate", xlab = 
 par(mfrow = c(1, 1))
 
 # ------------------------------------------------------------------------------
-# 1.5 Outlier Assessment (Rosner's Test)
-# ------------------------------------------------------------------------------
-# Social Housing Density
-cat("\n--- Rosner Test: Social Housing Density ---\n")
-rosnerTest(base_dept$social_housing_density, k = 10, alpha = 0.05)$all.stats
-
-# Single Parent Ratio
-cat("\n--- Rosner Test: Single Parent Ratio ---\n")
-rosnerTest(base_dept$single_parent_ratio, k = 10, alpha = 0.05)$all.stats
-
-# Immigrant Stock
-cat("\n--- ESD Test: Immigrant Stock (Levels) ---\n")
-x2 <- base_dept$immigrant_stock
-rval <- function(x2) {
-    ares <- abs(x2 - mean(x2)) / sd(x2)
-    df <- data.frame(x2, ares)
-    r <- max(df$ares)
-    list(r, df)
-}
-n <- length(x2)
-alpha <- 0.05
-lam <- c(1:20)
-R <- c(1:20)
-for (i in 1:20) {
-    if (i == 1) {
-        rt <- rval(x2)
-        R[i] <- unlist(rt[1])
-        df <- data.frame(rt[2])
-        newdf <- df[df$ares != max(df$ares), ]
-    } else if (i != 1) {
-        rt <- rval(newdf$x2)
-        R[i] <- unlist(rt[1])
-        df <- data.frame(rt[2])
-        newdf <- df[df$ares != max(df$ares), ]
-    }
-    p <- 1 - alpha / (2 * (n - i + 1))
-    t <- qt(p, (n - i - 1))
-    lam[i] <- t * (n - i) / sqrt((n - i - 1 + t**2) * (n - i + 1))
-}
-newdf <- data.frame(c(1:20), R, lam)
-names(newdf) <- c("No. Outliers", "Test Stat.", "Critical Val.")
-newdf
-
-# Note: Log Immigrant Stock (ln(X2)) is excluded from outlier testing.
-# Its boxplot showed no observations beyond the whiskers, confirming absence of outliers.
-
-# Housing Units
-cat("\n--- Rosner Test: Housing Units ---\n")
-rosnerTest(base_dept$housing_units, k = 10, alpha = 0.05)$all.stats
-
-# Population Change 10Y
-cat("\n--- Grubbs Test: Population Change 10Y ---\n")
-grubbs.test(base_dept$population_change_10yrs_pct, type = 10, two.sided = TRUE)
-
-# Unemployment Rate
-cat("\n--- Rosner Test: Unemployment Rate ---\n")
-rosnerTest(base_dept$unemployment_rate_pct, k = 10, alpha = 0.05)$all.stats
-
-# Poverty Rate
-cat("\n--- Rosner Test: Poverty Rate ---\n")
-rosnerTest(base_dept$poverty_rate_pct, k = 10, alpha = 0.05)$all.stats
-
-# Social Housing Rate
-cat("\n--- Rosner Test: Social Housing Rate ---\n")
-rosnerTest(base_dept$social_housing_rate_pct, k = 10, alpha = 0.05)$all.stats
-
-# ------------------------------------------------------------------------------
-# 1.6 Normality Assessment (Shapiro-Wilk)
+# 1.5 Normality Assessment (Shapiro-Wilk)
 # ------------------------------------------------------------------------------
 # H0: Normal distribution (Reject if p-value < 0.05)
 p_vals <- sapply(st_drop_geometry(base_dept)[vars_numeric], function(x) shapiro.test(x)$p.value)
 
 cat("\n--- Shapiro-Wilk Tests (p-values) ---\n")
 print(round(p_vals, 5))
-# Conclusion: p < 0.05 for multiple variables.
+# Conclusion: p < 0.05 for 8 variables.
 # Consequence: Non-normal distributions mandate non-parametric Spearman correlation.
+
+# ------------------------------------------------------------------------------
+# 1.6 Outlier Assessment
+# ------------------------------------------------------------------------------
+# Function to apply Hampel test and display results for non-normal variables
+hampel_outliers <- function(data, var_name, col_name) {
+    x <- data[[col_name]]
+    median_x <- median(x, na.rm = TRUE)
+    mad_x <- mad(x, constant = 1.4826, na.rm = TRUE)
+    
+    # Hampel Identifier threshold (3 MADs)
+    lower_bound <- median_x - 3 * mad_x
+    upper_bound <- median_x + 3 * mad_x
+    
+    outliers_idx <- which(x < lower_bound | x > upper_bound)
+    
+    cat(sprintf("\n--- Hampel Test: %s ---\n", var_name))
+    cat(sprintf("Median: %.4f | MAD: %.4f | Bounds: [%.4f, %.4f]\n", median_x, mad_x, lower_bound, upper_bound))
+    
+    if (length(outliers_idx) > 0) {
+        cat(sprintf("Number of outliers detected: %d\n", length(outliers_idx)))
+        outliers_data <- data.frame(
+            Department = data$department_code[outliers_idx],
+            Value = x[outliers_idx]
+        )
+        print(outliers_data)
+    } else {
+        cat("No outliers detected.\n")
+    }
+}
+
+# Social Housing Density
+hampel_outliers(base_dept, "Social Housing Density", "social_housing_density")
+
+# Single Parent Ratio
+hampel_outliers(base_dept, "Single Parent Ratio", "single_parent_ratio")
+
+# Immigrant Stock
+hampel_outliers(base_dept, "Immigrant Stock (Levels)", "immigrant_stock")
+
+# Note: Log Immigrant Stock (ln(X2)) is excluded from outlier testing.
+# Its boxplot showed no observations beyond the whiskers, confirming absence of outliers.
+
+# Housing Units
+hampel_outliers(base_dept, "Housing Units", "housing_units")
+
+# Population Change 10Y (Normally distributed -> Grubbs Test is appropriate)
+cat("\n--- Grubbs Test: Population Change 10Y ---\n")
+grubbs_res <- grubbs.test(base_dept$population_change_10yrs_pct, type = 10, two.sided = TRUE)
+print(grubbs_res)
+
+if (grubbs_res$p.value < 0.05) {
+    x_val <- base_dept$population_change_10yrs_pct
+    outlier_idx <- which.max(abs(x_val - mean(x_val, na.rm = TRUE)))
+    cat(sprintf("-> Outlier detected: Department %s (Value: %.4f)\n", 
+                base_dept$department_code[outlier_idx], 
+                x_val[outlier_idx]))
+}
+
+# Unemployment Rate
+hampel_outliers(base_dept, "Unemployment Rate", "unemployment_rate_pct")
+
+# Poverty Rate
+hampel_outliers(base_dept, "Poverty Rate", "poverty_rate_pct")
+
+# Social Housing Rate
+hampel_outliers(base_dept, "Social Housing Rate", "social_housing_rate_pct")
 
 # ------------------------------------------------------------------------------
 # 1.7 Pairwise Correlations (Spearman)
