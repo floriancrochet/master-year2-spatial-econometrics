@@ -1,0 +1,21 @@
+\begin{table}[ht]
+\centering
+\caption{Outlier tests} 
+\label{tab:outliers}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lccccc}
+  \toprule
+Variable & Potential outliers & Outliers & Values & Departments & Test \\ 
+  \midrule
+  Social housing density (units/10k hab) & 4 & 4 & 1414, 1289, 1284, 1257 & 93, 51, 94, 92 & Hampel \\ 
+  Single-parent ratio (\%) & 2 & 2 & 21.1, 18.8 & 93, 94 & Hampel \\ 
+  Immigrant stock & 12 & 18 & Multiple & Multiple & Hampel \\ 
+  Housing units & 3 & 4 & 1389375, 1232504, 1044973, 937544 & 75, 59, 13, 69 & Hampel \\ 
+  Pop. change over 10 years (\%) & 1 & 0 & -- & -- & Grubbs \\ 
+  Unemployment rate (\%) & 2 & 1 & 12.3 & 66 & Hampel \\ 
+  Poverty rate (\%) & 2 & 1 & 27.6 & 93 & Hampel \\ 
+  Social housing rate (\%) & 2 & 2 & 37, 30 & 93, 94 & Hampel \\ 
+   \bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
