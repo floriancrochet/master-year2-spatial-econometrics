@@ -229,9 +229,13 @@ Providing a comprehensive statistical baseline, Table~\ref{tab:desc_stats} summa
 
 \inputifexists{tables/descriptive_stats.tex}
 
-The statistical results indicate that social housing density averages 680 units per 10\,000 inhabitants but ranges widely (228--1\,414), underlining territorial inequality. The solo-mother ratio is roughly symmetric around 12.5\%, whereas immigrant stock is heavily right-skewed, concentrated in a few urban departements (\^Ile-de-France, Rh\^one, Nord; see Figure~\ref{fig:layout_main}). This skewness motivates entering immigrant stock in logarithmic form in all estimations. Ultimately, these structural disparities empirically warrant the subsequent detailed examination of their underlying distributions.
+The statistical results indicate that the primary dependent variable, social housing density, averages approximately 680 units per 10\,000 inhabitants. However, it exhibits profound territorial inequality, ranging from a minimum of 228 to a maximum of 1\,414 units. Similarly, the broader social housing rate averages 15.0\% across the territory but fluctuates dramatically between 5.0\% and 37.0\%, confirming a highly uneven spatial distribution of subsidized housing.
 
-\vspace{20pt}
+Averaging 12.5\%, the single-parent ratio displays a moderate cross-sectional variance (ranging from 7.8\% to 21.1\%). In parallel, general economic deprivation varies significantly across the departements: the poverty rate reaches an average of 14.3\% with extreme local peaks climbing to 27.6\%, while the unemployment rate averages 7.6\% and extends locally up to 12.3\%.
+
+Demographic dynamics are captured by the 10-year population change, which averages a 2.2\% growth but spans from severe demographic decline ($-7.9\%$) to rapid expansion ($+13.8\%$). Additionally, absolute scale variables reveal massive geographical disparities: the total number of housing units ranges from 61\,547 to nearly 1.39 million per departement. This structural variance is especially pronounced for the immigrant stock, which is heavily right-skewed with a mean of 72\,802 individuals but surges to an extreme maximum of 528\,429 in a few highly concentrated urban departements (\^Ile-de-France, Rh\^one, Nord; see Figure~\ref{fig:choropleth_all}). This severe skewness mathematically motivates the integration of the immigrant stock in logarithmic form (averaging 10.58) in all econometric estimations. Ultimately, these vast structural disparities empirically warrant the subsequent detailed examination of their formal distributions.
+
+\newpage
 \textbf{Distributions}
 \vspace{1pt}
 
@@ -239,7 +243,7 @@ An examination of the graphical histograms for the nine variables (see Appendix~
 
 Complementing this analysis, the boxplots highlight the prevalence of extreme values across the departements. The vast majority of the variables contain potential outliers, as evidenced by observations plotted beyond the whiskers; this group includes Social Housing Density, Single-Parent Ratio, Immigrant Stock, Housing Units, Pop. Change over 10 Years, Unemployment, Poverty Rate, and Social Housing Rate. The only variable with a boxplot showing no potential outliers is Log Immigrant Stock, demonstrating that the logarithmic transformation effectively absorbs the extreme values present in the raw data, which directly prompts a formal statistical assessment of their normality.
 
-\newpage
+\vspace{20pt}
 \textbf{Normality}
 \vspace{1pt}
 
@@ -394,24 +398,74 @@ Table~\ref{tab:moran_global} reports Moran's $I$ under both matrices. Under Quee
 
 As Figure~\ref{fig:layout_main} illustrates, the northern corridor and \^{I}le-de-France belt form a high-density cluster, while the south and rural west form a low-density zone. The higher $I$ under KNN-3 suggests that the clustering extends beyond immediately contiguous departements.
 
-\paragraph{Moran scatter plots.}
-Figure~\ref{fig:moran_diag} confirms the pattern: most departements fall in the HH or LL quadrants, with few deviations (HL/LH), reinforcing the spatial clustering of social housing provision.
+\subsection{Local Indicators of Spatial Association (LISA)}
+\label{sec:lisa}
+
+While global Moran's $I$ confirms the overall presence of spatial autocorrelation, it does not identify where these clusters are located. Local Indicators of Spatial Association (LISA) allow us to decompose the global statistic and geometrically map statistically significant local clusters. For each matrix (Queen, KNN-1, KNN-3, KNN-6), we present the LISA Cluster Map identifying the specific spatial structures (high-high, low-low, high-low, low-high) to detect significant clusterings of similar values, alongside the LISA Significance Map, and the comprehensive Moran scatter plot.
+
+\newpage
+\textbf{Queen contiguity}
+\vspace{1pt}
 
 \begin{figure}[H]
 \centering
-\includefig[width=0.48\textwidth]{figures/fig_moran_queen.png}
-\includefig[width=0.48\textwidth]{figures/fig_moran_knn.png}
-\caption[Moran scatter plots: Queen contiguity and KNN-3]{%
-  Moran scatter plots: Queen contiguity (left) and KNN-3 (right). Each point is a 
-  departement; horizontal axis = standardised social housing density; vertical axis 
-  = spatial lag ($Wy$); slope of the regression line = Moran's $I$. Quadrants: 
-  \textbf{HH} high–high (top-right), \textbf{LL} low–low (bottom-left), 
-  \textbf{HL} high–low (top-left), \textbf{LH} low–high (bottom-right). 
+\includefig[width=\textwidth]{figures/lisa_wqueen.png}
+\caption[LISA Analysis: Queen contiguity]{%
+  LISA Analysis: Queen contiguity. Top-left: LISA Cluster Map. Top-right: LISA Significance Map. Bottom: Moran Scatter Plot.
   \textit{Source: authors' calculations.}%
 }
-\label{fig:moran_diag}
+\label{fig:lisa_queen}
 \end{figure}
 
+An in-depth analysis of these three metrics reveals a highly polarized geography of social housing provision. The Moran scatter plot formally quantifies the strong positive spatial autocorrelation (Moran's $I = 0.600$), with the vast majority of departements falling into Quadrant 1 (positive spatial autocorrelation and ``high-high'' structure) or Quadrant 3 (positive spatial autocorrelation and ``low-low'' structure). The LISA Cluster Map geographically maps this dependence into two distinct, highly significant spatial clusters: a dense ``high-high'' cluster of 10 departements concentrated in the northern corridor and \^{I}le-de-France, and a broad ``low-low'' cluster of 16 departements spanning the South-West. This clearly highlights significant clusterings of similar values that strongly deviate from a random spatial distribution. Finally, the LISA Significance Map confirms the outstanding statistical robustness of these geographic cores, reaching high significance ($p \le 0.001$). The exceptional rarity of spatial outliers---limited to only two High-Low departements exhibiting local negative spatial autocorrelation---definitively proves that French social housing is governed by sweeping macro-regional divides.
+
+\newpage
+\textbf{$k$-nearest neighbours (KNN-1)}
+\vspace{1pt}
+
+\begin{figure}[H]
+\centering
+\includefig[width=\textwidth]{figures/lisa_wknn1.png}
+\caption[LISA Analysis: KNN-1]{%
+  LISA Analysis: KNN-1. Top-left: LISA Cluster Map. Top-right: LISA Significance Map. Bottom: Moran Scatter Plot.
+  \textit{Source: authors' calculations.}%
+}
+\label{fig:lisa_knn1}
+\end{figure}
+
+Shifting to the highly restrictive $k$-nearest neighbours (KNN-1) specification---which connects each departement solely to its absolute closest centroid---the spatial landscape predictably fragments. While the scatter plot yields an inflated global autocorrelation index (Moran's $I = 0.768$), the local cluster mapping dramatically contracts. The once-broad ``high-high'' structure (Quadrant 1) shrinks to merely 4 departements confined strictly to the \^{I}le-de-France core, and the ``low-low'' structure (Quadrant 3) splinters into just 5 departements scattered across the South-West. Correspondingly, statistical significance plummets: no clusters achieve a $p \le 0.01$ threshold, with all 9 clustered units clinging barely to a marginal $p = 0.05$ limitation under simulated random distributions. Furthermore, this specification artificially generates 5 completely disconnected ``neighborless'' observations. In the context of social housing, this proves that supply strategies do not operate on strict one-to-one local dependence between the two closest jurisdictions, exposing KNN-1 as structurally inadequate for mapping such regional autocorrelations.
+
+\newpage
+\textbf{$k$-nearest neighbours (KNN-3)}
+\vspace{1pt}
+
+\begin{figure}[H]
+\centering
+\includefig[width=\textwidth]{figures/lisa_wknn3.png}
+\caption[LISA Analysis: KNN-3]{%
+  LISA Analysis: KNN-3. Top-left: LISA Cluster Map. Top-right: LISA Significance Map. Bottom: Moran Scatter Plot.
+  \textit{Source: authors' calculations.}%
+}
+\label{fig:lisa_knn3}
+\end{figure}
+
+By broadening the spatial lens to exactly $k=3$ nearest neighbours, the analysis effectively smooths the localized noise of KNN-1 and begins to approximate the organic administrative boundaries observed under Queen contiguity. The global autocorrelation index stabilizes at Moran's $I = 0.722$, depicted by a well-distributed positive linear fit in the diagram. The LISA Cluster Map demonstrates a robust recovery of significant spatial associations: the positive spatial autocorrelation ``high-high'' cluster robustly expands to 12 departements consolidating the northern corridor and \^{I}le-de-France, while the ``low-low'' cluster coalesces into 9 departements across the South-West. This specification restores the statistical confidence that was visually absent in KNN-1, with 5 departements in the core of the northern cluster attaining peak significance ($p \le 0.001$) against the null hypothesis of spatial randomness. The virtual disappearance of spatial outliers (save for a single Quadrant 2 High-Low unit exhibiting negative autocorrelation) confirms that social housing dynamics exhibit strong regional scale effects.
+
+\newpage
+\textbf{$k$-nearest neighbours (KNN-6)}
+\vspace{1pt}
+
+\begin{figure}[H]
+\centering
+\includefig[width=\textwidth]{figures/lisa_wknn6.png}
+\caption[LISA Analysis: KNN-6]{%
+  LISA Analysis: KNN-6. Top-left: LISA Cluster Map. Top-right: LISA Significance Map. Bottom: Moran Scatter Plot.
+  \textit{Source: authors' calculations.}%
+}
+\label{fig:lisa_knn6}
+\end{figure}
+
+Extending the neighbourhood weights to the $k=6$ nearest neighbours provides a macro-regional smoothing effect that strongly amplifies local significance while slightly dampening the global autocorrelation magnitude (Moran's $I = 0.616$) toward levels seen under Queen contiguity. By aggressively averaging out local variations, this broad spatial lens causes the identified groupings of similar values to balloon in size: Quadrant 1 (``high-high'') expands to 14 departements encompassing the broader Parisian basin, while Quadrant 3 (``low-low'') swells dramatically to 20 departements, dominating the South-West and capturing isolated coastal territories. Crucially, this macro-smoothing yields an explosion of statistical robustness under simulated spatial permutations. A remarkable 15 departements now anchor the clusters at the maximum $p \le 0.001$ significance threshold, demonstrating that social housing under-supply and over-supply represent deeply entrenched, large-scale spatial regimes rather than statistically random locations. Only two High-Low outliers (negative spatial autocorrelation) remain, further confirming the structural rigidity of these broad territorial divides.
 
 \subsection{Model selection}
 
