@@ -405,7 +405,7 @@ moran_plot_KNN <- moran.plot(
 # 4.0 OLS Baseline
 # ------------------------------------------------------------------------------
 # Specification: Y ~ X1 + X2 + X3 + X4
-equation <- social_housing_density ~ single_parent_ratio + immigrant_stock + population_change_10yrs_pct + poverty_rate_pct
+equation <- social_housing_density ~ single_parent_ratio + log_immigrant_stock + population_change_10yrs_pct + poverty_rate_pct
 
 ols <- lm(equation, data = base_dept)
 summary(ols)
