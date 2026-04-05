@@ -44,7 +44,7 @@
 %==================================================
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\footnotesize M2 ECAP 2025--2026: Spatial Econometrics}
+\lhead{\footnotesize M2 ECAP 2025-2026: Spatial Econometrics}
 \rhead{}
 \cfoot{\footnotesize \thepage}
 \setlength{\headheight}{12.2pt}
@@ -60,9 +60,9 @@
 
 \thispagestyle{empty}
 
-%----------------------------------
+%------------
 % TITLE PAGE
-%----------------------------------
+%------------
 \begin{titlepage}
 	\thispagestyle{empty}
 	
@@ -81,7 +81,7 @@
 	
 	% Center of the page
 	\begin{center}
-		{\Large\scshape Master 2 -- Econometrics and Statistics}\\[0.2cm]
+		{\Large\scshape Master 2 - Econometrics and Statistics}\\[0.2cm]
 		{\Large\scshape Applied Econometrics Track}\\[1cm]
 		
 		{\Large\bfseries Spatial Econometrics}\\[0.4cm]
@@ -98,7 +98,7 @@
 		
 		\large\textbf{Professor: } Muriel TRAVERS \\[0.3cm]
 		
-		\large\textbf{Academic Year: } 2025--2026
+		\large\textbf{Academic Year: } 2025-2026
 	\end{center}
 \end{titlepage}
 
@@ -117,7 +117,7 @@
 %==================================================
 \section{Introduction}
 
-Despite the \emph{Solidarité et Renouvellement Urbain} (SRU) law, first enacted in 2000 and progressively tightened to a 25\% social housing target by 2025, supply remains deeply uneven across French departements. As of 2025, over 1\,000 municipalities were still classified as \emph{carences} for persistent supply shortfalls, and the national social housing rate -- averaging roughly 15\% of all dwellings -- masks a departement-level range from just 5\% to 37\% (Table~\ref{tab:desc_stats}). With waiting lists for social housing exceeding 2.4 million applicants nationwide by early 2025, understanding the territorial determinants of supply has both academic and policy urgency.
+Despite the \emph{Solidarité et Renouvellement Urbain} (SRU) law, first enacted in 2000 and progressively tightened to a 25\% social housing target by 2025, supply remains deeply uneven across French departements. As of 2025, over 1\,000 municipalities were still classified as \emph{carences} for persistent supply shortfalls, and the national social housing rate - averaging roughly 15\% of all dwellings - masks a departement-level range from just 5\% to 37\% (Table~\ref{tab:desc_stats}). With waiting lists for social housing exceeding 2.4 million applicants nationwide by early 2025, understanding the territorial determinants of supply has both academic and policy urgency.
 
 \medskip
 
@@ -155,11 +155,11 @@ H3 & Social housing density in a departement is positively associated with densi
 \end{tabular}
 \end{center}
 
-H1 captures the local-need channel: territories with more vulnerable households should provide more social housing. H2 asks whether need in adjacent departements spills over -- for instance through inter-communal planning bodies or cross-border migration. H3 captures a direct outcome-to-outcome link, consistent with policy coordination or shared housing-market dynamics \citep{wang2025, beenstock2015}.
+H1 captures the local-need channel: territories with more vulnerable households should provide more social housing. H2 asks whether need in adjacent departements spills over - for instance through inter-communal planning bodies or cross-border migration. H3 captures a direct outcome-to-outcome link, consistent with policy coordination or shared housing-market dynamics \citep{wang2025, beenstock2015}.
 
 \subsection{Methodological approach}
 
-To test these hypotheses we proceed as follows. A non-spatial OLS regression serves as the baseline; its residuals are checked for spatial autocorrelation (Moran's $I$, LM tests). If spatial dependence is detected, we estimate a series of spatial models -- SAR, SEM, SLX, and the general Spatial Durbin Model (SDM) -- under two neighbourhood definitions (Queen contiguity and $k$-nearest neighbours). The \citet{elhorst2010} general-to-specific procedure selects the most parsimonious specification not rejected by the data, and the impact decomposition separates own-departement effects from cross-departement spillovers. Full model definitions are presented in Section~4.
+To test these hypotheses we proceed as follows. A non-spatial OLS regression serves as the baseline; its residuals are checked for spatial autocorrelation (Moran's $I$, LM tests). If spatial dependence is detected, we estimate a series of spatial models - SAR, SEM, SLX, and the general Spatial Durbin Model (SDM) - under two neighbourhood definitions (Queen contiguity and $k$-nearest neighbours). The \citet{elhorst2010} general-to-specific procedure selects the most parsimonious specification not rejected by the data, and the impact decomposition separates own-departement effects from cross-departement spillovers. Full model definitions are presented in Section~4.
 
 \newpage
 
@@ -184,7 +184,7 @@ Social housing density ranges from 228 (Ariège) to 1\,414 (Seine-Saint-Denis), 
   \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}\textbf{[Map pending: qgis/layout\_v1.pdf]}\vspace{2cm}}}%
 }
 \caption[Social housing density across French departements]{%
-  Social housing density across French departements -- main cartographic layout. 
+  Social housing density across French departements - main cartographic layout. 
   Choropleth in quantile classification; RGF93/Lambert-93 (EPSG:2154). 
   \textit{Source: IGN, INSEE, RPLS. Authors' cartography designed in QGIS.}%
 }
@@ -193,93 +193,66 @@ Social housing density ranges from 228 (Ariège) to 1\,414 (Seine-Saint-Denis), 
 
 \subsection{The factors behind social housing provision}
 
-The dataset combines departmental boundary polygons with two tabular sources: social housing and solo-mother household data from INSEE, and a set of socio-economic indicators published in 2022. After merging on the INSEE departement code, the cross-section contains $n = 94$ observations. The baseline OLS equation is:
-\begin{equation}
-\mathrm{SHD}_i = \beta_0 + \beta_1\,\mathrm{SMR}_i + \beta_2\,\ln\mathrm{IMM}_i + \beta_3\,\Delta\mathrm{Pop}_i + \beta_4\,\mathrm{Pov}_i + \varepsilon_i
-\label{eq:ols}
-\end{equation}
-where $\mathrm{SHD}$ = social housing density (units per 10\,000 inhabitants), $\mathrm{SMR}$ = solo-mother ratio, $\ln\mathrm{IMM}$ = log-transformed immigrant stock, $\Delta\mathrm{Pop}$ = 10-year population change, $\mathrm{Pov}$ = poverty rate. The log transformation of immigrant stock addresses the heavy right-skew of this variable (see Figure~\ref{fig:hist_boxplot_focal}) and ensures that a few high-immigration urban departements do not exert disproportionate leverage on the estimates.
+The dataset combines departmental boundary polygons with two tabular sources: social housing and solo-mother household data from INSEE, and socio-economic indicators for 2022. After merging on the INSEE departement code, the cross-section contains $n = 94$ observations. Five candidate variables are considered - social housing density (SHD), solo-mother ratio (SMR), immigrant stock (IMM), 10-year population change ($\Delta$Pop), and poverty rate (Pov) - whose final selection follows the descriptive analysis (Section~\ref{sec:desc_corr}).
 
-\subsubsection{Solo-mother households: the primary vulnerability indicator}
-
-\subsubsection{Immigration: the second focal variable}
-
-\subsubsection{Control variables: poverty and population dynamics}
-
-\begin{figure}[H]
-\centering
-\includefig[width=\textwidth]{figures/fig_choropleth_all_variables.png}
-\caption[Spatial distribution of model variables]{%
-  Spatial distribution of model variables: social housing density (top-left), 
-  solo-mother ratio (top-centre), immigrant stock -- log scale (top-right), 
-  10-year population change (bottom-left), poverty rate (bottom-centre). 
-  All maps use quantile colour scales; RGF93/Lambert-93 projection. 
-  \textit{Source: INSEE, authors' calculations based on IGN departement boundaries.}%
-}
-\label{fig:choropleth_all}
-\end{figure}
-
-\newpage
 \subsection{Descriptive analysis}
 
-\textbf{Statistics}
-\vspace{1pt}
+\subsubsection{Summary statistics}
 
-Providing a comprehensive statistical baseline, Table~\ref{tab:desc_stats} summarizes the cross-sectional distributions of the dependent variable and the principal socio-demographic covariates for the 94 French departements in our sample.
+Table~\ref{tab:desc_stats} presents the distributions of all variables for the 94 metropolitan departements.
 
 \inputifexists{tables/descriptive_stats.tex}
 
-The statistical results indicate that the primary dependent variable, social housing density, averages approximately 680 units per 10\,000 inhabitants. However, it exhibits profound territorial inequality, ranging from a minimum of 228 to a maximum of 1\,414 units. Similarly, the broader social housing rate averages 15.0\% across the territory but fluctuates dramatically between 5.0\% and 37.0\%, confirming a highly uneven spatial distribution of subsidized housing.
+Social housing density has a coefficient of variation of 36\,\%, with a six-fold range between the lowest departement (228 units per 10\,000 inhabitants) and the highest (1\,414). This spread is considerably larger than that of the covariates, which already suggests strong spatial clustering and systematic territorial inequality in supply. The raw immigrant stock is strongly right-skewed (maximum of 528\,429 against a much lower median), which motivates the log transformation discussed below.
 
-Averaging 12.5\%, the single-parent ratio displays a moderate cross-sectional variance (ranging from 7.8\% to 21.1\%). In parallel, general economic deprivation varies significantly across the departements: the poverty rate reaches an average of 14.3\% with extreme local peaks climbing to 27.6\%, while the unemployment rate averages 7.6\% and extends locally up to 12.3\%.
+\subsubsection{Distributions}
 
-Demographic dynamics are captured by the 10-year population change, which averages a 2.2\% growth but spans from severe demographic decline ($-7.9\%$) to rapid expansion ($+13.8\%$). Additionally, absolute scale variables reveal massive geographical disparities: the total number of housing units ranges from 61\,547 to nearly 1.39 million per departement. This structural variance is especially pronounced for the immigrant stock, which is heavily right-skewed with a mean of 72\,802 individuals but surges to an extreme maximum of 528\,429 in a few highly concentrated urban departements (\^Ile-de-France, Rh\^one, Nord; see Figure~\ref{fig:choropleth_all}). This severe skewness mathematically motivates the integration of the immigrant stock in logarithmic form (averaging 10.58) in all econometric estimations. Ultimately, these vast structural disparities empirically warrant the subsequent detailed examination of their formal distributions.
+Histograms and box plots (Appendix~\ref{app:var_dist}) show two distinct profiles. The raw immigrant stock, social housing density, and poverty rate are all right-skewed, confirmed by the Shapiro-Wilk test ($p < 0.01$; Table~\ref{tab:normality}). The 10-year population change is the only normally distributed variable ($p = 0.243$). The log transformation of the immigrant stock effectively corrects the skewness of the raw series - the log version is close to normality ($p = 0.050$) and absorbs the extreme values visible in the box plot - which justifies its use throughout the estimations. The widespread non-normality of the other variables calls for robust methods: Spearman correlation and the Hampel filter for outlier detection (full Shapiro-Wilk results in Table~\ref{tab:normality}, Appendix~\ref{app:norm_outliers}).
 
-\newpage
-\textbf{Distributions}
-\vspace{1pt}
+\subsubsection{Outliers}
 
-An examination of the graphical histograms for the nine variables (see Appendix~\ref{app:var_dist}) reveals two distinct distributional profiles. Several variables display a pronounced asymmetric, right-skewed pattern: Social Housing Density, Immigrant Stock, Housing Units, Poverty Rate, and Social Housing Rate. In contrast, the remaining histograms exhibit roughly symmetric distributions, specifically Single-Parent Ratio, Log Immigrant Stock, Pop. Change over 10 Years, and Unemployment.
+Full outlier detection results are reported in Table~\ref{tab:outliers} (Appendix~\ref{app:norm_outliers}). The Grubbs test, applied to the only normally distributed variable (population change), finds no statistically supported outlier. The Hampel filter, by contrast, flags multiple extreme values among the skewed variables: 18 for the raw immigrant stock, where the rejection threshold is particularly tight around a low median. Departements 93 (Seine-Saint-Denis) and 94 (Val-de-Marne) appear repeatedly as extreme cases on social housing density and the solo-mother ratio, consistent with their outlying positions on the choropleth maps (Figure~\ref{fig:choropleth_all}). Removing them is ruled out however: it would create topological gaps in the Queen contiguity matrix and compromise the integrity of the spatial estimations. These observations are therefore kept in the sample.
 
-Complementing this analysis, the boxplots highlight the prevalence of extreme values across the departements. The vast majority of the variables contain potential outliers, as evidenced by observations plotted beyond the whiskers; this group includes Social Housing Density, Single-Parent Ratio, Immigrant Stock, Housing Units, Pop. Change over 10 Years, Unemployment, Poverty Rate, and Social Housing Rate. The only variable with a boxplot showing no potential outliers is Log Immigrant Stock, demonstrating that the logarithmic transformation effectively absorbs the extreme values present in the raw data, which directly prompts a formal statistical assessment of their normality.
-
-\vspace{20pt}
-\textbf{Normality}
-\vspace{1pt}
-
-To formally verify the visual distributional discrepancies observed previously, the Shapiro-Wilk test statistics (Table~\ref{tab:normality}) comprehensively assess the normality of all variables.
-
-\inputifexists{tables/normality.tex}
-
-The reported $p$-values confirm that out of the nine continuous variables evaluated, only the 10-year Population Change fails to reject the null hypothesis of a normal distribution ($p\text{-value} = 0.243$). In contrast, the remaining variables---including Social Housing Density, Poverty Rate, and the raw Immigrant Stock---exhibit statistically significant departures from normality ($p < 0.01$). Even the logarithmic transformation of the Immigrant Stock, while effectively smoothing its extreme right-skewness, still marginally rejects strict Gaussian normality ($p = 0.0497$). This widespread prevalence of non-normal distributions mathematically dictates the subsequent empirical strategy: it absolutely requires the selection of robust, non-parametric algorithms for the impending outlier detection.
-
-\vspace{20pt}
-\textbf{Outliers}
-\vspace{1pt}
-
-To quantitatively verify the presence of extreme observations, the algorithms in Table~\ref{tab:outliers} must be tailored to the established distributional properties: the Grubbs test is employed for normally distributed variables, whereas the robust Hampel filter is prescribed for asymmetric, non-normal variables to prevent devastating variance distortions.
-
-\inputifexists{tables/outliers.tex}
-
-The empirical results demonstrate that for the normally distributed 10-year Population Change, the Grubbs test confirms the absence of any true mathematical outliers, completely disregarding the single potential point flagged visually by the boxplot. In contrast, the robust Hampel filter validates multiple extreme values across the remaining non-normal variables. Notably, the raw Immigrant Stock exhibits 18 severe outliers, surpassing the 12 visually identified by its boxplot because the dense data concentration around the median generates an exceptionally narrow rejection threshold. Crucially, departements 93 (Seine-Saint-Denis) and 94 (Val-de-Marne) repeatedly emerge as massive outliers across key indicators such as Social Housing Density and Single-Parent Ratio. While classical econometrics often recommends discarding such extreme observations, removing these departements is mathematically prohibited in our study: it would create topological holes in the geographic map, severing neighborhood linkages and destroying the integrity of the Queen contiguity spatial weight matrices. Because these extreme departements must be strictly retained in the dataset, the forthcoming analysis relies exclusively on a correlation metric immune to such extreme boundaries.
-
-\vspace{20pt}
-\textbf{Correlation}
-\vspace{1pt}
-
-Given the widespread rejection of normality and the strict necessity to retain geographic outliers, Spearman's rank correlation coefficient is utilized in Figure~\ref{fig:corr_matrix} as the most robust non-parametric metric to assess bivariate associations.
+\subsubsection{Correlation and variable selection}
+\label{sec:desc_corr}
 
 \begin{figure}[H]
 \centering
 \includefig[width=0.75\textwidth]{figures/fig_correlation_matrix.png}
-\caption[Spearman correlation matrix between key variables]{%
-  Spearman correlation matrix between key variables. 
-  \textit{Source: INSEE, authors' calculations.}%
+\caption[Spearman correlation matrix between candidate variables]{%
+  Spearman correlation matrix between candidate variables.
+  \textit{Source: INSEE, authors' calculations in R.}%
 }
 \label{fig:corr_matrix}
 \end{figure}
 
-While formal Variance Inflation Factor (VIF) tests will comprehensively diagnose multivariate multicollinearity during the baseline OLS estimation, visually evaluating the pairwise rank correlations against a standard safety threshold of $\rho \ge 0.70$ dictates several immediate exclusions. First, the Social Housing Rate and Social Housing Density exhibit near-perfect collinearity ($\rho = 0.99$); we retain only the Density as our continuous dependent variable. Second, the raw and logarithmic Immigrant Stocks correlate perfectly ($\rho = 1.00$); we retain solely the log-transformed variant ($\ln\mathrm{IMM}$) due to its robust handling of right-skewed outliers. Third, absolute Housing Units correlate massively with the Immigrant Stock ($\rho = 0.90$), reflecting an endogenous scale effect that would induce severe variance inflation; thus, Housing Units are dropped. Finally, the Unemployment and Poverty rates share an overlapping correlation exceeding the threshold ($\rho = 0.73$). To guarantee spatial model stability, we eliminate the Unemployment rate and rigorously preserve the Poverty rate as the singular, broader proxy for economic deprivation. Consequently, only five variables (none of which exhibit pairwise correlations reaching the 0.70 limit) are retained for the ensuing spatial econometric regressions: Social Housing Density, Single-Parent Ratio, Log Immigrant Stock, 10-year Population Change, and Poverty Rate.
+The Spearman matrix (Figure~\ref{fig:corr_matrix}) covers nine variables, but several were included in the dataset purely for exploratory or descriptive purposes and were never intended as model inputs. The social housing rate was computed to describe the phenomenon alongside the density measure; the two are near-perfectly collinear ($\rho = 0.99$) and capture the same construct - only density is retained as the continuous dependent variable. The raw immigrant stock was included to show the distributional problem motivating the log transformation; since the two forms correlate perfectly ($\rho = 1.00$) by construction, only $\ln\mathrm{IMM}$ enters the model. Housing units were collected as a contextual scale indicator to characterise departement size; the strong collinearity with the immigrant stock ($\rho = 0.90$) confirms it would add no independent information and it is excluded.
+
+Among the genuine candidate predictors, one further choice arises: the unemployment and poverty rates both proxy economic deprivation and overlap substantially ($\rho = 0.73$, above the $0.70$ collinearity threshold). As poverty is the broader and more structurally stable indicator, it is retained and unemployment dropped. VIF diagnostics confirm the absence of residual multicollinearity among the five retained variables (Appendix~\ref{app:ols_vif}, VIF $\leq 5$).
+
+\medskip
+The baseline OLS equation is:
+\begin{equation}
+\mathrm{SHD}_i = \beta_0 + \beta_1\,\mathrm{SMR}_i + \beta_2\,\ln\mathrm{IMM}_i + \beta_3\,\Delta\mathrm{Pop}_i + \beta_4\,\mathrm{Pov}_i + \varepsilon_i
+\label{eq:ols}
+\end{equation}
+where $\mathrm{SHD}$ is social housing density (units per 10\,000 inhabitants), $\mathrm{SMR}$ the solo-mother ratio, $\ln\mathrm{IMM}$ the log-transformed immigrant stock, $\Delta\mathrm{Pop}$ the 10-year population change, and $\mathrm{Pov}$ the poverty rate. Spatial extensions of this equation are presented in Section~\ref{sec:wmat}.
+
+\medskip
+Figure~\ref{fig:choropleth_all} maps the geographic distribution of all five retained variables. The visual co-clustering of social housing density, the solo-mother ratio, and the log immigrant stock in the northern corridor and \^{I}le-de-France - contrasting with the low-value South-West - provides preliminary evidence that both vulnerability indicators and supply co-vary spatially, motivating the formal autocorrelation tests conducted in Section~\ref{sec:moran}.
+
+\begin{figure}[H]
+\centering
+\includefig[width=\textwidth]{figures/fig_choropleth_all_variables.png}
+\caption[Spatial distribution of the five retained model variables]{%
+  Spatial distribution of the five retained model variables: social housing density (top-left),
+  solo-mother ratio (top-centre), immigrant stock - log scale (top-right),
+  10-year population change (bottom-left), poverty rate (bottom-centre).
+  All maps use quantile colour scales; RGF93/Lambert-93 projection.
+  \textit{Source: INSEE, authors' calculations in Rbased on IGN departement boundaries.}%
+}
+\label{fig:choropleth_all}
+\end{figure}
 
 \newpage
 
@@ -311,21 +284,26 @@ All matrices are \textbf{row-standardised} so that $Wy$ represents a weighted av
 
 \inputifexists{tables/wmat_connectivity.tex}
 
+Table~\ref{tab:wmat_stats} and Figure~\ref{fig:neighbourhood} confirm \textbf{Queen contiguity} as the primary weight matrix: a single connected graph of 474 links ($\bar{k} = 5.04$, range 2-10), symmetric by construction, linking departements that share an administrative border. KNN-3 and KNN-6 serve as distance-based sensitivity checks.
+
+
 \begin{figure}[H]
 \centering
-\includefig[width=0.48\textwidth]{figures/fig_contiguity_queen.png}
-\includefig[width=0.48\textwidth]{figures/fig_contiguity_knn.png}\\[4pt]
-\includefig[width=0.48\textwidth]{figures/fig_contiguity_knn3.png}
-\includefig[width=0.48\textwidth]{figures/fig_contiguity_knn6.png}
+\includefig[width=0.32\textwidth]{figures/fig_contiguity_queen.png}
+\includefig[width=0.32\textwidth]{figures/fig_contiguity_knn.png}\\[4pt]
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includefig[width=0.32\textwidth]{figures/fig_contiguity_knn3.png}
+\includefig[width=0.32\textwidth]{figures/fig_contiguity_knn6.png}
 \caption[Neighbourhood graphs: Queen contiguity and KNN]{%
   Neighbourhood graphs: Queen contiguity (top-left), KNN-1 reference (top-right), 
   KNN-3 (bottom-left), KNN-6 (bottom-right). 
-  \textit{Source: authors' calculations based on IGN departement boundaries.}%
+  \textit{Source: authors' calculations in R based on IGN departement boundaries.}%
 }
 \label{fig:neighbourhood}
 \end{figure}
-
-Table~\ref{tab:wmat_stats} and Figure~\ref{fig:neighbourhood} confirm \textbf{Queen contiguity} as the primary weight matrix: a single connected graph of 474 links ($\bar{k} = 5.04$, range 2--10), symmetric by construction, linking departements that share an administrative border. KNN-3 and KNN-6 serve as distance-based sensitivity checks.
 
 
 
@@ -339,26 +317,26 @@ y_i = \mathbf{x}_i'\beta + \varepsilon_i, \quad \varepsilon \sim \mathcal{N}(0,\
 \end{equation}
 Spatial dependence in residuals from OLS signals model misspecification and is diagnosed via Lagrange multiplier tests.
 
-\paragraph{SAR -- Spatial Autoregressive Model.}
+\paragraph{SAR - Spatial Autoregressive Model.}
 \begin{equation}
 y_i = \rho \sum_j w_{ij}\,y_j + \mathbf{x}_i'\beta + \varepsilon_i
 \end{equation}
 The scalar $\rho$ captures endogenous spatial lag: the social housing density of unit $i$ is partially determined by a weighted average of its neighbours' density (H3).
 
-\paragraph{SEM -- Spatial Error Model.}
+\paragraph{SEM - Spatial Error Model.}
 \begin{equation}
 y_i = \mathbf{x}_i'\beta + u_i, \qquad u_i = \lambda \sum_j w_{ij}\,u_j + \varepsilon_i
 \end{equation}
 Spatial dependence confined to the error term ($\lambda$) indicates omitted spatially correlated confounders rather than true spillovers.
 
-\paragraph{SLX -- Spatial Lag of X Model.}
+\paragraph{SLX - Spatial Lag of X Model.}
 \begin{equation}
 y_i = \mathbf{x}_i'\beta + \sum_j w_{ij}\,\mathbf{x}_j'\theta + \varepsilon_i
 \label{eq:slx}
 \end{equation}
-The SLX extends OLS by adding spatially weighted neighbours' covariates ($W\mathbf{X}$) while imposing $\rho = 0$. Direct and indirect effects equal $\hat{\beta}_k$ and $\hat{\theta}_k$ exactly -- no simulation is needed. The SLX is the $\rho = 0$ restriction of the SDM and can be tested against it via a likelihood ratio test.
+The SLX extends OLS by adding spatially weighted neighbours' covariates ($W\mathbf{X}$) while imposing $\rho = 0$. Direct and indirect effects equal $\hat{\beta}_k$ and $\hat{\theta}_k$ exactly - no simulation is needed. The SLX is the $\rho = 0$ restriction of the SDM and can be tested against it via a likelihood ratio test.
 
-\paragraph{SDM -- Spatial Durbin Model (preferred specification).}
+\paragraph{SDM - Spatial Durbin Model (preferred specification).}
 
 The research question motivates the SDM as the primary model. It allows simultaneous testing of all three hypotheses within a single framework:
 
@@ -401,71 +379,43 @@ As Figure~\ref{fig:layout_main} illustrates, the northern corridor and \^{I}le-d
 \subsection{Local Indicators of Spatial Association (LISA)}
 \label{sec:lisa}
 
-While global Moran's $I$ confirms the overall presence of spatial autocorrelation, it does not identify where these clusters are located. Local Indicators of Spatial Association (LISA) allow us to decompose the global statistic and geometrically map statistically significant local clusters. For each matrix (Queen, KNN-1, KNN-3, KNN-6), we present the LISA Cluster Map identifying the specific spatial structures (high-high, low-low, high-low, low-high) to detect significant clusterings of similar values, alongside the LISA Significance Map, and the comprehensive Moran scatter plot.
-
-\newpage
 \textbf{Queen contiguity}
-\vspace{1pt}
-
 \begin{figure}[H]
 \centering
-\includefig[width=\textwidth]{figures/lisa_wqueen.png}
-\caption[LISA Analysis: Queen contiguity]{%
-  LISA Analysis: Queen contiguity. Top-left: LISA Cluster Map. Top-right: LISA Significance Map. Bottom: Moran Scatter Plot.
-  \textit{Source: authors' calculations.}%
+\includefig[width=0.4\textwidth]{figures/dept94_cluster_q.png}
+\includefig[width=0.4\textwidth]{figures/dept94_sign_q.png}\\[10pt]
+\includefig[width=0.35\textwidth]{figures/fig_moran_queen.png}
+\caption[LISA analysis: Queen contiguity]{%
+  LISA analysis, Queen contiguity.
+  Left: LISA cluster map. Right: significance map.
+  Bottom: Moran scatter plot.
+  \textit{Source: authors' calculations in GeoDa and R.}%
 }
 \label{fig:lisa_queen}
 \end{figure}
+Global Moran's $I$ tells us that clustering exists, but not where. LISA statistics assign a local autocorrelation score to each departement and test whether it is significant. 
 
-An in-depth analysis of these three metrics reveals a highly polarized geography of social housing provision. The Moran scatter plot formally quantifies the strong positive spatial autocorrelation (Moran's $I = 0.600$), with the vast majority of departements falling into Quadrant 1 (positive spatial autocorrelation and ``high-high'' structure) or Quadrant 3 (positive spatial autocorrelation and ``low-low'' structure). The LISA Cluster Map geographically maps this dependence into two distinct, highly significant spatial clusters: a dense ``high-high'' cluster of 10 departements concentrated in the northern corridor and \^{I}le-de-France, and a broad ``low-low'' cluster of 16 departements spanning the South-West. This clearly highlights significant clusterings of similar values that strongly deviate from a random spatial distribution. Finally, the LISA Significance Map confirms the outstanding statistical robustness of these geographic cores, reaching high significance ($p \le 0.001$). The exceptional rarity of spatial outliers---limited to only two High-Low departements exhibiting local negative spatial autocorrelation---definitively proves that French social housing is governed by sweeping macro-regional divides.
+Under Queen contiguity, the LISA maps show a clear north--south split. Twelve departements in the Paris region and northern corridor form a high-high cluster: they have high social housing density and so do their neighbours. Eighteen departements in the South-West form a low-low cluster with the opposite pattern. Together these two groups account for 34 significant associations, 11 of which are significant at the $p \leq 0.001$ level. Spatial outliers are few (3 high-low, 1 low-high), confirming that the overall picture is one of large, coherent regional blocs rather than scattered exceptions. The Moran scatter plot reinforces this: most departements lie in the top-right (high-high) or bottom-left (low-low) quadrants, producing the strong positive slope that corresponds to $I = 0.596$.
 
-\newpage
-\textbf{$k$-nearest neighbours (KNN-1)}
-\vspace{1pt}
-
-\begin{figure}[H]
-\centering
-\includefig[width=\textwidth]{figures/lisa_wknn1.png}
-\caption[LISA Analysis: KNN-1]{%
-  LISA Analysis: KNN-1. Top-left: LISA Cluster Map. Top-right: LISA Significance Map. Bottom: Moran Scatter Plot.
-  \textit{Source: authors' calculations.}%
-}
-\label{fig:lisa_knn1}
-\end{figure}
-
-Shifting to the highly restrictive $k$-nearest neighbours (KNN-1) specification---which connects each departement solely to its absolute closest centroid---the spatial landscape predictably fragments. While the scatter plot yields an inflated global autocorrelation index (Moran's $I = 0.768$), the local cluster mapping dramatically contracts. The once-broad ``high-high'' structure (Quadrant 1) shrinks to merely 4 departements confined strictly to the \^{I}le-de-France core, and the ``low-low'' structure (Quadrant 3) splinters into just 5 departements scattered across the South-West. Correspondingly, statistical significance plummets: no clusters achieve a $p \le 0.01$ threshold, with all 9 clustered units clinging barely to a marginal $p = 0.05$ limitation under simulated random distributions. Furthermore, this specification artificially generates 5 completely disconnected ``neighborless'' observations. In the context of social housing, this proves that supply strategies do not operate on strict one-to-one local dependence between the two closest jurisdictions, exposing KNN-1 as structurally inadequate for mapping such regional autocorrelations.
-
-\newpage
-\textbf{$k$-nearest neighbours (KNN-3)}
-\vspace{1pt}
+\vspace{3pt}
+\textbf{$k$-nearest neighbours ($k = 3$)}
 
 \begin{figure}[H]
 \centering
-\includefig[width=\textwidth]{figures/lisa_wknn3.png}
-\caption[LISA Analysis: KNN-3]{%
-  LISA Analysis: KNN-3. Top-left: LISA Cluster Map. Top-right: LISA Significance Map. Bottom: Moran Scatter Plot.
-  \textit{Source: authors' calculations.}%
+\includefig[width=0.4\textwidth]{figures/dept94_cluster_knn3.png}
+\includefig[width=0.4\textwidth]{figures/dept94_sign_knn3.png}\\[10pt]
+\includefig[width=0.35\textwidth]{figures/fig_moran_knn.png}
+\caption[LISA analysis: KNN-3]{%
+  LISA analysis, $k$-nearest neighbours ($k = 3$).
+  Left: LISA cluster map. Right: significance map.
+  Bottom: Moran scatter plot.
+  \textit{Source: authors' calculations in GeoDa and R.}%
 }
 \label{fig:lisa_knn3}
 \end{figure}
 
-By broadening the spatial lens to exactly $k=3$ nearest neighbours, the analysis effectively smooths the localized noise of KNN-1 and begins to approximate the organic administrative boundaries observed under Queen contiguity. The global autocorrelation index stabilizes at Moran's $I = 0.722$, depicted by a well-distributed positive linear fit in the diagram. The LISA Cluster Map demonstrates a robust recovery of significant spatial associations: the positive spatial autocorrelation ``high-high'' cluster robustly expands to 12 departements consolidating the northern corridor and \^{I}le-de-France, while the ``low-low'' cluster coalesces into 9 departements across the South-West. This specification restores the statistical confidence that was visually absent in KNN-1, with 5 departements in the core of the northern cluster attaining peak significance ($p \le 0.001$) against the null hypothesis of spatial randomness. The virtual disappearance of spatial outliers (save for a single Quadrant 2 High-Low unit exhibiting negative autocorrelation) confirms that social housing dynamics exhibit strong regional scale effects.
+Switching to KNN-3 gives broadly the same picture. The higher Moran's $I$ ($= 0.728$) reflects the fact that distance-based neighbours are more similar to each other than border-sharing ones. The high-high cluster grows slightly to 14 departements, picking up some outer Parisian areas, while the low-low cluster tightens to 13 departements in the South-West. Spatial outliers are down to just 2. The two maps agree closely despite using a different weight matrix, which confirms that the spatial patterns are real. This robustness supports the choice of Queen contiguity as the primary matrix, since it maps directly onto the administrative boundaries that govern social housing allocation in France.
 
-\newpage
-\textbf{$k$-nearest neighbours (KNN-6)}
-\vspace{1pt}
-
-\begin{figure}[H]
-\centering
-\includefig[width=\textwidth]{figures/lisa_wknn6.png}
-\caption[LISA Analysis: KNN-6]{%
-  LISA Analysis: KNN-6. Top-left: LISA Cluster Map. Top-right: LISA Significance Map. Bottom: Moran Scatter Plot.
-  \textit{Source: authors' calculations.}%
-}
-\label{fig:lisa_knn6}
-\end{figure}
-
-Extending the neighbourhood weights to the $k=6$ nearest neighbours provides a macro-regional smoothing effect that strongly amplifies local significance while slightly dampening the global autocorrelation magnitude (Moran's $I = 0.616$) toward levels seen under Queen contiguity. By aggressively averaging out local variations, this broad spatial lens causes the identified groupings of similar values to balloon in size: Quadrant 1 (``high-high'') expands to 14 departements encompassing the broader Parisian basin, while Quadrant 3 (``low-low'') swells dramatically to 20 departements, dominating the South-West and capturing isolated coastal territories. Crucially, this macro-smoothing yields an explosion of statistical robustness under simulated spatial permutations. A remarkable 15 departements now anchor the clusters at the maximum $p \le 0.001$ significance threshold, demonstrating that social housing under-supply and over-supply represent deeply entrenched, large-scale spatial regimes rather than statistically random locations. Only two High-Low outliers (negative spatial autocorrelation) remain, further confirming the structural rigidity of these broad territorial divides.
 
 \subsection{Model selection}
 
@@ -479,7 +429,7 @@ The baseline OLS (equation~\ref{eq:ols}) is reported in Appendix~\ref{app:ols_vi
 \caption[Spatial distribution of OLS residuals]{%
   Spatial distribution of OLS residuals. Positive values (red) indicate 
   under-prediction; negative values (blue) indicate over-prediction. 
-  \textit{Source: authors' calculations based on IGN departement boundaries.}%
+  \textit{Source: authors' calculations in R, based on IGN departement boundaries.}%
 }
 \label{fig:ols_resid}
 \end{figure}
@@ -495,7 +445,7 @@ Table~\ref{tab:moran_resid} confirms significant residual autocorrelation under 
 
 \inputifexists{tables/lm_tests.tex}
 
-Table~\ref{tab:lm_tests} reports the LM diagnostics. Standard tests reject no-spatial-dependence under both matrices ($p < 0.01$). The robust LM tests point to the SAR under Queen (RLM-lag: $\chi^2 = 6.90$, $p = 0.01$; RLM-err: $p = 0.43$) and to the SEM under KNN-3 (RLM-err: $\chi^2 = 3.93$, $p = 0.05$; RLM-lag: $p = 0.11$). This matrix-dependent divergence --- endogenous supply-to-supply feedback dominates along shared administrative borders, while spatially correlated unobservables take over under distance-based neighbourhood definitions --- indicates that both channels plausibly operate simultaneously, making the SDM, which nests both the lagged outcome and spatially lagged covariates, the natural general starting specification.
+Table~\ref{tab:lm_tests} reports the LM diagnostics. Standard tests reject no-spatial-dependence under both matrices ($p < 0.01$). The robust LM tests point to the SAR under Queen (RLM-lag: $\chi^2 = 6.90$, $p = 0.01$; RLM-err: $p = 0.43$) and to the SEM under KNN-3 (RLM-err: $\chi^2 = 3.93$, $p = 0.05$; RLM-lag: $p = 0.11$). This matrix-dependent divergence - endogenous supply-to-supply feedback dominates along shared administrative borders, while spatially correlated unobservables take over under distance-based neighbourhood definitions - indicates that both channels plausibly operate simultaneously, making the SDM, which nests both the lagged outcome and spatially lagged covariates, the natural general starting specification.
 
 
 \subsubsection{SAR and SEM estimation results}
@@ -522,7 +472,7 @@ The procedure proceeds in three steps (Table~\ref{tab:lr_tests}): (i)~dropping $
 The AIC ranking (Table~\ref{tab:aic}) selects \textbf{SDM Queen} as the best-fitting combination. This is consistent with the institutional logic: social housing administration follows administrative borders rather than straight-line distances.
 
 \paragraph{SDM coefficient interpretation (Queen).}
-Under the preferred specification (Table~\ref{tab:sdm_compact}), the spatial autoregressive parameter and the solo-mother ratio remain highly significant. The log-transformed immigrant stock, $\ln\mathrm{IMM}$, is also significant ($\hat{\beta} = 61.9$, $p < 0.05$), confirming that departements with larger immigrant populations provide more social housing, even after controlling for spatial structure. Its spatially lagged counterpart $W\!\times\!\ln\mathrm{IMM}$ is, however, not significant ($\hat{\theta} \approx 4.6$), indicating no exogenous cross-border spillover from neighbours' immigrant stock. Among the other spatially lagged covariates, $W\!\times\!\Delta\mathrm{Pop}$ is significant ($\hat{\theta} = -15.65$, $p < 0.05$, Queen): departements surrounded by fast-growing neighbours register lower social housing density, possibly because rapid demographic expansion in adjacent areas inflates private-market pressure faster than the regulated social sector can respond. The spatial autoregressive parameter $\hat{\rho} = 0.546$ (Wald $= 27.67$, $p < 0.001$; Table~\ref{tab:sdm_slx}) implies that a 100-unit increase in the average social housing density of a departement's neighbours is associated with roughly 55 additional units locally --- consistent with inter-jurisdictional coordination in allocation decisions or shared regional housing-market dynamics. The impact decomposition below provides the full marginal-effect reading.
+Under the preferred specification (Table~\ref{tab:sdm_compact}), the spatial autoregressive parameter and the solo-mother ratio remain highly significant. The log-transformed immigrant stock, $\ln\mathrm{IMM}$, is also significant ($\hat{\beta} = 61.9$, $p < 0.05$), confirming that departements with larger immigrant populations provide more social housing, even after controlling for spatial structure. Its spatially lagged counterpart $W\!\times\!\ln\mathrm{IMM}$ is, however, not significant ($\hat{\theta} \approx 4.6$), indicating no exogenous cross-border spillover from neighbours' immigrant stock. Among the other spatially lagged covariates, $W\!\times\!\Delta\mathrm{Pop}$ is significant ($\hat{\theta} = -15.65$, $p < 0.05$, Queen): departements surrounded by fast-growing neighbours register lower social housing density, possibly because rapid demographic expansion in adjacent areas inflates private-market pressure faster than the regulated social sector can respond. The spatial autoregressive parameter $\hat{\rho} = 0.546$ (Wald $= 27.67$, $p < 0.001$; Table~\ref{tab:sdm_slx}) implies that a 100-unit increase in the average social housing density of a departement's neighbours is associated with roughly 55 additional units locally - consistent with inter-jurisdictional coordination in allocation decisions or shared regional housing-market dynamics. The impact decomposition below provides the full marginal-effect reading.
 
 \begin{figure}[H]
 \centering
@@ -530,17 +480,17 @@ Under the preferred specification (Table~\ref{tab:sdm_compact}), the spatial aut
 \caption[Residual distribution of the preferred SDM (Queen)]{%
   Residual distribution of the preferred SDM (Queen). Residuals are approximately 
   symmetric and centred on zero, confirming model adequacy. 
-  \textit{Source: authors' calculations.}%
+  \textit{Source: authors' calculations in R.}%
 }
 \label{fig:sdm_resid}
 \end{figure}
 
-The approximately symmetric, near-zero-centred residual distribution (Figure~\ref{fig:sdm_resid}) confirms that the SDM adequately captures the spatial structure of social housing provision: no systematic over- or under-prediction pattern remains across the territory, and no single departement --- such as an isolated metropolitan pole or a border territory --- appears to exert undue leverage on the fit.
+The approximately symmetric, near-zero-centred residual distribution (Figure~\ref{fig:sdm_resid}) confirms that the SDM adequately captures the spatial structure of social housing provision: no systematic over- or under-prediction pattern remains across the territory, and no single departement - such as an isolated metropolitan pole or a border territory - appears to exert undue leverage on the fit.
 
 \subsection{Model interpretation: SDM Queen impacts}
 \label{sec:impacts}
 
-Table~\ref{tab:impacts_combined} presents the impact decomposition for the preferred specification --- the SDM under Queen contiguity. Direct, indirect, and total effects are obtained via 1\,000 Monte Carlo draws from the asymptotic parameter distribution. In the SDM, the raw coefficients $\hat{\beta}$ and $\hat{\theta}$ do not directly equal marginal effects because spatial feedback loops redistribute every shock across the network; the impact decomposition accounts for this.
+Table~\ref{tab:impacts_combined} presents the impact decomposition for the preferred specification - the SDM under Queen contiguity. Direct, indirect, and total effects are obtained via 1\,000 Monte Carlo draws from the asymptotic parameter distribution. In the SDM, the raw coefficients $\hat{\beta}$ and $\hat{\theta}$ do not directly equal marginal effects because spatial feedback loops redistribute every shock across the network; the impact decomposition accounts for this.
 
 \inputifexists{tables/sdm_slx_impacts.tex}
 
@@ -581,7 +531,7 @@ The SLX ($\rho = 0$ restriction of the SDM) was also estimated under both weight
 %==================================================
 \section{Conclusion}
 
-This paper investigated whether the density of social housing across French departements is shaped solely by local demographic pressures or also by interactions with neighbouring jurisdictions. Using a Spatial Durbin Model under Queen contiguity -- selected via the \citet{elhorst2010} general-to-specific procedure and confirmed by AIC -- we tested three hypotheses.
+This paper investigated whether the density of social housing across French departements is shaped solely by local demographic pressures or also by interactions with neighbouring jurisdictions. Using a Spatial Durbin Model under Queen contiguity - selected via the \citet{elhorst2010} general-to-specific procedure and confirmed by AIC - we tested three hypotheses.
 
 \textbf{H1} is supported: the solo-mother ratio is the strongest local predictor of social housing density, and the log-transformed immigrant stock is also significant ($p < 0.05$) across all spatial specifications. The log transformation corrects the heavy right-skew of the raw immigrant variable and yields a stable, positive association: departements with larger immigrant populations provide more social housing, consistent with a local-need channel.
 
@@ -590,49 +540,16 @@ This paper investigated whether the density of social housing across French depa
 \textbf{H3} is accepted: the spatial autoregressive coefficient is highly significant ($p < 0.01$), indicating substantial interdependence in social housing provision between adjacent departements. This outcome-to-outcome link is the most robust spatial channel in the data and persists across weight matrix specifications.
 
 \paragraph{Policy implications.}
-Social housing planning at the departement level cannot be treated in isolation. The significant spatial lag suggests that supply decisions in one jurisdiction are associated with --- and potentially influence --- supply in its neighbours. Coordinated regional approaches to social housing allocation are likely to be more effective than fragmented departement-by-departement planning.
+Social housing planning at the departement level cannot be treated in isolation. The significant spatial lag suggests that supply decisions in one jurisdiction are associated with - and potentially influence - supply in its neighbours. Coordinated regional approaches to social housing allocation are likely to be more effective than fragmented departement-by-departement planning.
 
 \paragraph{Limitations.}
-Several limitations should be acknowledged. First, the analysis is cross-sectional ($n = 94$): no causal claims can be made, and reverse causality -- social housing attracting vulnerable populations rather than responding to them -- cannot be ruled out. Second, the small sample constrains the degrees of freedom available for the SDM's eight regressors plus spatial lag, though Monte Carlo inference on impact measures partially addresses finite-sample concerns. Third, the two-year gap between covariates (2022) and the dependent variable (2024) reduces simultaneity but may introduce measurement error if social structure shifted over that period. Finally, the analysis does not account for unobserved political or historical determinants of housing stock, which likely vary across territories.
+First, the analysis is cross-sectional ($n = 94$): no causal claims can be made, and reverse causality - social housing attracting vulnerable populations rather than responding to them - cannot be ruled out. Second, the small sample constrains the degrees of freedom available for the SDM's eight regressors plus spatial lag, though Monte Carlo inference on impact measures partially addresses finite-sample concerns. Third, the two-year gap between covariates (2022) and the dependent variable (2024) reduces simultaneity but may introduce measurement error if social structure shifted over that period. Finally, the analysis does not account for unobserved political or historical determinants of housing stock, which likely vary across territories.
 
 %==================================================
 % ANNEXES
 %==================================================
-\newpage
 \appendix
 \section{Appendix}
-
-\subsection{Degree distribution of the Queen weight matrix}
-\label{app:nb_card_queen}
-
-\begin{figure}[H]
-\centering
-\includefig[width=0.75\textwidth]{figures/fig_nb_card_queen.png}
-\caption[Degree distribution of the Queen contiguity matrix]{%
-  Degree distribution of the Queen contiguity matrix. Peripheral departements have 
-  fewer neighbours; interior crossroads departements have more. 
-  \textit{Source: authors' calculations.}%
-}
-\label{fig:nb_card_queen}
-\end{figure}
-
-\subsection{OLS benchmark and multicollinearity}
-\label{app:ols_vif}
-
-\inputifexists{tables/ols_results.tex}
-
-\inputifexists{tables/vif.tex}
-
-All VIF values remain below~5 (highest: $\mathrm{SMR}$ at 4.79). The unemployment rate was excluded \emph{a priori} due to high correlation with the poverty rate ($r > 0.5$, Figure~\ref{fig:corr_matrix}).
-
-\subsection{Full estimation tables}
-\label{app:full}
-
-Complete estimation output with standard errors and fit measures for all spatial specifications.
-
-\inputifexists{tables/sar_sem_models.tex}
-
-\inputifexists{tables/sdm_slx_comparison.tex}
 
 \subsection{Variable distributions}
 \label{app:var_dist}
@@ -644,7 +561,7 @@ Complete estimation output with standard errors and fit measures for all spatial
   Distribution of the five main equation variables: social housing density (row~1), 
   solo-mother ratio (row~2), immigrant stock in levels (row~3), population change 
   over 10 years (row~4), and poverty rate (row~5). Histogram (left) and box-plot 
-  with outlier labels (right) in each row. \textit{Source: INSEE, authors' calculations.}%
+  with outlier labels (right) in each row. \textit{Source: INSEE, authors' calculations in R.}%
 }
 \label{fig:hist_boxplot_focal}
 \end{figure}
@@ -653,23 +570,74 @@ Complete estimation output with standard errors and fit measures for all spatial
 
 \begin{figure}[H]
 \centering
-\includefig[width=0.95\textwidth]{figures_flo/distri_social_housing_density_single_parent_ratio.png}
 \includefig[width=0.95\textwidth]{figures_flo/distri_immigrant_stock_log_immigrant_stock.png}
-\end{figure}
-
-\begin{figure}[H]
-\centering
 \includefig[width=0.95\textwidth]{figures_flo/distri_housing_units_population_change_10yrs_pct.png}
 \includefig[width=0.95\textwidth]{figures_flo/distri_unemployment_rate_pct_poverty_rate_pct.png}
+\includefig[width=0.95\textwidth]{figures_flo/distri_social_housing_rate_pct.png}
+\caption[Distribution of the other descriptive variables]{%
+  Distribution of the other descriptive variables. \textit{Source: INSEE, authors' calculations.}%
+}
 \end{figure}
 
+\subsection{Normality tests and outlier detection}
+\label{app:norm_outliers}
+
+\inputifexists{tables/normality.tex}
+
+\inputifexists{tables/outliers.tex}
+
+\subsection{Degree distribution of the Queen weight matrix}
+\label{app:nb_card_queen}
 
 \begin{figure}[H]
 \centering
-\includefig[width=0.95\textwidth]{figures_flo/distri_social_housing_rate_pct.png}
+\includefig[width=0.75\textwidth]{figures/fig_nb_card_queen.png}
+\caption[Degree distribution of the Queen contiguity matrix]{%
+  Degree distribution of the Queen contiguity matrix. Peripheral departements have 
+  fewer neighbours; interior crossroads departements have more. 
+  \textit{Source: authors' calculations in R.}%
+}
+\label{fig:nb_card_queen}
 \end{figure}
 
+\subsection{GeoDa commands for LISA analysis}
+\label{app:geoda}
+
+\subsubsection*{Data preparation}
+
+The two Corsican departements (2A and 2B) were removed in QGIS prior to import to avoid isolated nodes in the spatial weight matrices. The resulting mainland shapefile was merged with the social housing dataset inside GeoDa to produce the working file.
+
+\subsubsection*{Spatial weight matrices}
+
+Both matrices were created via \textit{Tools $\to$ Weights Manager $\to$ Create}, using \texttt{INSEE\_DEP} as the identifier variable.
+
+\begin{itemize}
+  \item \textbf{Queen contiguity.} Select \textit{Queen Contiguity}, order~1. Save as \texttt{WQueen}.
+  \item \textbf{KNN-3.} Select the \textit{Distance Weight} tab, then \textit{K-Nearest Neighbors} with $k = 3$. Save as \texttt{WKNN3}.
+\end{itemize}
+
+The connectivity graph (\textit{Connectivity Graph} button) was used to verify that each matrix forms a connected graph.
+
+\subsubsection*{LISA analysis}
+
+The LISA maps were produced twice --- once per matrix --- via \textit{Space $\to$ Univariate Local Moran's I}, selecting social housing density as the variable of interest and all three graphical outputs (cluster map, significance map, Moran scatter plot).
+
 \newpage
+\subsection{OLS benchmark and multicollinearity}
+\label{app:ols_vif}
+\inputifexists{tables/vif.tex}
+
+\inputifexists{tables/ols_results.tex}
+
+\newpage
+\subsection{Full estimation tables}
+\label{app:full}
+
+Complete estimation output with standard errors and fit measures for all spatial specifications.
+
+\inputifexists{tables/sar_sem_models.tex}
+
+\inputifexists{tables/sdm_slx_comparison.tex}
 
 \subsection{Residual distributions of non-retained models}
 \label{app:residuals}
@@ -680,7 +648,7 @@ Complete estimation output with standard errors and fit measures for all spatial
 \includefig[width=0.55\textwidth]{figures/fig_slx_residuals.png}
 \caption[Residual distributions of non-retained specifications]{%
   Residual distributions of non-retained specifications. Top: SEM KNN-3 (left) and 
-  SAR Queen (right). Bottom: SLX KNN-3. \textit{Source: authors' calculations.}%
+  SAR Queen (right). Bottom: SLX KNN-3. \textit{Source: authors' calculations in R.}%
 }
 \label{fig:resid_nonretained}
 \end{figure}

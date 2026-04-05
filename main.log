@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.22)  27 MAR 2026 19:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.22)  5 APR 2026 12:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -236,14 +236,6 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \@temptokenb=\toks28
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
-
-
-Package hyphenat Warning: *******************************
-(hyphenat)                * You have used the htt option.
-(hyphenat)                * You are likely to get many Font Warning messages.
-(hyphenat)                * These can usually be ignored.
-(hyphenat)                *******************************.
-
 \langwohyphens=\language23
 LaTeX Info: Redefining \_ on input line 43.
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -505,142 +497,17 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/m/scsl' undefined
-(Font)              using `T1/cmtt/m/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/b/n' undefined
-(Font)              using `T1/cmtt/m/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/b/it' undefined
-(Font)              using `T1/cmtt/b/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/b/sl' undefined
-(Font)              using `T1/cmtt/b/it' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/b/scit' undefined
-(Font)              using `T1/cmtt/b/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/b/sc' undefined
-(Font)              using `T1/cmtt/b/n' instead on input line 55.
-
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 55.
-LaTeX Font Info:    Font shape `T1/cmtt/bx/it' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/it' tried instead on input line 55.
-
-LaTeX Font Warning: Font shape `T1/cmtt/bx/sl' undefined
-(Font)              using `T1/cmtt/bx/it' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/bx/scit' undefined
-(Font)              using `T1/cmtt/bx/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/bx/sc' undefined
-(Font)              using `T1/cmtt/bx/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/sbx/sc' undefined
-(Font)              using `T1/cmtt/sb/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/sb/n' undefined
-(Font)              using `T1/cmtt/m/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/sb/it' undefined
-(Font)              using `T1/cmtt/sb/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/sb/sl' undefined
-(Font)              using `T1/cmtt/sb/it' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/sb/scit' undefined
-(Font)              using `T1/cmtt/sb/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/sb/sc' undefined
-(Font)              using `T1/cmtt/sb/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/sbc/sc' undefined
-(Font)              using `T1/cmtt/c/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/c/n' undefined
-(Font)              using `T1/cmtt/m/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/c/it' undefined
-(Font)              using `T1/cmtt/c/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/c/sl' undefined
-(Font)              using `T1/cmtt/c/it' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/c/scit' undefined
-(Font)              using `T1/cmtt/c/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/c/sc' undefined
-(Font)              using `T1/cmtt/c/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/lc/sc' undefined
-(Font)              using `T1/cmtt/l/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/l/n' undefined
-(Font)              using `T1/cmtt/m/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/l/it' undefined
-(Font)              using `T1/cmtt/l/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/l/sl' undefined
-(Font)              using `T1/cmtt/l/it' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/l/scit' undefined
-(Font)              using `T1/cmtt/l/sc' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/l/sc' undefined
-(Font)              using `T1/cmtt/l/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/m/ui' undefined
-(Font)              using `T1/cmtt/m/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/bx/ui' undefined
-(Font)              using `T1/cmtt/bx/n' instead on input line 55.
-
-
-LaTeX Font Warning: Font shape `T1/cmtt/m/In' undefined
-(Font)              using `T1/cmtt/m/n' instead on input line 55.
-
 Package hyperref Info: Link coloring ON on input line 55.
-(./main.out) (./main.out)
+ (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-<iae_logo.png, id=136, 1606.0pt x 339.2675pt>
+<iae_logo.png, id=152, 1606.0pt x 339.2675pt>
 File: iae_logo.png Graphic file (type png)
 <use iae_logo.png>
 Package pdftex.def Info: iae_logo.png  used on input line 72.
 (pdftex.def)             Requested size: 202.02379pt x 42.67912pt.
-<nu_logo.png, id=137, 1606.0pt x 411.5375pt>
+<nu_logo.png, id=153, 1606.0pt x 411.5375pt>
 File: nu_logo.png Graphic file (type png)
 <use nu_logo.png>
 Package pdftex.def Info: nu_logo.png  used on input line 77.
@@ -649,230 +516,239 @@ Package pdftex.def Info: nu_logo.png  used on input line 77.
 
 [1
 
-{/usr/local/texlive/2025basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./iae_logo.png> <./nu_logo.png>] (./main.toc)
-\tf@toc=\write4
-\openout4 = `main.toc'.
-
-
+{/usr/local/texlive/2025basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./iae_logo.png> <./nu_logo.png>] (./main.toc
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.110 \newpage
-               [1] (./main.lof
-Overfull \hbox (7.44972pt too wide) in paragraph at lines 1--1
- \T1/cmr/m/n/12 out. Choro-pleth in quan-tile clas-si-fi-ca-tion; RGF93/Lambert-93 (EPSG:2154). 
- []
+l.53 ...ull estimation tables}{29}{subsection.A.6}
+                                                  % [1])
+\tf@toc=\write4
+\openout4 = `main.toc'.
 
-)
+
+
+[2] (./main.lof)
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
- (./main.lot
-
-[2])
+ (./main.lot)
 \tf@lot=\write6
 \openout6 = `main.lot'.
 
 
 
 [3]
-Overfull \hbox (15.6118pt too wide) in paragraph at lines 146--158
- [] 
- []
-
-
 
 [4]
-<qgis/layout_v1.pdf, id=317, 903.375pt x 616.3025pt>
+
+[5]
+<qgis/layout_v1.pdf, id=324, 903.375pt x 616.3025pt>
 File: qgis/layout_v1.pdf Graphic file (type pdf)
 <use qgis/layout_v1.pdf>
-Package pdftex.def Info: qgis/layout_v1.pdf  used on input line 186.
+Package pdftex.def Info: qgis/layout_v1.pdf  used on input line 185.
 (pdftex.def)             Requested size: 455.24411pt x 310.58612pt.
 
 
-[5]
-<figures/fig_choropleth_all_variables.png, id=325, 1011.78pt x 650.43pt>
-File: figures/fig_choropleth_all_variables.png Graphic file (type png)
-<use figures/fig_choropleth_all_variables.png>
-Package pdftex.def Info: figures/fig_choropleth_all_variables.png  used on input line 208.
-(pdftex.def)             Requested size: 455.24411pt x 292.66101pt.
+[6 <./qgis/layout_v1.pdf>] (./tables/descriptive_stats.tex)
 
-
-[6 <./qgis/layout_v1.pdf>]
-
-[7 <./figures/fig_choropleth_all_variables.png>] (./tables/descriptive_stats.tex
-Overfull \hbox (67.25813pt too wide) in paragraph at lines 7--22
- [][] 
- []
-
-)
-<figures/fig_correlation_matrix.png, id=448, 1204.5pt x 1003.75pt>
+[7]
+<figures/fig_correlation_matrix.png, id=453, 1204.5pt x 1003.75pt>
 File: figures/fig_correlation_matrix.png Graphic file (type png)
 <use figures/fig_correlation_matrix.png>
-Package pdftex.def Info: figures/fig_correlation_matrix.png  used on input line 224.
+Package pdftex.def Info: figures/fig_correlation_matrix.png  used on input line 221.
 (pdftex.def)             Requested size: 341.43307pt x 284.52481pt.
 
 
 [8 <./figures/fig_correlation_matrix.png>]
-Overfull \hbox (0.43576pt too wide) in paragraph at lines 247--248
-\T1/cmr/m/n/12 one bound-ary point (edge or cor-ner). This sym-met-ric ma-trix cap-tures in-ter-ac-tions through
- []
+<figures/fig_choropleth_all_variables.png, id=465, 1011.78pt x 650.43pt>
+File: figures/fig_choropleth_all_variables.png Graphic file (type png)
+<use figures/fig_choropleth_all_variables.png>
+Package pdftex.def Info: figures/fig_choropleth_all_variables.png  used on input line 246.
+(pdftex.def)             Requested size: 455.24411pt x 292.66101pt.
 
-(./tables/wmat_connectivity.tex)
-<figures/fig_contiguity_queen.png, id=456, 578.16pt x 505.89pt>
+
+[9 <./figures/fig_choropleth_all_variables.png>] (./tables/wmat_connectivity.tex)
+<figures/fig_contiguity_queen.png, id=475, 578.16pt x 505.89pt>
 File: figures/fig_contiguity_queen.png Graphic file (type png)
 <use figures/fig_contiguity_queen.png>
-Package pdftex.def Info: figures/fig_contiguity_queen.png  used on input line 260.
-(pdftex.def)             Requested size: 218.51521pt x 191.19809pt.
-<figures/fig_contiguity_knn.png, id=457, 578.16pt x 505.89pt>
+Package pdftex.def Info: figures/fig_contiguity_queen.png  used on input line 292.
+(pdftex.def)             Requested size: 145.68144pt x 127.46796pt.
+<figures/fig_contiguity_knn.png, id=476, 578.16pt x 505.89pt>
 File: figures/fig_contiguity_knn.png Graphic file (type png)
 <use figures/fig_contiguity_knn.png>
-Package pdftex.def Info: figures/fig_contiguity_knn.png  used on input line 261.
-(pdftex.def)             Requested size: 218.51521pt x 191.19809pt.
-<figures/fig_contiguity_knn3.png, id=458, 578.16pt x 505.89pt>
+Package pdftex.def Info: figures/fig_contiguity_knn.png  used on input line 293.
+(pdftex.def)             Requested size: 145.68144pt x 127.46796pt.
+
+
+[10]
+<figures/fig_contiguity_knn3.png, id=486, 578.16pt x 505.89pt>
 File: figures/fig_contiguity_knn3.png Graphic file (type png)
 <use figures/fig_contiguity_knn3.png>
-Package pdftex.def Info: figures/fig_contiguity_knn3.png  used on input line 262.
-(pdftex.def)             Requested size: 218.51521pt x 191.19809pt.
-<figures/fig_contiguity_knn6.png, id=459, 578.16pt x 505.89pt>
+Package pdftex.def Info: figures/fig_contiguity_knn3.png  used on input line 298.
+(pdftex.def)             Requested size: 145.68144pt x 127.46796pt.
+<figures/fig_contiguity_knn6.png, id=487, 578.16pt x 505.89pt>
 File: figures/fig_contiguity_knn6.png Graphic file (type png)
 <use figures/fig_contiguity_knn6.png>
-Package pdftex.def Info: figures/fig_contiguity_knn6.png  used on input line 263.
-(pdftex.def)             Requested size: 218.51521pt x 191.19809pt.
+Package pdftex.def Info: figures/fig_contiguity_knn6.png  used on input line 299.
+(pdftex.def)             Requested size: 145.68144pt x 127.46796pt.
 
 
-[9]
+[11 <./figures/fig_contiguity_queen.png> <./figures/fig_contiguity_knn.png> <./figures/fig_contiguity_knn3.png> <./figures/fig_contiguity_knn6.png>]
 
-[10 <./figures/fig_contiguity_queen.png> <./figures/fig_contiguity_knn.png> <./figures/fig_contiguity_knn3.png> <./figures/fig_contiguity_knn6.png>]
-
-[11] (./tables/moran_global.tex
-Overfull \hbox (28.33879pt too wide) in paragraph at lines 7--15
- [][] 
- []
-
-)
-<figures/fig_moran_queen.png, id=499, 903.375pt x 702.625pt>
+[12] (./tables/moran_global.tex)
+<figures/dept94_cluster_q.png, id=518, 383.5128pt x 272.217pt>
+File: figures/dept94_cluster_q.png Graphic file (type png)
+<use figures/dept94_cluster_q.png>
+Package pdftex.def Info: figures/dept94_cluster_q.png  used on input line 385.
+(pdftex.def)             Requested size: 182.09486pt x 129.25456pt.
+<figures/dept94_sign_q.png, id=519, 383.5128pt x 272.217pt>
+File: figures/dept94_sign_q.png Graphic file (type png)
+<use figures/dept94_sign_q.png>
+Package pdftex.def Info: figures/dept94_sign_q.png  used on input line 386.
+(pdftex.def)             Requested size: 182.09486pt x 129.25456pt.
+<figures/fig_moran_queen.png, id=520, 903.375pt x 702.625pt>
 File: figures/fig_moran_queen.png Graphic file (type png)
 <use figures/fig_moran_queen.png>
-Package pdftex.def Info: figures/fig_moran_queen.png  used on input line 346.
-(pdftex.def)             Requested size: 218.51521pt x 169.95215pt.
-<figures/fig_moran_knn.png, id=500, 903.375pt x 702.625pt>
+Package pdftex.def Info: figures/fig_moran_queen.png  used on input line 387.
+(pdftex.def)             Requested size: 159.33821pt x 123.92612pt.
+
+
+[13 <./figures/dept94_cluster_q.png> <./figures/dept94_sign_q.png> <./figures/fig_moran_queen.png>]
+<figures/dept94_cluster_knn3.png, id=526, 383.5128pt x 272.217pt>
+File: figures/dept94_cluster_knn3.png Graphic file (type png)
+<use figures/dept94_cluster_knn3.png>
+Package pdftex.def Info: figures/dept94_cluster_knn3.png  used on input line 405.
+(pdftex.def)             Requested size: 182.09486pt x 129.25456pt.
+<figures/dept94_sign_knn3.png, id=527, 383.5128pt x 239.9364pt>
+File: figures/dept94_sign_knn3.png Graphic file (type png)
+<use figures/dept94_sign_knn3.png>
+Package pdftex.def Info: figures/dept94_sign_knn3.png  used on input line 406.
+(pdftex.def)             Requested size: 182.09486pt x 113.92703pt.
+<figures/fig_moran_knn.png, id=528, 903.375pt x 702.625pt>
 File: figures/fig_moran_knn.png Graphic file (type png)
 <use figures/fig_moran_knn.png>
-Package pdftex.def Info: figures/fig_moran_knn.png  used on input line 347.
-(pdftex.def)             Requested size: 218.51521pt x 169.95215pt.
+Package pdftex.def Info: figures/fig_moran_knn.png  used on input line 407.
+(pdftex.def)             Requested size: 159.33821pt x 123.92612pt.
 
 
-[12]
-<figures/fig_ols_residuals_map.png, id=511, 578.16pt x 505.89pt>
+[14 <./figures/dept94_cluster_knn3.png> <./figures/dept94_sign_knn3.png> <./figures/fig_moran_knn.png>]
+<figures/fig_ols_residuals_map.png, id=537, 578.16pt x 505.89pt>
 File: figures/fig_ols_residuals_map.png Graphic file (type png)
 <use figures/fig_ols_residuals_map.png>
-Package pdftex.def Info: figures/fig_ols_residuals_map.png  used on input line 361.
+Package pdftex.def Info: figures/fig_ols_residuals_map.png  used on input line 428.
 (pdftex.def)             Requested size: 259.49246pt x 227.054pt.
- (./tables/moran_residuals.tex
+ (./tables/moran_residuals.tex) (./tables/lm_tests.tex)
 
-[13 <./figures/fig_moran_queen.png> <./figures/fig_moran_knn.png> <./figures/fig_ols_residuals_map.png>]) (./tables/lm_tests.tex
-Overfull \hbox (5.35832pt too wide) in paragraph at lines 7--19
- [][] 
- []
+[15 <./figures/fig_ols_residuals_map.png>] (./tables/sar_sem_compact.tex)
 
-) (./tables/sar_sem_compact.tex)
+[16] (./tables/sdm_compact.tex) (./tables/lr_tests_elhorst.tex) (./tables/aic_comparison.tex)
 
-[14] (./tables/sdm_compact.tex) (./tables/lr_tests_elhorst.tex) (./tables/aic_comparison.tex)
-
-[15]
-
-[16]
-<figures/fig_sdm_residuals.png, id=559, 803.0pt x 501.875pt>
+[17]
+<figures/fig_sdm_residuals.png, id=576, 803.0pt x 501.875pt>
 File: figures/fig_sdm_residuals.png Graphic file (type png)
 <use figures/fig_sdm_residuals.png>
-Package pdftex.def Info: figures/fig_sdm_residuals.png  used on input line 408.
+Package pdftex.def Info: figures/fig_sdm_residuals.png  used on input line 479.
 (pdftex.def)             Requested size: 318.66948pt x 199.16888pt.
- (./tables/sdm_slx_impacts.tex)
 
-[17 <./figures/fig_sdm_residuals.png>]
 
-[18]
+[18] (./tables/sdm_slx_impacts.tex)
 
-[19]
+[19 <./figures/fig_sdm_residuals.png>]
 
 [20]
-<figures/fig_nb_card_queen.png, id=599, 903.375pt x 501.875pt>
-File: figures/fig_nb_card_queen.png Graphic file (type png)
-<use figures/fig_nb_card_queen.png>
-Package pdftex.def Info: figures/fig_nb_card_queen.png  used on input line 484.
-(pdftex.def)             Requested size: 341.43307pt x 189.68831pt.
- (./tables/ols_results.tex) (./tables/vif.tex)
 
-[21 <./figures/fig_nb_card_queen.png>] (./tables/sar_sem_models.tex
-Overfull \hbox (2.1417pt too wide) in paragraph at lines 7--46
- [][] 
- []
-
-) (./tables/sdm_slx_comparison.tex
-Overfull \hbox (64.81613pt too wide) in paragraph at lines 7--60
- [][] 
- []
-
-
-LaTeX Warning: Float too large for page by 1.63188pt on input line 60.
-
-)
-<figures/fig_hist_boxplot_focal_vars.png, id=606, 1606.0pt x 2208.25pt>
+[21]
+<figures/fig_hist_boxplot_focal_vars.png, id=617, 1606.0pt x 2208.25pt>
 File: figures/fig_hist_boxplot_focal_vars.png Graphic file (type png)
 <use figures/fig_hist_boxplot_focal_vars.png>
-Package pdftex.def Info: figures/fig_hist_boxplot_focal_vars.png  used on input line 512.
+Package pdftex.def Info: figures/fig_hist_boxplot_focal_vars.png  used on input line 559.
 (pdftex.def)             Requested size: 432.48051pt x 594.65181pt.
 
 
 [22]
 
 [23]
+Overfull \vbox (20.49724pt too high) has occurred while \output is active []
 
-[24]
-<figures/fig_sar_sem_residuals.png, id=620, 1204.5pt x 501.875pt>
+
+
+[24 <./figures/fig_hist_boxplot_focal_vars.png>]
+<figures_flo/distri_immigrant_stock_log_immigrant_stock.png, id=634, 722.7pt x 263.5446pt>
+File: figures_flo/distri_immigrant_stock_log_immigrant_stock.png Graphic file (type png)
+<use figures_flo/distri_immigrant_stock_log_immigrant_stock.png>
+Package pdftex.def Info: figures_flo/distri_immigrant_stock_log_immigrant_stock.png  used on input line 573.
+(pdftex.def)             Requested size: 432.48051pt x 157.70975pt.
+<figures_flo/distri_housing_units_population_change_10yrs_pct.png, id=635, 718.1229pt x 279.2031pt>
+File: figures_flo/distri_housing_units_population_change_10yrs_pct.png Graphic file (type png)
+<use figures_flo/distri_housing_units_population_change_10yrs_pct.png>
+Package pdftex.def Info: figures_flo/distri_housing_units_population_change_10yrs_pct.png  used on input line 574.
+(pdftex.def)             Requested size: 432.48051pt x 168.1494pt.
+<figures_flo/distri_unemployment_rate_pct_poverty_rate_pct.png, id=636, 721.0137pt x 257.2812pt>
+File: figures_flo/distri_unemployment_rate_pct_poverty_rate_pct.png Graphic file (type png)
+<use figures_flo/distri_unemployment_rate_pct_poverty_rate_pct.png>
+Package pdftex.def Info: figures_flo/distri_unemployment_rate_pct_poverty_rate_pct.png  used on input line 575.
+(pdftex.def)             Requested size: 432.48051pt x 154.3228pt.
+<figures_flo/distri_social_housing_rate_pct.png, id=637, 721.9773pt x 259.2084pt>
+File: figures_flo/distri_social_housing_rate_pct.png Graphic file (type png)
+<use figures_flo/distri_social_housing_rate_pct.png>
+Package pdftex.def Info: figures_flo/distri_social_housing_rate_pct.png  used on input line 576.
+(pdftex.def)             Requested size: 432.48051pt x 155.26913pt.
+ (./tables/normality.tex
+
+[25 <./figures_flo/distri_immigrant_stock_log_immigrant_stock.png> <./figures_flo/distri_housing_units_population_change_10yrs_pct.png> <./figures_flo/distri_unemployment_rate_pct_poverty_rate_pct.png> <./figures_flo/distri_social_housing_rate_pct.png>]) (./tables/outliers.tex)
+<figures/fig_nb_card_queen.png, id=642, 903.375pt x 501.875pt>
+File: figures/fig_nb_card_queen.png Graphic file (type png)
+<use figures/fig_nb_card_queen.png>
+Package pdftex.def Info: figures/fig_nb_card_queen.png  used on input line 594.
+(pdftex.def)             Requested size: 341.43307pt x 189.68831pt.
+
+
+[26 <./figures/fig_nb_card_queen.png>]
+
+[27] (./tables/vif.tex) (./tables/ols_results.tex)
+
+[28] (./tables/sar_sem_models.tex) (./tables/sdm_slx_comparison.tex)
+<figures/fig_sar_sem_residuals.png, id=662, 1204.5pt x 501.875pt>
 File: figures/fig_sar_sem_residuals.png Graphic file (type png)
 <use figures/fig_sar_sem_residuals.png>
-Package pdftex.def Info: figures/fig_sar_sem_residuals.png  used on input line 522.
+Package pdftex.def Info: figures/fig_sar_sem_residuals.png  used on input line 660.
 (pdftex.def)             Requested size: 432.48051pt x 180.20006pt.
-<figures/fig_slx_residuals.png, id=621, 803.0pt x 501.875pt>
+<figures/fig_slx_residuals.png, id=663, 803.0pt x 501.875pt>
 File: figures/fig_slx_residuals.png Graphic file (type png)
 <use figures/fig_slx_residuals.png>
-Package pdftex.def Info: figures/fig_slx_residuals.png  used on input line 523.
+Package pdftex.def Info: figures/fig_slx_residuals.png  used on input line 661.
 (pdftex.def)             Requested size: 250.38564pt x 156.49094pt.
 
 
-[25 <./figures/fig_hist_boxplot_focal_vars.png>]
+[29]
 
-[26 <./figures/fig_sar_sem_residuals.png> <./figures/fig_slx_residuals.png>] (./main.bbl)
+[30]
 
-[27] (./main.aux)
+[31 <./figures/fig_sar_sem_residuals.png> <./figures/fig_slx_residuals.png>] (./main.bbl)
+
+[32] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B496F2BAF0C29D5C678DDEBD996C3781;6875.
+(rerunfilecheck)             Checksum: B1ACE329B15979AE6E605F72882857AD;7339.
  ) 
 Here is how much of TeX's memory you used:
- 17309 strings out of 474662
- 323898 string characters out of 5751109
- 731448 words of memory out of 5000000
- 39967 multiletter control sequences out of 15000+600000
- 580793 words of font info for 83 fonts, out of 8000000 for 9000
+ 17360 strings out of 474662
+ 326784 string characters out of 5751109
+ 750024 words of memory out of 5000000
+ 39997 multiletter control sequences out of 15000+600000
+ 580500 words of font info for 82 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 75i,13n,117p,1563b,1136s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1728.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (28 pages, 6976010 bytes).
+ 75i,13n,117p,1561b,1064s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </Users/ss/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1728.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on main.pdf (33 pages, 7651751 bytes).
 PDF statistics:
- 1342 PDF objects out of 1440 (max. 8388607)
- 626 compressed objects within 7 object streams
- 119 named destinations out of 1000 (max. 500000)
- 350 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1444 PDF objects out of 1728 (max. 8388607)
+ 671 compressed objects within 7 object streams
+ 135 named destinations out of 1000 (max. 500000)
+ 422 words of extra memory for PDF output out of 10000 (max. 10000000)
 
